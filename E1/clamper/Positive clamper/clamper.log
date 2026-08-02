@@ -1,6 +1,6 @@
 LTspice 26.0.2 for Windows
-Circuit: C:\Users\bharg\OneDrive\Documents\LTspice\EDC Lab\E1\clamper.net
-Start Time: Wed Jul 29 09:17:42 2026
+Circuit: C:\Users\bharg\Documents\EDC-Lab\E1\clamper\Positive clamper\clamper.net
+Start Time: Sun Aug  2 12:16:29 2026
 solver = Normal
 Maximum thread count: 16
 tnom = 27
@@ -8,9 +8,9 @@ temp = 27
 method = trap
 .OP point found by inspection.
 .OP point found by inspection.
-Total elapsed time: 0.103 seconds.
+Total elapsed time: 0.116 seconds.
 
 Files loaded:
-C:\Users\bharg\OneDrive\Documents\LTspice\EDC Lab\E1\clamper.net
+C:\Users\bharg\Documents\EDC-Lab\E1\clamper\Positive clamper\clamper.net
 C:\Users\bharg\AppData\Local\LTspice\lib\cmp\standard.dio
 
