@@ -15,7 +15,8 @@
     \large V--I Characteristics of PN Junction \& Zener Diodes,\\
     Clipper and Clamper Circuits
 }
-\author{Bhargav K \quad (EE25BTECH11013) \\ Department of Electrical Engineering \\ IIT Hyderabad}
+\author{Bhargav K (EE25BTECH11013) \\ Department of Electrical Engineering \\ IIT Hyderabad \and Aditya Appana (EE25BTECH11004) \\ Department of Electrical Engineering \\ IIT Hyderabad }
+
 \date{}
 
 \begin{document}
@@ -51,7 +52,19 @@ Breadboard, wires, probes & -- & as needed \\
 \end{table}
 
 \section{PN Junction Diode}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth, angle = 90]{E1/photos/PNForward.jpeg}
+    \caption{Forward Biased}
+    \label{fig:placeholder}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth, angle = 90]{E1/photos/PNReverse.jpeg}
+    \caption{Reverse Biased}
+    \label{fig:placeholder}
+\end{figure}
 \subsection{Theory}
 A PN junction diode conducts mainly in one direction. In forward bias, once the applied voltage crosses the cut-in voltage $V_\gamma$ (about 0.7 V for silicon), the current starts rising very fast for a small increase in voltage, because majority carriers are being injected across the junction in large numbers. In reverse bias, only a small reverse saturation current $I_0$ flows due to minority carriers, and this stays almost constant until breakdown happens at a large negative voltage.
 
@@ -72,25 +85,25 @@ The circuit was simulated in LTSpice with a 1 k$\Omega$ series resistor and the 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{E1/pnjunction/ckt.png}
+    \includegraphics[width=0.6\textwidth]{E1/pnjunction/forwardbias/ckt.png}
     \caption{LTSpice circuit for PN junction diode forward bias test}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{E1/pnjunction/sim1.png}
+    \includegraphics[width=0.85\textwidth]{E1/pnjunction/forwardbias/sim1.png}
     \caption{Simulated V--I plot: voltage across diode (green) and diode current (red) vs. sweep voltage. Current stays near zero till about 0.4 V and then rises sharply, showing the cut-in behaviour.}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{E1/pnjunction/sim2.png}
+    \includegraphics[width=0.85\textwidth]{E1/pnjunction/forwardbias/sim2.png}
     \caption{Simulated forward V--I characteristic, second view}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{E1/pnjunction/sim3.png}
+    \includegraphics[width=0.85\textwidth]{E1/pnjunction/forwardbias/sim3.png}
     \caption{Simulated forward V--I characteristic, third view}
 \end{figure}
 
@@ -98,30 +111,74 @@ From the simulation, the cut-in voltage is close to 0.4--0.5 V for the SPICE mod
 
 \subsection{Observation Table -- Forward Bias (to be filled in lab)}
 \begin{table}[H]
-\centering
-\begin{tabular}{ccc}
-\toprule
-S.No. & $V_f$ (V) & $I_f$ (mA) \\
-\midrule
-1 & & \\ 2 & & \\ 3 & & \\ 4 & & \\ 5 & & \\ 6 & & \\ 7 & & \\ 8 & & \\
-\bottomrule
-\end{tabular}
+    \centering
+    \caption{Forward Bias Diode Characteristics and Power Source Voltage Measurements}
+    \label{tab:diode_data}
+    \begin{tabular}{|c|c|c|}
+        \toprule
+        {\textbf{Diode Voltage $V_f$ (V)}} & {\textbf{Diode Current $I_f$ (mA)}} & {\textbf{Power Source Voltage (V)}} \\
+        \midrule
+        0       & 0      & 0     \\
+        0.1     & 0      & 0.1   \\
+        0.2     & 0.0001 & 0.2   \\
+        0.3     & 0.0001 & 0.3   \\
+        0.397   & 0.0053 & 0.4   \\
+        0.472   & 0.0384 & 0.5   \\
+        0.496   & 0.0674 & 0.55  \\
+        0.5135  & 0.1017 & 0.6   \\
+        0.5266  & 0.139  & 0.65  \\
+        0.537   & 0.1793 & 0.7   \\
+        0.5466  & 0.2207 & 0.75  \\
+        0.635   & 2.02   & 2.64  \\
+        0.663   & 4      & 4.64  \\
+        0.678   & 5.995  & 6.65  \\
+        0.689   & 8      & 8.64  \\
+        0.698   & 9.9994 & 10.62 \\
+        0.706   & 12.02  & 12.61 \\
+        0.7109  & 14.05  & 14.61 \\
+        0.716   & 16.009 & 16.5  \\
+        0.72    & 18.01  & 18.43 \\
+        0.723   & 20     & 20.33 \\
+        \bottomrule
+    \end{tabular}
 \end{table}
 
 \subsection{Observation Table -- Reverse Bias (to be filled in lab)}
 No simulation was done for this part since the reverse saturation current of a real diode model is very small and not reliably captured in LTSpice's default diode model. This will be measured directly in the lab using a microammeter.
 \begin{table}[H]
-\centering
-\begin{tabular}{ccc}
-\toprule
-S.No. & $V_r$ (V) & $I_r$ ($\mu$A) \\
-\midrule
-1 & & \\ 2 & & \\ 3 & & \\ 4 & & \\ 5 & & \\ 6 & & \\ 7 & & \\ 8 & & \\
-\bottomrule
-\end{tabular}
+    \centering
+    \caption{Reverse Bias Diode Characteristics and Power Source Voltage Measurements}
+    \label{tab:reverse_bias_data_basic}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Diode Voltage Vf (V)} & \textbf{Diode Current (mA)} & \textbf{Power Source Voltage (V)} \\
+        \hline
+        0       & 0      & 0  \\
+        4.99    & 0      & 5  \\
+        9.97    & 0      & 10 \\
+        14.964  & 0      & 15 \\
+        19.95   & 0      & 20 \\
+        24.931  & 0.0001 & 25 \\
+        29.919  & 0.0001 & 30 \\
+        \hline
+    \end{tabular}
 \end{table}
 
 \section{Zener Diode}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth, angle = 90]{E1/photos/Zener.jpeg}
+    \caption{Positive Bias Zener Circuit}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth, angle = 270]{E1/photos/Zener.jpeg}
+    \caption{Negative Bias Zener Circuit}
+    \label{fig:placeholder}
+\end{figure}
 
 \subsection{Theory}
 A Zener diode is a heavily doped PN junction meant to be operated in reverse breakdown without getting damaged. Its forward characteristic is the same as a normal diode. In reverse bias, once the voltage reaches the Zener voltage $V_Z$, the current increases sharply while the voltage stays almost constant -- this near-vertical knee is what makes it useful as a voltage reference. Breakdown below about 5 V is mainly due to the Zener effect (field emission), and above about 6 V it is mainly avalanche multiplication.
@@ -131,22 +188,131 @@ The Zener resistance is calculated from the slope of the breakdown region:
     R_Z = \frac{\Delta V_Z}{\Delta I_Z}
 \end{equation}
 
-\subsection{Observations}
+\subsection{Observations - Forward Bias (to be filled in lab) }
 This part was not simulated -- it will be done directly in the lab with the 1N4733A Zener diode, since the exact breakdown behaviour depends on the physical device and is best measured directly rather than simulated.
 
+\subsection{Circuit and Simulation - Forward Bias}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{E1/zener/forward bias/ckt1.png}
+    \caption{Forward Biased Zener Diode Circuit}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{E1/zener/forward bias/sim1.png}
+    \caption{Simulation 1 - LTSpice}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{E1/zener/forward bias/sim2.png}
+\caption{Simulation 2 - LTSpice}
+\end{figure}
+
 \begin{table}[H]
-\centering
-\begin{tabular}{cccc}
-\toprule
-S.No. & $V_f$ (V) & $I_f$ (mA) & $V_r$ (V) / $I_r$ (mA) \\
-\midrule
-1 & & & \\ 2 & & & \\ 3 & & & \\ 4 & & & \\ 5 & & & \\ 6 & & & \\ 7 & & & \\ 8 & & & \\
-\bottomrule
-\end{tabular}
+    \centering
+    \caption{Zener Diode Forward Bias Characteristics and Source Voltage Measurements}
+    \label{tab:zener_forward_data_basic}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Diode Voltage Vf (V)} & \textbf{Diode Current (mA)} & \textbf{Power Source Voltage (V)} \\
+        \hline
+        0       & 0      & 0     \\
+        0.1     & 0      & 0.1   \\
+        0.2     & 0      & 0.2   \\
+        0.3     & 0      & 0.3   \\
+        0.4     & 0      & 0.4   \\
+        0.5     & 0.0002 & 0.5   \\
+        0.548   & 0.0016 & 0.55  \\
+        0.592   & 0.008  & 0.6   \\
+        0.625   & 0.025  & 0.65  \\
+        0.645   & 0.055  & 0.7   \\
+        0.66    & 0.0915 & 0.75  \\
+        0.669   & 0.1315 & 0.8   \\
+        0.676   & 0.174  & 0.85  \\
+        0.717   & 0.785  & 1.5   \\
+        0.73    & 1.275  & 2     \\
+        0.743   & 2      & 2.74  \\
+        0.7604  & 4.006  & 4.75  \\
+        0.7706  & 5.998  & 6.74  \\
+        0.779   & 8.005  & 8.74  \\
+        0.785   & 9.995  & 10.7  \\
+        0.7907  & 12     & 12.68 \\
+        0.794   & 14.004 & 14.64 \\
+        0.797   & 16.01  & 16.59 \\
+        0.801   & 18     & 18.53 \\
+        0.804   & 20     & 20.43 \\
+        \hline
+    \end{tabular}
 \end{table}
 
 From the reverse plot, $V_Z$ and $R_Z$ will be read off from the near-vertical breakdown knee.
+\subsection{Circuit and Simulation - Reverse Bias}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{E1/zener/reverse bias/ckt1.png}
+    \caption{Forward Biased Zener Diode Circuit}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{E1/zener/reverse bias/sim1.png}
+    \caption{Simulation 1 - LTSpice}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{E1/zener/reverse bias/sim2.png}
+\caption{Simulation 2 - LTSpice}
+\end{figure}
+
+\subsection{Observations - Reverse Bias (to be filled in lab) }
+\begin{table}[H]
+    \centering
+    \caption{Reverse Bias Diode Characteristics and Power Source Voltage Measurements}
+    \label{tab:zener_reverse_data_basic}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Diode Voltage Vf (V)} & \textbf{Current (mA)} & \textbf{Power Source Voltage (V)} \\
+        \hline
+        0.0006  & 0      & 0     \\
+        0.5     & 0      & 0.5   \\
+        1       & 0      & 1     \\
+        1.5     & 0      & 1.5   \\
+        2       & 0      & 2     \\
+        2.5     & 0.0005 & 2.5   \\
+        3       & 0.0045 & 3     \\
+        3.48    & 0.022  & 3.5   \\
+        3.92    & 0.079  & 4     \\
+        4.003   & 0.098  & 4.1   \\
+        4.08    & 0.12   & 4.2   \\
+        4.1529  & 0.15   & 4.3   \\
+        4.22    & 0.181  & 4.4   \\
+        4.28    & 0.217  & 4.5   \\
+        4.34    & 0.258  & 4.6   \\
+        4.4     & 0.303  & 4.7   \\
+        4.45    & 0.352  & 4.8   \\
+        4.5     & 0.405  & 4.9   \\
+        4.54    & 0.462  & 5     \\
+        4.58    & 0.523  & 5.1   \\
+        4.617   & 0.587  & 5.2   \\
+        4.65    & 0.655  & 5.3   \\
+        4.68    & 0.725  & 5.4   \\
+        4.708   & 0.797  & 5.5   \\
+        4.936   & 2      & 6.93  \\
+        5.06    & 4      & 9.05  \\
+        5.1221  & 6      & 11.1  \\
+        5.155   & 8      & 13.1  \\
+        5.18    & 10     & 15.17 \\
+        5.2     & 12     & 17.17 \\
+        5.2186  & 14     & 19.05 \\
+        5.23    & 16     & 21.06 \\
+        5.241   & 18     & 22.96 \\
+        5.25    & 20     & 24.96 \\
+        \hline
+    \end{tabular}
+\end{table}
 \section{Clipper Circuits}
 
 \subsection{Theory}
@@ -154,6 +320,12 @@ A clipper circuit cuts off part of a waveform above or below some reference leve
 
 \subsection{Positive Clipper (clips above +1 V)}
 Here the diode conducts and clamps the output to +1 V whenever the input goes above +1 V. Below that, the diode is off and the output follows the input.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/PositiveClipperCircuit.jpeg}
+    \caption{Circuit}
+    \label{fig:placeholder}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -167,6 +339,12 @@ Here the diode conducts and clamps the output to +1 V whenever the input goes ab
     \caption{Positive clipper: input and output waveforms}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/PositiveClipper.jpeg}
+    \caption{Observed Waveform}
+    \label{fig:placeholder}
+\end{figure}
 The expected clipping level is:
 \begin{equation}
     V_{out,max} \approx V_{ref} + V_\gamma
@@ -174,6 +352,12 @@ The expected clipping level is:
 
 \subsection{Negative Clipper (clips below -1 V)}
 This is the mirror case of the positive clipper -- the diode is reversed so the output is clamped whenever the input goes below $-1$ V.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/NegativeClipperCircuit.jpeg}
+    \caption{Circuit}
+    \label{fig:placeholder}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -187,9 +371,21 @@ This is the mirror case of the positive clipper -- the diode is reversed so the 
     \caption{Negative clipper: input and output waveforms}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/NegativeClipper.jpeg}
+    \caption{Observed Waveform}
+    \label{fig:placeholder}
+\end{figure}
+
 \subsection{Biased (Two-Level) Clipper}
 This combines both circuits above at the same output node -- one diode referenced to +1 V clips the top of the waveform and the other referenced to $-1$ V clips the bottom, giving a doubly clipped output.
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/BiasedClipperCircuit.jpeg}
+    \caption{Circuit}
+    \label{fig:placeholder}
+\end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.55\textwidth]{E1/clipper/Biased/ckt.png}
@@ -200,6 +396,13 @@ This combines both circuits above at the same output node -- one diode reference
     \centering
     \includegraphics[width=0.85\textwidth]{E1/clipper/Biased/sim.png}
     \caption{Biased clipper: input and output waveforms, clipped on both sides}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/BiasedClipper.jpeg}
+    \caption{Observed Waveform}
+    \label{fig:placeholder}
 \end{figure}
 
 \subsection{Observation Table -- Clippers}
@@ -232,6 +435,9 @@ The theoretical DC shift is approximately equal to the peak input amplitude minu
 \end{equation}
 
 \subsection{Positive Clamper}
+
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.55\textwidth]{{E1/clamper/Positive clamper/ckt}.png}
@@ -244,7 +450,16 @@ The theoretical DC shift is approximately equal to the peak input amplitude minu
     \caption{Positive clamper: input and output waveforms, DC level shifted up}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/PositiveClamper.jpeg}
+    \caption{Observed Waveform}
+    \label{fig:placeholder}
+\end{figure}
+
 \subsection{Negative Clamper}
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.55\textwidth]{{E1/clamper/Negative clamper/ckt}.png}
@@ -256,6 +471,16 @@ The theoretical DC shift is approximately equal to the peak input amplitude minu
     \includegraphics[width=0.85\textwidth]{{E1/clamper/Negative clamper/sim}.png}
     \caption{Negative clamper: input and output waveforms, DC level shifted down}
 \end{figure}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/NegativeClamper.jpeg}
+    \caption{Observed Waveform}
+    \label{fig:placeholder}
+\end{figure}
+
 
 \subsection{Observation Table -- Clampers}
 \begin{table}[H]
@@ -269,6 +494,7 @@ Negative clamper & 4 & $\approx V_{peak}-V_\gamma$ & \\
 \bottomrule
 \end{tabular}
 \end{table}
+
 
 \section{Calculations / Analysis}
 \begin{itemize}
