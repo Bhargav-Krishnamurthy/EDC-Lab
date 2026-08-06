@@ -80,6 +80,7 @@ From the forward characteristic we can find:
     \item \textbf{Dynamic resistance} near a point: $R_{AC} = \Delta V/\Delta I$
 \end{itemize}
 
+
 \subsection{Circuit and Simulation (Forward Bias)}
 The circuit was simulated in LTSpice with a 1 k$\Omega$ series resistor and the supply swept from 0 to 0.5 V in steps of 0.1 V, followed by finer steps near the knee.
 
@@ -143,6 +144,14 @@ From the simulation, the cut-in voltage is close to 0.4--0.5 V for the SPICE mod
     \end{tabular}
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/PNForwardLog.jpeg}
+    \caption{Semi-Log Graph}
+    \label{fig:placeholder}
+\end{figure}
+
+
 \subsection{Observation Table -- Reverse Bias (to be filled in lab)}
 No simulation was done for this part since the reverse saturation current of a real diode model is very small and not reliably captured in LTSpice's default diode model. This will be measured directly in the lab using a microammeter.
 \begin{table}[H]
@@ -164,6 +173,12 @@ No simulation was done for this part since the reverse saturation current of a r
     \end{tabular}
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/PNReverseLinear.jpeg}
+    \caption{Linear Graph}
+    \label{fig:placeholder}
+\end{figure}
 \section{Zener Diode}
 
 \begin{figure}[H]
@@ -247,6 +262,12 @@ This part was not simulated -- it will be done directly in the lab with the 1N47
     \end{tabular}
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/ZenerForwardLog.jpeg}
+    \caption{Semi-Log Graph}
+    \label{fig:placeholder}
+\end{figure}
 From the reverse plot, $V_Z$ and $R_Z$ will be read off from the near-vertical breakdown knee.
 \subsection{Circuit and Simulation - Reverse Bias}
 \begin{figure}[H]
@@ -313,6 +334,13 @@ From the reverse plot, $V_Z$ and $R_Z$ will be read off from the near-vertical b
         \hline
     \end{tabular}
 \end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{E1/photos/ZenerReverseLinear.jpeg}
+    \caption{Linear Graph}
+    \label{fig:placeholder}
+\end{figure}
 \section{Clipper Circuits}
 
 \subsection{Theory}
