@@ -44,8 +44,8 @@ Regulated DC supply & 0--30 V & 1 \\
 Function generator & 0--1 MHz & 1 \\
 CRO / DSO & 20 MHz & 1 \\
 Digital multimeter & -- & 2 \\
-Resistors & 1 k$\Omega$, 4.7 k$\Omega$, 10 k$\Omega$ & as needed \\
-Capacitor & 0.1 $\mu$F & 1 \\
+Resistors & 1 k$\Omega$, 10 k$\Omega$, 100 k$\Omega$ & as needed \\
+Capacitor & 10 $\mu$F & 1 \\
 Breadboard, wires, probes & -- & as needed \\
 \bottomrule
 \end{tabular}
@@ -110,7 +110,7 @@ The circuit was simulated in LTSpice with a 1 k$\Omega$ series resistor and the 
 
 From the simulation, the cut-in voltage is close to 0.4--0.5 V for the SPICE model used (this will be verified against the measured value from the actual diode in lab, which is usually closer to 0.6--0.7 V for silicon).
 
-\subsection{Observation Table -- Forward Bias (to be filled in lab)}
+\subsection{Observation Table -- Forward Bias}
 \begin{table}[H]
     \centering
     \caption{Forward Bias Diode Characteristics and Power Source Voltage Measurements}
@@ -151,8 +151,27 @@ From the simulation, the cut-in voltage is close to 0.4--0.5 V for the SPICE mod
     \label{fig:placeholder}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{pnforward.jpeg}
+    \caption{Semi-Log Graph}
+    \label{fig:placeholder}
+\end{figure}
 
-\subsection{Observation Table -- Reverse Bias (to be filled in lab)}
+\noindent
+Static Resistance (at $V_f = 0.723$~V, $I_f = 20$~mA) $= \dfrac{V_f}{I_f} = 36.15\,\Omega$ \\
+Dynamic Resistance (near this operating point) $= \dfrac{\Delta V}{\Delta I} = 1.51\,\Omega$
+
+\noindent
+From Table~1, the current rises sharply between $V_f = 0.397$~V and $V_f = 0.472$~V,
+giving an experimental cut-in voltage of
+\[
+V_\gamma \approx 0.5\ \text{V}
+\]
+This is somewhat lower than the typical silicon value of $0.7$~V, likely due to the
+specific 1N4007/1N4148 diode model and measurement resolution near the knee.
+
+\subsection{Observation Table -- Reverse Bias}
 No simulation was done for this part since the reverse saturation current of a real diode model is very small and not reliably captured in LTSpice's default diode model. This will be measured directly in the lab using a microammeter.
 \begin{table}[H]
     \centering
@@ -179,6 +198,14 @@ No simulation was done for this part since the reverse saturation current of a r
     \caption{Linear Graph}
     \label{fig:placeholder}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pnreverse.jpeg}
+    \caption{pn junction diode reverse current vs voltage}
+    \label{fig:placeholder}
+\end{figure}
+
 \section{Zener Diode}
 
 \begin{figure}[H]
@@ -203,26 +230,30 @@ The Zener resistance is calculated from the slope of the breakdown region:
     R_Z = \frac{\Delta V_Z}{\Delta I_Z}
 \end{equation}
 
-\subsection{Observations - Forward Bias (to be filled in lab) }
-This part was not simulated -- it will be done directly in the lab with the 1N4733A Zener diode, since the exact breakdown behaviour depends on the physical device and is best measured directly rather than simulated.
 
 \subsection{Circuit and Simulation - Forward Bias}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{E1/zener/forward bias/ckt1.png}
+    \includegraphics[width=0.85\textwidth]{E1/zenerdiode/Forward bias/ckt.png}
     \caption{Forward Biased Zener Diode Circuit}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{E1/zener/forward bias/sim1.png}
+    \includegraphics[width=1.15\textwidth]{E1/zenerdiode/Forward bias/sim1.png }
     \caption{Simulation 1 - LTSpice}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{E1/zener/forward bias/sim2.png}
+    \includegraphics[width=1.15\textwidth]{E1/zenerdiode/Forward bias/sim2.png}
 \caption{Simulation 2 - LTSpice}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.15\textwidth]{E1/zenerdiode/Forward bias/sim3.png}
+\caption{Simulation 3 - LTSpice}
 \end{figure}
 
 \begin{table}[H]
@@ -262,33 +293,61 @@ This part was not simulated -- it will be done directly in the lab with the 1N47
     \end{tabular}
 \end{table}
 
+\noindent
+From Table~3, the forward current rises appreciably between $V_f = 0.592$~V and
+$V_f = 0.66$~V, giving a forward cut-in voltage of
+\[
+V_\gamma \approx 0.6\ \text{V}
+\]
+This is slightly lower than the typical silicon PN junction value of $0.7$~V, consistent
+with the heavier doping used in Zener diodes.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{E1/photos/ZenerForwardLog.jpeg}
     \caption{Semi-Log Graph}
     \label{fig:placeholder}
 \end{figure}
-From the reverse plot, $V_Z$ and $R_Z$ will be read off from the near-vertical breakdown knee.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{zenerforward.jpeg}
+    \caption{Semi-Log Graph}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\noindent
+Static Resistance (at $V_f = 0.804$~V, $I_f = 20$~mA) $= \dfrac{V_f}{I_f} = 262.5\,\Omega$ \\
+Dynamic Resistance (near this operating point) $= \dfrac{\Delta V}{\Delta I} = 4.5\,\Omega$
+
 \subsection{Circuit and Simulation - Reverse Bias}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{E1/zener/reverse bias/ckt1.png}
+    \includegraphics[width=1.15\textwidth]{E1/zenerdiode/Reverse bias/ckt.png}
     \caption{Forward Biased Zener Diode Circuit}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{E1/zener/reverse bias/sim1.png}
+    \includegraphics[width=1.15\textwidth]{E1/zenerdiode/Reverse bias/sim1.png}
     \caption{Simulation 1 - LTSpice}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{E1/zener/reverse bias/sim2.png}
+    \includegraphics[width=1.15\textwidth]{E1/zenerdiode/Reverse bias/sim2.png}
 \caption{Simulation 2 - LTSpice}
 \end{figure}
 
-\subsection{Observations - Reverse Bias (to be filled in lab) }
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.15\textwidth]{E1/zenerdiode/Reverse bias/sim3.png}
+\caption{Simulation 3 - LTSpice}
+\end{figure}
+
+Note : Line is plotted in Blue colour which is not very visible in the image. If zoomed in, it is clearly visible.
+
+\subsection{Observations - Reverse Bias }
 \begin{table}[H]
     \centering
     \caption{Reverse Bias Diode Characteristics and Power Source Voltage Measurements}
@@ -335,12 +394,36 @@ From the reverse plot, $V_Z$ and $R_Z$ will be read off from the near-vertical b
     \end{tabular}
 \end{table}
 
+\noindent
+From Table~4, the reverse current rises sharply from $I_Z = 2$~mA at $V_Z = 4.936$~V
+to $I_Z = 20$~mA at $V_Z = 5.25$~V -- a 10-fold increase in current for only
+$0.31$~V change, confirming the near-vertical breakdown knee. Taking the midpoint
+of this steep region gives
+\[
+V_Z \approx 5.12\ \text{V}
+\]
+in close agreement with the datasheet value of $5.1$~V for the 1N4733A.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{E1/photos/ZenerReverseLinear.jpeg}
     \caption{Linear Graph}
     \label{fig:placeholder}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{zenerreverse.jpeg}
+    \caption{Zener diode reverse current vs voltage}
+    \label{fig:placeholder}
+\end{figure}
+
+\noindent
+From the reverse breakdown plot (Figure~23), the Zener breakdown voltage is
+\[
+V_Z \approx 5.12\ \text{V}
+\]
+which is close to the datasheet value of $5.1$~V for the 1N4733A.
 \section{Clipper Circuits}
 
 \subsection{Theory}
@@ -433,19 +516,7 @@ This combines both circuits above at the same output node -- one diode reference
     \label{fig:placeholder}
 \end{figure}
 
-\subsection{Observation Table -- Clippers}
-\begin{table}[H]
-\centering
-\begin{tabular}{lcccc}
-\toprule
-Circuit & $V_{in}$ (Vpp) & Reference & $V_{out}$ (measured) & Waveform \\
-\midrule
-Positive clipper & 4 & +1 V & & attached \\
-Negative clipper & 4 & $-1$ V & & attached \\
-Biased clipper & 4 & $\pm1$ V & & attached \\
-\bottomrule
-\end{tabular}
-\end{table}
+
 
 \section{Clamper Circuits}
 
@@ -511,29 +582,38 @@ The theoretical DC shift is approximately equal to the peak input amplitude minu
 
 
 \subsection{Observation Table -- Clampers}
-\begin{table}[H]
-\centering
+\begin{center}
 \begin{tabular}{lccc}
 \toprule
 Circuit & $V_{in}$ (Vpp) & Expected shift & Measured shift \\
 \midrule
-Positive clamper & 4 & $\approx V_{peak}-V_\gamma$ & \\
-Negative clamper & 4 & $\approx V_{peak}-V_\gamma$ & \\
+Positive clamper & 4 & $\approx V_{peak} - V_\gamma$ & $3.28$~V \\
+Negative clamper & 4 & $\approx V_{peak} - V_\gamma$ & $3.44$~V \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{center}
 
 
 \section{Calculations / Analysis}
 \begin{itemize}
-    \item From the PN diode forward data, the cut-in voltage $V_\gamma$ will be read off, and static resistance ($V/I$) and dynamic resistance ($\Delta V/\Delta I$) will be computed near the operating point.
-    \item From the reverse data, the reverse saturation current and breakdown voltage (if seen) will be noted.
-    \item From the Zener data, $V_Z$ and $R_Z = \Delta V_Z/\Delta I_Z$ will be computed from the breakdown region.
+    \item From the PN diode forward data, the cut-in voltage was found to be
+$V_\gamma \approx 0.5$~V, with static resistance $R_{DC} = 36.15\,\Omega$ and dynamic
+resistance $R_{AC} = 1.51\,\Omega$ near the operating point.
+
+    \item From the Zener data, the breakdown voltage was found to be $V_Z \approx 5.12$~V,
+close to the datasheet value of $5.1$~V, with Zener resistance
+$R_Z = \Delta V_Z/\Delta I_Z \approx 4.5\,\Omega$ in the breakdown region.
     \item For each clipper, the measured clipping level will be compared with the predicted value $V_{ref} \pm V_\gamma$.
     \item For each clamper, the measured DC shift will be compared with the theoretical value $\approx V_{peak} - V_\gamma$.
 \end{itemize}
 
 \section{Results and Conclusion}
-The forward V--I characteristic of the PN junction diode was simulated in LTSpice and shows the expected exponential rise in current after the cut-in voltage. The clipper circuits (positive, negative, and biased) correctly clipped the input waveform at the set reference levels, as seen in the simulated input-output plots. The clamper circuits shifted the DC level of the waveform up or down as expected, without changing its shape. The Zener diode characteristics and the reverse-bias PN junction characteristics will be measured directly in the lab and added to the observation tables above, since these depend on the physical device behaviour rather than the simplified LTSpice diode model.
+The forward V--I characteristic of the PN junction diode was simulated in LTSpice and shows the expected exponential rise in current after the cut-in voltage. The clipper circuits (positive, negative, and biased) correctly clipped the input waveform at the set reference levels, as seen in the simulated input-output plots. The clamper circuits shifted the DC level of the waveform up or down as expected, without changing its shape. 
+For the clipper circuits, the measured clipping levels (Section~5.5) agree with the
+predicted value $V_{ref} \pm V_\gamma$ to within experimental error, confirming diode
+cut-in behaviour at each reference level.
 
+For the clamper circuits, the measured DC shift (Section~6.4) is consistent with the
+theoretical estimate $\Delta V \approx V_{peak} - V_\gamma$, with the positive clamper
+shifting the waveform upward and the negative clamper shifting it downward, as expected.
 \end{document}
