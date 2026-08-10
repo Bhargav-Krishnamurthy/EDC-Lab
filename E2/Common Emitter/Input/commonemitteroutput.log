@@ -1,0 +1,14 @@
+LTspice 26.0.2 for Windows
+Circuit: C:\Users\bharg\Documents\EDC-Lab\E2\Common Emitter\Input\commonemitteroutput.net
+Start Time: Mon Aug 10 21:53:03 2026
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Total elapsed time: 0.044 seconds.
+
+Files loaded:
+C:\Users\bharg\Documents\EDC-Lab\E2\Common Emitter\Input\commonemitteroutput.net
+C:\Users\bharg\AppData\Local\LTspice\lib\cmp\standard.bjt
+
