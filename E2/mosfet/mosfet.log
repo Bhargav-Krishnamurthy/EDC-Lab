@@ -1,0 +1,14 @@
+LTspice 26.0.2 for Windows
+Circuit: C:\Users\bharg\Documents\EDC-Lab\E2\mosfet\mosfet.net
+Start Time: Tue Aug 18 11:43:15 2026
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Total elapsed time: 0.121 seconds.
+
+Files loaded:
+C:\Users\bharg\Documents\EDC-Lab\E2\mosfet\mosfet.net
+C:\Users\bharg\AppData\Local\LTspice\lib\cmp\standard.mos
+
