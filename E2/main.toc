@@ -1,0 +1,19 @@
+\contentsline {section}{\numberline {1}Aim}{3}{section.1}%
+\contentsline {section}{\numberline {2}Apparatus / Components}{3}{section.2}%
+\contentsline {section}{\numberline {3}Common Emitter (CE) Configuration}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Theory}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Circuit Connections and Procedure}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Circuit and Simulation}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Observation Tables}{7}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Common Base (CB) Configuration}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Theory}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Circuit Connections and Procedure}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Circuit and Simulation}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Observation Tables}{9}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Common Collector (CC) Configuration}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Theory}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Circuit Connections and Procedure}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Circuit and Simulation}{11}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Observation Tables}{13}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Calculations / Analysis}{13}{section.6}%
+\contentsline {section}{\numberline {7}Results and Conclusion}{13}{section.7}%

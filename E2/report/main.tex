@@ -1,0 +1,298 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{\textbf{Electronic Devices \& Circuits Laboratory \\ Experiment 2: BJT Characteristics}}
+\author{
+    \textbf{Student Name (ID)} \\
+    Department of Electrical Engineering \\
+    IIT Hyderabad
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Aim}
+\begin{itemize}
+    \item To plot the input and output characteristics of a BJT in the Common Emitter (CE) configuration, and to determine the current gain $\beta$, input resistance $r_i$, and output resistance $r_o$[cite: 1].
+    \item To plot the input and output characteristics of a BJT in the Common Base (CB) configuration, and to determine the current gain $\alpha$, input resistance $r_i$, and output resistance $r_o$[cite: 1].
+    \item To plot the input and output characteristics of a BJT in the Common Collector (CC) configuration, and to determine the current gain $\gamma$, input resistance $r_i$, and output resistance $r_o$[cite: 1].
+    \item To verify the relationships $\beta=\alpha/(1-\alpha)$ and $\gamma=\beta+1$ from the measured data[cite: 1].
+\end{itemize}
+
+\section{Apparatus / Components}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|l|c|}
+        \hline
+        \textbf{S.No.} & \textbf{Component / Equipment} & \textbf{Specification} & \textbf{Quantity} \\ \hline
+        1 & BC547 transistor & NPN, TO-92 package & 1 \\ \hline
+        2 & Regulated DC power supply & 0-30 V, dual output & 2 \\ \hline
+        3 & Milliammeter & 0-10 mA and 0-30 mA range & 2 \\ \hline
+        4 & Microammeter & 0-500 $\mu$A range & 1 \\ \hline
+        5 & Voltmeter & 0-1 V and 0-30 V range & 2 \\ \hline
+        6 & Fixed resistors & 1 k$\Omega$, 4.7 k$\Omega$, 10 k$\Omega$ & as needed \\ \hline
+        7 & Breadboard, connecting wires, probes & Required & as needed \\ \hline
+    \end{tabular}
+    \caption{List of components required[cite: 1].}
+\end{table}
+
+\section{Common Emitter (CE) Configuration}
+
+\subsection{Theory}
+A Bipolar Junction Transistor (BJT) is a three-terminal device - emitter (E), base (B), and collector (C) - formed by two back-to-back PN junctions[cite: 1]. In normal (active-region) operation, the base-emitter junction is forward-biased and the base-collector junction is reverse-biased[cite: 1]. A small base current controls a much larger collector current, giving current gain[cite: 1]. 
+
+In the CE configuration, the emitter is common to both input (base-emitter) and output (collector-emitter) loops[cite: 1]. The input characteristic ($I_B$ vs $V_{BE}$ at constant $V_{CE}$) resembles a diode's forward characteristic[cite: 1]. The output characteristic ($I_C$ vs $V_{CE}$ at constant $I_B$) shows a steep rise in the saturation region followed by a nearly flat active region, whose slight upward slope reflects a finite output resistance[cite: 1]. The current gain $\beta=\Delta I_C/\Delta I_B$ is typically 50-300[cite: 1].
+
+\subsection{Circuit Connections and Procedure}
+\textbf{Output Characteristics:}
+\begin{enumerate}
+    \item Connect the transistor in CE configuration: emitter grounded (common), base current supplied through a 10 k$\Omega$ resistor from the base supply with a microammeter (0-500 $\mu$A) in series, and collector connected through a milliammeter (0-10 mA) to the collector supply[cite: 1].
+    \item Connect a voltmeter (0-1 V) across base-emitter and a voltmeter (0-30 V) across collector-emitter[cite: 1].
+    \item Set the base supply to give $I_B=20\mu A$ (adjust and confirm on the microammeter) and keep it fixed for this run[cite: 1].
+    \item Starting with $V_{CE}=0$ V, increase $V_{CE}$ in steps of 0.5 V up to 2 V, then in steps of 2 V up to 20 V, recording $I_C$ at each step[cite: 1].
+    \item Repeat for $I_B=40, 60, 80$, and 100 $\mu$A, tabulating $I_C$ vs $V_{CE}$ for each[cite: 1]. Switch off the supply[cite: 1].
+\end{enumerate}
+
+\textbf{Input Characteristics:}
+\begin{enumerate}
+    \item Retain the CE circuit[cite: 1]. Set $V_{CE}=1$ V and hold it fixed for this run[cite: 1].
+    \item Increase $V_{BE}$ in steps of 0.05 V from 0 to 0.4 V, then in steps of 0.02 V up to 0.7 V, recording $I_B$ at each step[cite: 1].
+    \item Repeat for $V_{CE}=5$ V and $V_{CE}=10$ V[cite: 1]. Switch off the supply[cite: 1].
+\end{enumerate}
+
+\subsection{Circuit and Simulation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{"Common Emitter/Input/ckt.png"}
+    \caption{Simulation Circuit for CE Input Characteristics}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{"Graphs/emitter_input_characteristics.png"}
+    \caption{Simulated CE Input Characteristics ($I_B$ vs $V_{BE}$)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{"Common Emitter/Output/ckt.png"}
+    \caption{Simulation Circuit for CE Output Characteristics}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{"Graphs/emitter_output_characteristics.png"}
+    \caption{Simulated CE Output Characteristics ($I_C$ vs $V_{CE}$)}
+\end{figure}
+
+\subsection{Observation Tables (To be filled in lab)}
+\begin{table}[H]
+    \centering
+    \caption{CE Output Characteristics[cite: 1]}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{S.No.} & \textbf{$V_{CE}$ (V)} & \textbf{$I_C$ (mA) at $I_B=20\mu A$} & \textbf{$I_C$ (mA) at $I_B=60\mu A$} & \textbf{$I_C$ (mA) at $I_B=100\mu A$} \\ \hline
+        1 & & & & \\ \hline
+        2 & & & & \\ \hline
+        3 & & & & \\ \hline
+        4 & & & & \\ \hline
+        5 & & & & \\ \hline
+        6 & & & & \\ \hline
+        7 & & & & \\ \hline
+        8 & & & & \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{CE Input Characteristics[cite: 1]}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{S.No.} & \textbf{$V_{BE}$ (V)} & \textbf{$I_B$ ($\mu$A) at $V_{CE}=1 V$} & \textbf{$I_B$ ($\mu$A) at $V_{CE}=5 V$} & \textbf{$I_B$ ($\mu$A) at $V_{CE}=10 V$} \\ \hline
+        1 & & & & \\ \hline
+        2 & & & & \\ \hline
+        3 & & & & \\ \hline
+        4 & & & & \\ \hline
+        5 & & & & \\ \hline
+        6 & & & & \\ \hline
+        7 & & & & \\ \hline
+        8 & & & & \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Common Base (CB) Configuration}
+
+\subsection{Theory}
+In the CB configuration, the base is common to both loops[cite: 1]. The input characteristic ($I_E$ vs $V_{EB}$ at constant $V_{CB}$) is again diode-like[cite: 1]. The output characteristic ($I_C$ vs $V_{CB}$ at constant $I_E$) is extremely flat, since the collector current is set almost entirely by the emitter current and is nearly independent of $V_{CB}$ giving CB circuits a very high output resistance[cite: 1]. The current gain $\alpha=\Delta I_C/\Delta I_E$ is always slightly less than 1 (typically 0.95-0.99)[cite: 1].
+
+\subsection{Circuit Connections and Procedure}
+\textbf{Output Characteristics:}
+\begin{enumerate}
+    \item Connect the transistor in CB configuration: base grounded (common), emitter current supplied through a 1 k$\Omega$ resistor from the emitter supply with a milliammeter (0-10 mA) in series, and collector connected through a milliammeter (0-10 mA) to the collector supply[cite: 1].
+    \item Connect a voltmeter (0-1 V) across emitter-base and a voltmeter (0-30 V) across collector-base[cite: 1].
+    \item Set the emitter supply to give $I_E=2$ mA and hold it fixed for this run[cite: 1].
+    \item Starting with $V_{CB}=0$ V, increase $V_{CB}$ in steps of 0.5 V up to 2 V, then in steps of 2 V up to 20 V, recording $I_C$ at each step[cite: 1].
+    \item Repeat for $I_E=4, 6, 8$, and 10 mA[cite: 1]. Switch off the supply[cite: 1].
+\end{enumerate}
+
+\textbf{Input Characteristics:}
+\begin{enumerate}
+    \item Retain the CB circuit[cite: 1]. Set $V_{CB} = 0$ V and hold it fixed for this run[cite: 1].
+    \item Increase $V_{EB}$ in steps of 0.05 V from 0 to 0.4 V, then in steps of 0.02 V up to 0.7 V, recording $I_E$ at each step[cite: 1].
+    \item Repeat for $V_{CB}=5$ V and $V_{CB}=10$ V[cite: 1]. Switch off the supply[cite: 1].
+\end{enumerate}
+
+\subsection{Circuit and Simulation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{"Common Base/Input/ckt.png"}
+    \caption{Simulation Circuit for CB Configuration}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{"Graphs/common_base_input_characteristics.png"}
+    \caption{Simulated CB Input Characteristics ($I_E$ vs $V_{EB}$)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{"Graphs/common_base_output_characteristics.png"}
+    \caption{Simulated CB Output Characteristics ($I_C$ vs $V_{CB}$)}
+\end{figure}
+
+\subsection{Observation Tables (To be filled in lab)}
+\begin{table}[H]
+    \centering
+    \caption{CB Output Characteristics[cite: 1]}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{S.No.} & \textbf{$V_{CB}$ (V)} & \textbf{$I_C$ (mA) at $I_E=2$ mA} & \textbf{$I_C$ (mA) at $I_E=6$ mA} & \textbf{$I_C$ (mA) at $I_E=10$ mA} \\ \hline
+        1 & & & & \\ \hline
+        2 & & & & \\ \hline
+        3 & & & & \\ \hline
+        4 & & & & \\ \hline
+        5 & & & & \\ \hline
+        6 & & & & \\ \hline
+        7 & & & & \\ \hline
+        8 & & & & \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{CB Input Characteristics[cite: 1]}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{S.No.} & \textbf{$V_{EB}$ (V)} & \textbf{$I_E$ (mA) at $V_{CB}=0 V$} & \textbf{$I_E$ (mA) at $V_{CB}=5 V$} & \textbf{$I_E$ (mA) at $V_{CB}=10 V$} \\ \hline
+        1 & & & & \\ \hline
+        2 & & & & \\ \hline
+        3 & & & & \\ \hline
+        4 & & & & \\ \hline
+        5 & & & & \\ \hline
+        6 & & & & \\ \hline
+        7 & & & & \\ \hline
+        8 & & & & \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Common Collector (CC) Configuration}
+
+\subsection{Theory}
+In the CC configuration (also called an emitter follower), the collector is common to both loops[cite: 1]. The output characteristic ($I_E$ vs $V_{EC}$ at constant $I_B$) closely resembles the CE output characteristic, since $I_E \approx I_C$[cite: 1]. The input characteristic is normally plotted as $I_B$ vs $V_{BC}$ at constant $V_{EC}$, and falls off as the base-collector reverse bias increases[cite: 1]. The current gain $\gamma=\Delta I_E/\Delta I_B \approx \beta+1$, so CC circuits provide current gain close to that of the CE configuration but are used mainly for their high input resistance and low output resistance (voltage buffering)[cite: 1].
+
+\subsection{Circuit Connections and Procedure}
+\textbf{Output Characteristics:}
+\begin{enumerate}
+    \item Connect the transistor in CC configuration: collector grounded (common), base current supplied through a 10 k$\Omega$ resistor from the base supply with a microammeter (0-500 $\mu$A) in series, and emitter connected through a milliammeter (0-10 mA) to the emitter supply[cite: 1].
+    \item Connect a voltmeter (0-30 V) across base-collector and a voltmeter (0-30 V) across emitter-collector[cite: 1].
+    \item Set the base supply to give $I_B=20\mu A$ and hold it fixed for this run[cite: 1].
+    \item Starting with $V_{EC}=0$ V increase $V_{EC}$ in steps of 0.5 V up to 2 V, then in steps of 2 V up to 20 V, recording $I_E$ at each step[cite: 1].
+    \item Repeat for $I_B=40, 60, 80$, and 100 $\mu$A[cite: 1]. Switch off the supply[cite: 1].
+\end{enumerate}
+
+\textbf{Input Characteristics:}
+\begin{enumerate}
+    \item Retain the CC circuit[cite: 1]. Set $V_{EC} = 1$ V and hold it fixed for this run[cite: 1].
+    \item Increase $V_{BC}$ in steps of 0.5 V from 0 to 10 V, recording $I_B$ at each step[cite: 1].
+    \item Repeat for $V_{EC}=5$ V and $V_{EC}=10$ V[cite: 1]. Switch off the supply[cite: 1].
+\end{enumerate}
+
+\subsection{Circuit and Simulation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{"Common Collector/Input/ckt.png"}
+    \caption{Simulation Circuit for CC Configuration}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{"Graphs/collector_input_characteristics.png"}
+    \caption{Simulated CC Input Characteristics ($I_B$ vs $V_{BC}$)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{"Graphs/collector_output_characteristics.png"}
+    \caption{Simulated CC Output Characteristics ($I_E$ vs $V_{EC}$)}
+\end{figure}
+
+\subsection{Observation Tables (To be filled in lab)}
+\begin{table}[H]
+    \centering
+    \caption{CC Output Characteristics[cite: 1]}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{S.No.} & \textbf{$V_{EC}$ (V)} & \textbf{$I_E$ (mA) at $I_B=20\mu A$} & \textbf{$I_E$ (mA) at $I_B=60\mu A$} & \textbf{$I_E$ (mA) at $I_B=100\mu A$} \\ \hline
+        1 & & & & \\ \hline
+        2 & & & & \\ \hline
+        3 & & & & \\ \hline
+        4 & & & & \\ \hline
+        5 & & & & \\ \hline
+        6 & & & & \\ \hline
+        7 & & & & \\ \hline
+        8 & & & & \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{CC Input Characteristics[cite: 1]}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{S.No.} & \textbf{$V_{BC}$ (V)} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=1 V$} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=5 V$} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=10 V$} \\ \hline
+        1 & & & & \\ \hline
+        2 & & & & \\ \hline
+        3 & & & & \\ \hline
+        4 & & & & \\ \hline
+        5 & & & & \\ \hline
+        6 & & & & \\ \hline
+        7 & & & & \\ \hline
+        8 & & & & \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Calculations / Analysis}
+Based on the collected data, the following analysis will be performed[cite: 1]:
+\begin{itemize}
+    \item \textbf{CE:} compute $\beta=\Delta I_C/\Delta I_B$ from the output family (at fixed $V_{CE}$); compute input resistance $r_i = \Delta V_{BE}/\Delta I_B$ and output resistance $r_o=\Delta V_{CE}/\Delta I_C$ from the respective characteristics[cite: 1].
+    \item \textbf{CB:} compute $\alpha=\Delta I_C/\Delta I_E$ from the output family (at fixed $V_{CB}$); compute $r_i=\Delta V_{EB}/\Delta I_E$ and $r_o=\Delta V_{CB}/\Delta I_C$[cite: 1].
+    \item \textbf{CC:} compute $\gamma=\Delta I_E/\Delta I_B$ from the output family (at fixed $V_{EC}$); compute $r_i=\Delta V_{BC}/\Delta I_B$ and $r_o=\Delta V_{EC}/\Delta I_E$[cite: 1].
+\end{itemize}
+Cross-check the three current gains using $\beta=\alpha/(1-\alpha)$ and $\gamma=\beta+1$, and compare with the directly measured values[cite: 1]. Comment on the relative magnitudes of $r_i$ and $r_o$ across the three configurations (CE: moderate $r_i$, moderate $r_o$; CB: low $r_i$, very high $r_o$; CC: high $r_i$, low $r_o$)[cite: 1].
+
+\section{Results and Conclusion}
+The input and output characteristics of the BC547 BJT were simulated in LTSpice for the CE, CB, and CC configurations. The CE configuration demonstrated a moderate slope in the active region indicating a finite output resistance, while the CB configuration showed extremely flat curves representing a high output resistance. Experimental values from the lab will be populated in the observation tables to accurately calculate the practical $\alpha$, $\beta$, and $\gamma$ values, which will then be verified against their theoretical relationships.
+
+\end{document}
