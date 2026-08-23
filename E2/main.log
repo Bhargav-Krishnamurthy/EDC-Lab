@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.13)  21 AUG 2026 22:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.13)  23 AUG 2026 19:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -426,155 +426,408 @@ Overfull \hbox (19.90225pt too wide) in paragraph at lines 52--63
 
 [3{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }]
-<Media/BJT_Emitter.jpeg, id=120, 1604.99625pt x 902.37125pt>
+<Media/BJT_Emitter.jpeg, id=145, 1604.99625pt x 902.37125pt>
 File: Media/BJT_Emitter.jpeg Graphic file (type jpg)
 <use Media/BJT_Emitter.jpeg>
 Package pdftex.def Info: Media/BJT_Emitter.jpeg  used on input line 94.
 (pdftex.def)             Requested size: 271.7835pt x 152.79524pt.
-<Common Emitter/Input/ckt.png, id=121, 392.96812pt x 309.40594pt>
+<Common Emitter/Input/ckt.png, id=146, 392.96812pt x 309.40594pt>
 File: Common Emitter/Input/ckt.png Graphic file (type png)
 <use Common Emitter/Input/ckt.png>
 Package pdftex.def Info: Common Emitter/Input/ckt.png  used on input line 100.
-(pdftex.def)             Requested size: 271.7835pt x 214.00493pt.
+(pdftex.def)             Requested size: 407.66833pt x 321.00032pt.
 
 
 [4 <./Media/BJT_Emitter.jpeg>]
-<Graphs/emitter_input_characteristics.png, id=136, 578.16pt x 433.62pt>
+<Graphs/emitter_input_characteristics.png, id=162, 578.16pt x 433.62pt>
 File: Graphs/emitter_input_characteristics.png Graphic file (type png)
 <use Graphs/emitter_input_characteristics.png>
 Package pdftex.def Info: Graphs/emitter_input_characteristics.png  used on inpu
 t line 106.
-(pdftex.def)             Requested size: 317.07614pt x 237.80362pt.
-<Common Emitter/Output/ckt.png, id=137, 348.55219pt x 302.63063pt>
+(pdftex.def)             Requested size: 407.66833pt x 305.74846pt.
+
+
+[5 <./Common Emitter/Input/ckt.png>]
+<Common Emitter/Input/sim1a.png, id=169, 1444.64719pt x 384.6872pt>
+File: Common Emitter/Input/sim1a.png Graphic file (type png)
+<use Common Emitter/Input/sim1a.png>
+Package pdftex.def Info: Common Emitter/Input/sim1a.png  used on input line 115
+.
+(pdftex.def)             Requested size: 407.66833pt x 108.55693pt.
+<Common Emitter/Input/sim1b.png, id=170, 1443.14156pt x 379.4175pt>
+File: Common Emitter/Input/sim1b.png Graphic file (type png)
+<use Common Emitter/Input/sim1b.png>
+Package pdftex.def Info: Common Emitter/Input/sim1b.png  used on input line 121
+.
+(pdftex.def)             Requested size: 407.66833pt x 107.17984pt.
+<Common Emitter/Input/sim5a.png, id=171, 1440.13031pt x 386.19281pt>
+File: Common Emitter/Input/sim5a.png Graphic file (type png)
+<use Common Emitter/Input/sim5a.png>
+Package pdftex.def Info: Common Emitter/Input/sim5a.png  used on input line 127
+.
+(pdftex.def)             Requested size: 407.66833pt x 109.31769pt.
+
+
+[6 <./Graphs/emitter_input_characteristics.png> <./Common Emitter/Input/sim1a.p
+ng> <./Common Emitter/Input/sim1b.png>]
+<Common Emitter/Input/sim5b.png, id=182, 1441.63594pt x 384.6872pt>
+File: Common Emitter/Input/sim5b.png Graphic file (type png)
+<use Common Emitter/Input/sim5b.png>
+Package pdftex.def Info: Common Emitter/Input/sim5b.png  used on input line 133
+.
+(pdftex.def)             Requested size: 407.66833pt x 108.77998pt.
+<Common Emitter/Input/sim10a.png, id=183, 1434.86063pt x 383.18156pt>
+File: Common Emitter/Input/sim10a.png Graphic file (type png)
+<use Common Emitter/Input/sim10a.png>
+Package pdftex.def Info: Common Emitter/Input/sim10a.png  used on input line 13
+9.
+(pdftex.def)             Requested size: 407.66833pt x 108.86876pt.
+<Common Emitter/Input/sim10b.png, id=184, 1434.86063pt x 386.19281pt>
+File: Common Emitter/Input/sim10b.png Graphic file (type png)
+<use Common Emitter/Input/sim10b.png>
+Package pdftex.def Info: Common Emitter/Input/sim10b.png  used on input line 14
+5.
+(pdftex.def)             Requested size: 407.66833pt x 109.7243pt.
+<Common Emitter/Output/ckt.png, id=185, 348.55219pt x 302.63063pt>
 File: Common Emitter/Output/ckt.png Graphic file (type png)
 <use Common Emitter/Output/ckt.png>
-Package pdftex.def Info: Common Emitter/Output/ckt.png  used on input line 112.
+Package pdftex.def Info: Common Emitter/Output/ckt.png  used on input line 151.
 
-(pdftex.def)             Requested size: 271.7835pt x 235.98628pt.
+(pdftex.def)             Requested size: 407.66833pt x 353.97481pt.
 
 
-[5 <./Common Emitter/Input/ckt.png> <./Graphs/emitter_input_characteristics.png
->]
-<Graphs/emitter_output_characteristics.png, id=146, 578.16pt x 433.62pt>
+[7 <./Common Emitter/Input/sim5a.png> <./Common Emitter/Input/sim5b.png> <./Com
+mon Emitter/Input/sim10a.png> <./Common Emitter/Input/sim10b.png>]
+<Graphs/emitter_output_characteristics.png, id=199, 578.16pt x 433.62pt>
 File: Graphs/emitter_output_characteristics.png Graphic file (type png)
 <use Graphs/emitter_output_characteristics.png>
 Package pdftex.def Info: Graphs/emitter_output_characteristics.png  used on inp
-ut line 118.
-(pdftex.def)             Requested size: 317.07614pt x 237.80362pt.
+ut line 157.
+(pdftex.def)             Requested size: 407.66833pt x 305.74846pt.
 
-Overfull \hbox (67.50839pt too wide) in paragraph at lines 126--138
+
+[8 <./Common Emitter/Output/ckt.png>]
+<Common Emitter/Output/sim20a.png, id=206, 1431.09656pt x 350.05782pt>
+File: Common Emitter/Output/sim20a.png Graphic file (type png)
+<use Common Emitter/Output/sim20a.png>
+Package pdftex.def Info: Common Emitter/Output/sim20a.png  used on input line 1
+66.
+(pdftex.def)             Requested size: 407.66833pt x 99.71944pt.
+<Common Emitter/Output/sim20b.png, id=207, 1441.63594pt x 386.19281pt>
+File: Common Emitter/Output/sim20b.png Graphic file (type png)
+<use Common Emitter/Output/sim20b.png>
+Package pdftex.def Info: Common Emitter/Output/sim20b.png  used on input line 1
+72.
+(pdftex.def)             Requested size: 407.66833pt x 109.20573pt.
+
+
+[9 <./Graphs/emitter_output_characteristics.png> <./Common Emitter/Output/sim20
+a.png>]
+<Common Emitter/Output/sim40a.png, id=216, 1444.64719pt x 379.4175pt>
+File: Common Emitter/Output/sim40a.png Graphic file (type png)
+<use Common Emitter/Output/sim40a.png>
+Package pdftex.def Info: Common Emitter/Output/sim40a.png  used on input line 1
+78.
+(pdftex.def)             Requested size: 407.66833pt x 107.06984pt.
+<Common Emitter/Output/sim40b.png, id=217, 1439.3775pt x 385.44pt>
+File: Common Emitter/Output/sim40b.png Graphic file (type png)
+<use Common Emitter/Output/sim40b.png>
+Package pdftex.def Info: Common Emitter/Output/sim40b.png  used on input line 1
+84.
+(pdftex.def)             Requested size: 407.66833pt x 109.16342pt.
+<Common Emitter/Output/sim60a.png, id=218, 1440.88312pt x 388.45125pt>
+File: Common Emitter/Output/sim60a.png Graphic file (type png)
+<use Common Emitter/Output/sim60a.png>
+Package pdftex.def Info: Common Emitter/Output/sim60a.png  used on input line 1
+90.
+(pdftex.def)             Requested size: 407.66833pt x 109.90364pt.
+<Common Emitter/Output/sim60b.png, id=219, 1441.63594pt x 381.67593pt>
+File: Common Emitter/Output/sim60b.png Graphic file (type png)
+<use Common Emitter/Output/sim60b.png>
+Package pdftex.def Info: Common Emitter/Output/sim60b.png  used on input line 1
+96.
+(pdftex.def)             Requested size: 407.66833pt x 107.92848pt.
+
+
+[10 <./Common Emitter/Output/sim20b.png> <./Common Emitter/Output/sim40a.png> <
+./Common Emitter/Output/sim40b.png> <./Common Emitter/Output/sim60a.png>]
+<Common Emitter/Output/sim80a.png, id=232, 1440.88312pt x 379.4175pt>
+File: Common Emitter/Output/sim80a.png Graphic file (type png)
+<use Common Emitter/Output/sim80a.png>
+Package pdftex.def Info: Common Emitter/Output/sim80a.png  used on input line 2
+02.
+(pdftex.def)             Requested size: 407.66833pt x 107.34773pt.
+<Common Emitter/Output/sim80b.png, id=233, 1443.14156pt x 380.92313pt>
+File: Common Emitter/Output/sim80b.png Graphic file (type png)
+<use Common Emitter/Output/sim80b.png>
+Package pdftex.def Info: Common Emitter/Output/sim80b.png  used on input line 2
+08.
+(pdftex.def)             Requested size: 407.66833pt x 107.60516pt.
+<Common Emitter/Output/sim100a.png, id=234, 1440.88312pt x 384.6872pt>
+File: Common Emitter/Output/sim100a.png Graphic file (type png)
+<use Common Emitter/Output/sim100a.png>
+Package pdftex.def Info: Common Emitter/Output/sim100a.png  used on input line 
+214.
+(pdftex.def)             Requested size: 407.66833pt x 108.83868pt.
+<Common Emitter/Output/sim100b.png, id=235, 1440.13031pt x 385.44pt>
+File: Common Emitter/Output/sim100b.png Graphic file (type png)
+<use Common Emitter/Output/sim100b.png>
+Package pdftex.def Info: Common Emitter/Output/sim100b.png  used on input line 
+220.
+(pdftex.def)             Requested size: 407.66833pt x 109.1046pt.
+
+
+[11 <./Common Emitter/Output/sim60b.png> <./Common Emitter/Output/sim80a.png> <
+./Common Emitter/Output/sim80b.png> <./Common Emitter/Output/sim100a.png>]
+Overfull \hbox (67.50839pt too wide) in paragraph at lines 228--240
+ [][] 
+ []
+
+
+Overfull \hbox (43.31071pt too wide) in paragraph at lines 245--257
  [][] 
  []
 
 
 
-[6 <./Common Emitter/Output/ckt.png> <./Graphs/emitter_output_characteristics.p
-ng>]
-Overfull \hbox (43.31071pt too wide) in paragraph at lines 143--155
- [][] 
- []
-
-
-
-[7]
-<Media/BJT_Base.jpeg, id=165, 1604.99625pt x 902.37125pt>
+[12 <./Common Emitter/Output/sim100b.png>]
+<Media/BJT_Base.jpeg, id=256, 1604.99625pt x 902.37125pt>
 File: Media/BJT_Base.jpeg Graphic file (type jpg)
 <use Media/BJT_Base.jpeg>
-Package pdftex.def Info: Media/BJT_Base.jpeg  used on input line 183.
+Package pdftex.def Info: Media/BJT_Base.jpeg  used on input line 285.
 (pdftex.def)             Requested size: 271.7835pt x 152.79524pt.
-<Common Base/Input/ckt.png, id=166, 384.6872pt x 268.75406pt>
+<Common Base/Input/ckt.png, id=257, 384.6872pt x 268.75406pt>
 File: Common Base/Input/ckt.png Graphic file (type png)
 <use Common Base/Input/ckt.png>
-Package pdftex.def Info: Common Base/Input/ckt.png  used on input line 189.
-(pdftex.def)             Requested size: 271.7835pt x 189.88992pt.
-<Graphs/common_base_input_characteristics.png, id=167, 722.7pt x 433.62pt>
+Package pdftex.def Info: Common Base/Input/ckt.png  used on input line 291.
+(pdftex.def)             Requested size: 407.66833pt x 284.82874pt.
+
+
+[13 <./Media/BJT_Base.jpeg>]
+<Graphs/common_base_input_characteristics.png, id=272, 722.7pt x 433.62pt>
 File: Graphs/common_base_input_characteristics.png Graphic file (type png)
 <use Graphs/common_base_input_characteristics.png>
 Package pdftex.def Info: Graphs/common_base_input_characteristics.png  used on 
-input line 195.
-(pdftex.def)             Requested size: 317.07614pt x 190.24422pt.
+input line 297.
+(pdftex.def)             Requested size: 407.66833pt x 244.59877pt.
+<Common Base/Input/sim0a.png, id=273, 1444.64719pt x 386.94562pt>
+File: Common Base/Input/sim0a.png Graphic file (type png)
+<use Common Base/Input/sim0a.png>
+Package pdftex.def Info: Common Base/Input/sim0a.png  used on input line 304.
+(pdftex.def)             Requested size: 407.66833pt x 109.19424pt.
 
 
-[8 <./Media/BJT_Base.jpeg> <./Common Base/Input/ckt.png>]
-<Graphs/common_base_output_characteristics.png, id=181, 722.7pt x 433.62pt>
+[14 <./Common Base/Input/ckt.png> <./Graphs/common_base_input_characteristics.p
+ng>]
+<Common Base/Input/sim0b.png, id=282, 1443.14156pt x 383.93437pt>
+File: Common Base/Input/sim0b.png Graphic file (type png)
+<use Common Base/Input/sim0b.png>
+Package pdftex.def Info: Common Base/Input/sim0b.png  used on input line 310.
+(pdftex.def)             Requested size: 407.66833pt x 108.4558pt.
+<Common Base/Input/sim5a.png, id=283, 1443.14156pt x 389.20406pt>
+File: Common Base/Input/sim5a.png Graphic file (type png)
+<use Common Base/Input/sim5a.png>
+Package pdftex.def Info: Common Base/Input/sim5a.png  used on input line 316.
+(pdftex.def)             Requested size: 407.66833pt x 109.94441pt.
+<Common Base/Input/sim5b.png, id=284, 1440.13031pt x 389.95688pt>
+File: Common Base/Input/sim5b.png Graphic file (type png)
+<use Common Base/Input/sim5b.png>
+Package pdftex.def Info: Common Base/Input/sim5b.png  used on input line 322.
+(pdftex.def)             Requested size: 407.66833pt x 110.38318pt.
+<Common Base/Input/sim10a.png, id=285, 1440.13031pt x 388.45125pt>
+File: Common Base/Input/sim10a.png Graphic file (type png)
+<use Common Base/Input/sim10a.png>
+Package pdftex.def Info: Common Base/Input/sim10a.png  used on input line 328.
+(pdftex.def)             Requested size: 407.66833pt x 109.95699pt.
+
+
+[15 <./Common Base/Input/sim0a.png> <./Common Base/Input/sim0b.png> <./Common B
+ase/Input/sim5a.png> <./Common Base/Input/sim5b.png>]
+<Common Base/Input/sim10b.png, id=298, 1441.63594pt x 379.4175pt>
+File: Common Base/Input/sim10b.png Graphic file (type png)
+<use Common Base/Input/sim10b.png>
+Package pdftex.def Info: Common Base/Input/sim10b.png  used on input line 334.
+(pdftex.def)             Requested size: 407.66833pt x 107.28984pt.
+<Graphs/common_base_output_characteristics.png, id=299, 722.7pt x 433.62pt>
 File: Graphs/common_base_output_characteristics.png Graphic file (type png)
 <use Graphs/common_base_output_characteristics.png>
 Package pdftex.def Info: Graphs/common_base_output_characteristics.png  used on
- input line 201.
-(pdftex.def)             Requested size: 317.07614pt x 190.24422pt.
+ input line 340.
+(pdftex.def)             Requested size: 407.66833pt x 244.59877pt.
+<Common Base/Output/sim.png, id=300, 1441.63594pt x 381.67593pt>
+File: Common Base/Output/sim.png Graphic file (type png)
+<use Common Base/Output/sim.png>
+Package pdftex.def Info: Common Base/Output/sim.png  used on input line 346.
+(pdftex.def)             Requested size: 407.66833pt x 107.92848pt.
 
-Overfull \hbox (79.82848pt too wide) in paragraph at lines 209--221
+
+[16 <./Common Base/Input/sim10a.png> <./Common Base/Input/sim10b.png> <./Graphs
+/common_base_output_characteristics.png>]
+Overfull \hbox (79.82848pt too wide) in paragraph at lines 355--367
  [][] 
  []
 
 
-Overfull \hbox (55.85257pt too wide) in paragraph at lines 226--238
+Overfull \hbox (55.85257pt too wide) in paragraph at lines 372--384
  [][] 
  []
 
 
 
-[9 <./Graphs/common_base_input_characteristics.png> <./Graphs/common_base_outpu
-t_characteristics.png>]
-<Media/BJT_Collector.jpeg, id=191, 1604.99625pt x 902.37125pt>
+[17 <./Common Base/Output/sim.png>]
+<Media/BJT_Collector.jpeg, id=319, 1604.99625pt x 902.37125pt>
 File: Media/BJT_Collector.jpeg Graphic file (type jpg)
 <use Media/BJT_Collector.jpeg>
-Package pdftex.def Info: Media/BJT_Collector.jpeg  used on input line 266.
+Package pdftex.def Info: Media/BJT_Collector.jpeg  used on input line 412.
 (pdftex.def)             Requested size: 271.7835pt x 152.79524pt.
-
-
-[10]
-<Common Collector/Input/ckt.png, id=205, 335.00156pt x 266.49562pt>
+<Common Collector/Input/ckt.png, id=320, 335.00156pt x 266.49562pt>
 File: Common Collector/Input/ckt.png Graphic file (type png)
 <use Common Collector/Input/ckt.png>
-Package pdftex.def Info: Common Collector/Input/ckt.png  used on input line 272
+Package pdftex.def Info: Common Collector/Input/ckt.png  used on input line 418
 .
-(pdftex.def)             Requested size: 271.7835pt x 216.20184pt.
-<Graphs/collector_input_characteristics.png, id=206, 578.16pt x 433.62pt>
+(pdftex.def)             Requested size: 407.66833pt x 324.30276pt.
+
+
+[18 <./Media/BJT_Collector.jpeg>]
+<Graphs/collector_input_characteristics.png, id=335, 578.16pt x 433.62pt>
 File: Graphs/collector_input_characteristics.png Graphic file (type png)
 <use Graphs/collector_input_characteristics.png>
 Package pdftex.def Info: Graphs/collector_input_characteristics.png  used on in
-put line 278.
-(pdftex.def)             Requested size: 317.07614pt x 237.80362pt.
+put line 424.
+(pdftex.def)             Requested size: 407.66833pt x 305.74846pt.
 
 
-[11 <./Media/BJT_Collector.jpeg> <./Common Collector/Input/ckt.png>]
-<Graphs/collector_output_characteristics.png, id=214, 578.16pt x 433.62pt>
+[19 <./Common Collector/Input/ckt.png>]
+<Common Collector/Input/sim1.png, id=343, 1444.64719pt x 383.18156pt>
+File: Common Collector/Input/sim1.png Graphic file (type png)
+<use Common Collector/Input/sim1.png>
+Package pdftex.def Info: Common Collector/Input/sim1.png  used on input line 43
+1.
+(pdftex.def)             Requested size: 407.66833pt x 108.13205pt.
+<Common Collector/Input/sim5.png, id=344, 1442.38875pt x 386.94562pt>
+File: Common Collector/Input/sim5.png Graphic file (type png)
+<use Common Collector/Input/sim5.png>
+Package pdftex.def Info: Common Collector/Input/sim5.png  used on input line 43
+7.
+(pdftex.def)             Requested size: 407.66833pt x 109.35957pt.
+<Common Collector/Input/sim10.png, id=345, 1440.88312pt x 394.47375pt>
+File: Common Collector/Input/sim10.png Graphic file (type png)
+<use Common Collector/Input/sim10.png>
+Package pdftex.def Info: Common Collector/Input/sim10.png  used on input line 4
+43.
+(pdftex.def)             Requested size: 407.66833pt x 111.60757pt.
+
+
+[20 <./Graphs/collector_input_characteristics.png> <./Common Collector/Input/si
+m1.png> <./Common Collector/Input/sim5.png>]
+<Graphs/collector_output_characteristics.png, id=356, 578.16pt x 433.62pt>
 File: Graphs/collector_output_characteristics.png Graphic file (type png)
 <use Graphs/collector_output_characteristics.png>
 Package pdftex.def Info: Graphs/collector_output_characteristics.png  used on i
-nput line 284.
-(pdftex.def)             Requested size: 317.07614pt x 237.80362pt.
+nput line 449.
+(pdftex.def)             Requested size: 407.66833pt x 305.74846pt.
+<Common Collector/Output/sim20a.png, id=357, 1443.14156pt x 377.91188pt>
+File: Common Collector/Output/sim20a.png Graphic file (type png)
+<use Common Collector/Output/sim20a.png>
+Package pdftex.def Info: Common Collector/Output/sim20a.png  used on input line
+ 458.
+(pdftex.def)             Requested size: 407.66833pt x 106.75453pt.
 
-Overfull \hbox (67.67172pt too wide) in paragraph at lines 292--304
+
+[21 <./Common Collector/Input/sim10.png> <./Graphs/collector_output_characteris
+tics.png>]
+<Common Collector/Output/sim20b.png, id=366, 1441.63594pt x 387.69844pt>
+File: Common Collector/Output/sim20b.png Graphic file (type png)
+<use Common Collector/Output/sim20b.png>
+Package pdftex.def Info: Common Collector/Output/sim20b.png  used on input line
+ 464.
+(pdftex.def)             Requested size: 407.66833pt x 109.63148pt.
+<Common Collector/Output/sim40a.png, id=367, 1434.10782pt x 385.44pt>
+File: Common Collector/Output/sim40a.png Graphic file (type png)
+<use Common Collector/Output/sim40a.png>
+Package pdftex.def Info: Common Collector/Output/sim40a.png  used on input line
+ 470.
+(pdftex.def)             Requested size: 407.66833pt x 109.56335pt.
+<Common Collector/Output/sim40b.png, id=368, 1441.63594pt x 377.91188pt>
+File: Common Collector/Output/sim40b.png Graphic file (type png)
+<use Common Collector/Output/sim40b.png>
+Package pdftex.def Info: Common Collector/Output/sim40b.png  used on input line
+ 476.
+(pdftex.def)             Requested size: 407.66833pt x 106.86409pt.
+<Common Collector/Output/sim60a.png, id=369, 1442.38875pt x 384.6872pt>
+File: Common Collector/Output/sim60a.png Graphic file (type png)
+<use Common Collector/Output/sim60a.png>
+Package pdftex.def Info: Common Collector/Output/sim60a.png  used on input line
+ 482.
+(pdftex.def)             Requested size: 407.66833pt x 108.72128pt.
+
+
+[22 <./Common Collector/Output/sim20a.png> <./Common Collector/Output/sim20b.pn
+g> <./Common Collector/Output/sim40a.png> <./Common Collector/Output/sim40b.png
+>]
+<Common Collector/Output/sim60b.png, id=382, 1442.38875pt x 386.19281pt>
+File: Common Collector/Output/sim60b.png Graphic file (type png)
+<use Common Collector/Output/sim60b.png>
+Package pdftex.def Info: Common Collector/Output/sim60b.png  used on input line
+ 488.
+(pdftex.def)             Requested size: 407.66833pt x 109.1468pt.
+<Common Collector/Output/sim80a.png, id=383, 1443.89438pt x 376.40625pt>
+File: Common Collector/Output/sim80a.png Graphic file (type png)
+<use Common Collector/Output/sim80a.png>
+Package pdftex.def Info: Common Collector/Output/sim80a.png  used on input line
+ 494.
+(pdftex.def)             Requested size: 407.66833pt x 106.27177pt.
+<Common Collector/Output/sim80b.png, id=384, 1444.64719pt x 389.20406pt>
+File: Common Collector/Output/sim80b.png Graphic file (type png)
+<use Common Collector/Output/sim80b.png>
+Package pdftex.def Info: Common Collector/Output/sim80b.png  used on input line
+ 500.
+(pdftex.def)             Requested size: 407.66833pt x 109.83157pt.
+<Common Collector/Output/sim100a.png, id=385, 1444.64719pt x 410.2828pt>
+File: Common Collector/Output/sim100a.png Graphic file (type png)
+<use Common Collector/Output/sim100a.png>
+Package pdftex.def Info: Common Collector/Output/sim100a.png  used on input lin
+e 506.
+(pdftex.def)             Requested size: 407.66833pt x 115.77989pt.
+
+
+[23 <./Common Collector/Output/sim60a.png> <./Common Collector/Output/sim60b.pn
+g> <./Common Collector/Output/sim80a.png> <./Common Collector/Output/sim80b.png
+>]
+<Common Collector/Output/sim100b.png, id=398, 1440.88312pt x 379.4175pt>
+File: Common Collector/Output/sim100b.png Graphic file (type png)
+<use Common Collector/Output/sim100b.png>
+Package pdftex.def Info: Common Collector/Output/sim100b.png  used on input lin
+e 512.
+(pdftex.def)             Requested size: 407.66833pt x 107.34773pt.
+
+Overfull \hbox (67.67172pt too wide) in paragraph at lines 520--532
+ [][] 
+ []
+
+
+Overfull \hbox (43.25627pt too wide) in paragraph at lines 537--549
  [][] 
  []
 
 
 
-[12 <./Graphs/collector_input_characteristics.png> <./Graphs/collector_output_c
-haracteristics.png>]
-Overfull \hbox (43.25627pt too wide) in paragraph at lines 309--321
- [][] 
- []
+[24 <./Common Collector/Output/sim100a.png> <./Common Collector/Output/sim100b.
+png>]
 
-
-
-[13]
-
-[14] (./main.aux)
+[25] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 577AE4198E64AAE6B53B756440043461;3137.
+(rerunfilecheck)             Checksum: B61DEEB60CF0822B770A623233CF2722;4017.
  ) 
 Here is how much of TeX's memory you used:
- 10073 strings out of 473190
- 157555 string characters out of 5715800
- 576522 words of memory out of 5000000
- 33135 multiletter control sequences out of 15000+600000
+ 10418 strings out of 473190
+ 169428 string characters out of 5715800
+ 573531 words of memory out of 5000000
+ 33428 multiletter control sequences out of 15000+600000
  565774 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,10n,79p,650b,527s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -584,10 +837,10 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
 r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
 /local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (14 pages, 808980 bytes).
+Output written on main.pdf (25 pages, 1500970 bytes).
 PDF statistics:
- 283 PDF objects out of 1000 (max. 8388607)
- 229 compressed objects within 3 object streams
- 79 named destinations out of 1000 (max. 500000)
- 218 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 472 PDF objects out of 1000 (max. 8388607)
+ 334 compressed objects within 4 object streams
+ 131 named destinations out of 1000 (max. 500000)
+ 438 words of extra memory for PDF output out of 10000 (max. 10000000)
 

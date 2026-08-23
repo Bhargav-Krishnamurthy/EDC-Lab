@@ -97,26 +97,128 @@ In the CE configuration, the emitter is common to both input (base-emitter) and 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{"Common Emitter/Input/ckt.png"}
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Input/ckt.png"}
     \caption{Simulation Circuit for CE Input Characteristics}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{"Graphs/emitter_input_characteristics.png"}
+    \includegraphics[width=0.9\textwidth]{"Graphs/emitter_input_characteristics.png"}
     \caption{Simulated CE Input Characteristics ($I_B$ vs $V_{BE}$)}
+\end{figure}
+
+\subsubsection{CE Input Simulations}
+The following simulations show the input characteristics at varying $V_{CE}$ values.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Input/sim1a.png"}
+    \caption{CE Input $V_{CE} = 1V$ (Low Range)}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{"Common Emitter/Output/ckt.png"}
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Input/sim1b.png"}
+    \caption{CE Input $V_{CE} = 1V$ (High Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Input/sim5a.png"}
+    \caption{CE Input $V_{CE} = 5V$ (Low Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Input/sim5b.png"}
+    \caption{CE Input $V_{CE} = 5V$ (High Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Input/sim10a.png"}
+    \caption{CE Input $V_{CE} = 10V$ (Low Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Input/sim10b.png"}
+    \caption{CE Input $V_{CE} = 10V$ (High Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/ckt.png"}
     \caption{Simulation Circuit for CE Output Characteristics}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{"Graphs/emitter_output_characteristics.png"}
+    \includegraphics[width=0.9\textwidth]{"Graphs/emitter_output_characteristics.png"}
     \caption{Simulated CE Output Characteristics ($I_C$ vs $V_{CE}$)}
+\end{figure}
+
+\subsubsection{CE Output Simulations}
+The following images show the simulation results for varying base currents. The 'a' images represent the voltage sweep in steps of 0.5 V up to 2 V, and 'b' images represent steps of 2 V up to 20 V.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim20a.png"}
+    \caption{CE Output $I_B = 20\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim20b.png"}
+    \caption{CE Output $I_B = 20\mu A$ (2 to 20V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim40a.png"}
+    \caption{CE Output $I_B = 40\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim40b.png"}
+    \caption{CE Output $I_B = 40\mu A$ (2 to 20V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim60a.png"}
+    \caption{CE Output $I_B = 60\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim60b.png"}
+    \caption{CE Output $I_B = 60\mu A$ (2 to 20V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim80a.png"}
+    \caption{CE Output $I_B = 80\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim80b.png"}
+    \caption{CE Output $I_B = 80\mu A$ (2 to 20V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim100a.png"}
+    \caption{CE Output $I_B = 100\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Emitter/Output/sim100b.png"}
+    \caption{CE Output $I_B = 100\mu A$ (2 to 20V)}
 \end{figure}
 
 \subsection{Observation Tables}
@@ -186,21 +288,65 @@ In the CB configuration, the base is common to both loops. The input characteris
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{"Common Base/Input/ckt.png"}
+    \includegraphics[width=0.9\textwidth]{"Common Base/Input/ckt.png"}
     \caption{Simulation Circuit for CB Configuration}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{"Graphs/common_base_input_characteristics.png"}
+    \includegraphics[width=0.9\textwidth]{"Graphs/common_base_input_characteristics.png"}
     \caption{Simulated CB Input Characteristics ($I_E$ vs $V_{EB}$)}
+\end{figure}
+
+\subsubsection{CB Input Simulations}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Base/Input/sim0a.png"}
+    \caption{CB Input $V_{CB} = 0V$ (Low Range)}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{"Graphs/common_base_output_characteristics.png"}
+    \includegraphics[width=0.9\textwidth]{"Common Base/Input/sim0b.png"}
+    \caption{CB Input $V_{CB} = 0V$ (High Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Base/Input/sim5a.png"}
+    \caption{CB Input $V_{CB} = 5V$ (Low Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Base/Input/sim5b.png"}
+    \caption{CB Input $V_{CB} = 5V$ (High Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Base/Input/sim10a.png"}
+    \caption{CB Input $V_{CB} = 10V$ (Low Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Base/Input/sim10b.png"}
+    \caption{CB Input $V_{CB} = 10V$ (High Range)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Graphs/common_base_output_characteristics.png"}
     \caption{Simulated CB Output Characteristics ($I_C$ vs $V_{CB}$)}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Base/Output/sim.png"}
+    \caption{Simulated CB Output Characteristics Detailed Simulation}
+\end{figure}
+
 
 \subsection{Observation Tables}
 \begin{table}[H]
@@ -269,20 +415,102 @@ In the CC configuration (also called an emitter follower), the collector is comm
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{"Common Collector/Input/ckt.png"}
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Input/ckt.png"}
     \caption{Simulation Circuit for CC Configuration}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{"Graphs/collector_input_characteristics.png"}
+    \includegraphics[width=0.9\textwidth]{"Graphs/collector_input_characteristics.png"}
     \caption{Simulated CC Input Characteristics ($I_B$ vs $V_{BC}$)}
+\end{figure}
+
+\subsubsection{CC Input Simulations}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Input/sim1.png"}
+    \caption{CC Input $V_{EC} = 1V$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{"Graphs/collector_output_characteristics.png"}
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Input/sim5.png"}
+    \caption{CC Input $V_{EC} = 5V$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Input/sim10.png"}
+    \caption{CC Input $V_{EC} = 10V$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Graphs/collector_output_characteristics.png"}
     \caption{Simulated CC Output Characteristics ($I_E$ vs $V_{EC}$)}
+\end{figure}
+
+\subsubsection{CC Output Simulations}
+The following images show the simulation results for varying base currents. The 'a' images represent the voltage sweep in steps of 0.5 V up to 2 V, and 'b' images represent steps of 2 V up to 20 V.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim20a.png"}
+    \caption{CC Output $I_B = 20\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim20b.png"}
+    \caption{CC Output $I_B = 20\mu A$ (2 to 20V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim40a.png"}
+    \caption{CC Output $I_B = 40\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim40b.png"}
+    \caption{CC Output $I_B = 40\mu A$ (2 to 20V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim60a.png"}
+    \caption{CC Output $I_B = 60\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim60b.png"}
+    \caption{CC Output $I_B = 60\mu A$ (2 to 20V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim80a.png"}
+    \caption{CC Output $I_B = 80\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim80b.png"}
+    \caption{CC Output $I_B = 80\mu A$ (2 to 20V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim100a.png"}
+    \caption{CC Output $I_B = 100\mu A$ (0 to 2V)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim100b.png"}
+    \caption{CC Output $I_B = 100\mu A$ (2 to 20V)}
 \end{figure}
 
 \subsection{Observation Tables}

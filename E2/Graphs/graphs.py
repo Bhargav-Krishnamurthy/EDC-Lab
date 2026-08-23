@@ -51,7 +51,7 @@ vec_out = [0, 0.5, 1, 1.5, 2, 4, 6, 8]
 ie_20_out = [0.0001, 0.0653, 0.068, 0.0704, 0.0725, 0.082, 0.096, 0.499]
 ie_60_out = [0.0001, 0.2245, 0.2326, 0.2396, 0.2463, 0.2743, 0.3261, 0.5947]
 # Note: The last value (1324) seems to be an anomalous outlier in the original image, kept as printed.
-ie_100_out = [0.0001, 0.4187, 0.426, 0.4512, 0.4631, 0.4867, 0.6158, 1324]
+ie_100_out = [0.0001, 0.4187, 0.426, 0.4512, 0.4631, 0.4867, 0.6158, 1.324]
 
 plt.figure(figsize=(8, 6))
 plt.plot(vec_out, ie_20_out, marker='o', label='IB = 20 µA')
