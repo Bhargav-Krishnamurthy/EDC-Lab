@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 # ---------------------------------------------------------
 # Plot 1: Common Emitter Output (image_578b68.png / image_578b30.png)
@@ -47,46 +48,78 @@ plt.savefig("emitter_input_characteristics.png")
 # ---------------------------------------------------------
 # Plot 3: Common Collector Output (image_578ba8.png)
 # ---------------------------------------------------------
-vec_out = [0, 0.5, 1, 1.5, 2, 4, 6, 8]
-ie_20_out = [0.0001, 0.0653, 0.068, 0.0704, 0.0725, 0.082, 0.096, 0.499]
-ie_60_out = [0.0001, 0.2245, 0.2326, 0.2396, 0.2463, 0.2743, 0.3261, 0.5947]
-# Note: The last value (1324) seems to be an anomalous outlier in the original image, kept as printed.
-ie_100_out = [0.0001, 0.4187, 0.426, 0.4512, 0.4631, 0.4867, 0.6158, 1.324]
+# Data extracted from the table
+V_EC = [0.0, 0.5, 1.0, 1.5, 2.0, 4.0, 6.0, 8.0]
 
-plt.figure(figsize=(8, 6))
-plt.plot(vec_out, ie_20_out, marker='o', label='IB = 20 µA')
-plt.plot(vec_out, ie_60_out, marker='s', label='IB = 60 µA')
-plt.plot(vec_out, ie_100_out, marker='^', label='IB = 100 µA')
-plt.title('Common Collector Output Characteristics')
-plt.xlabel('VEC (V)')
-plt.ylabel('IE (mA)')
-# Setting log scale for Y-axis due to the massive spike at the end of IB=100µA
-plt.yscale('log')
-plt.grid(True)
-plt.legend()
+# Emitter currents (I_E) in mA for different base currents (I_B)
+I_E_20uA = [0.0016, 6.21, 6.24, 6.3, 6.35, 6.47, 6.65, 6.78]
+I_E_60uA = [0.05, 16.01, 18.30, 18.60, 18.90, 19.65, 21.09, 21.9]
+I_E_100uA = [0.09, 21.50, 24.62, 26.55, 27.35, 28.81, 30.4, 31.9]
+
+# Create the plot
+plt.figure(figsize=(10, 6))
+
+# Plot each series with a line and markers
+plt.plot(V_EC, I_E_20uA, marker='o', linestyle='-', label=r'$I_B = 20\mu A$')
+plt.plot(V_EC, I_E_60uA, marker='s', linestyle='-', label=r'$I_B = 60\mu A$')
+plt.plot(V_EC, I_E_100uA, marker='^', linestyle='-', label=r'$I_B = 100\mu A$')
+
+# Labeling and titles
+plt.title('CC Output Characteristics', fontsize=14, pad=15)
+plt.xlabel(r'$V_{EC}$ (V)', fontsize=12)
+plt.ylabel(r'$I_E$ (mA)', fontsize=12)
+
+# Grid and Legend
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.legend(title='Base Current', fontsize=10, title_fontsize=11)
+
+# Set axes limits starting from 0 for better visualization
+plt.xlim(left=0)
+plt.ylim(bottom=0)
+
+# Display the plot
 plt.tight_layout()
 plt.savefig("collector_output_characteristics.png")
 
 # ---------------------------------------------------------
 # Plot 4: Common Collector Input (image_578e51.png)
 # ---------------------------------------------------------
-vbc_in = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
-ib_vec_1 = [0, 0.0014, 0.0023, 0.1041, 0.1642, 0.2234, 0.2825, 0.3426, 0.4014, 
-            0.4607, 0.5201, 0.5799, 0.6207, 0.6866, 0.7422, 0.7915, 0.877]
-ib_vec_5 = [0, 0.0017, 0.0503, 0.1085, 0.1682, 0.2285, 0.2888, 0.35, 0.4107, 
-            0.4717, 0.5297, 0.5884, 0.6495, 0.7097, 0.7315, 0.789, 0.867]
-ib_vec_10 = [0, 0.0007, 0.06, 0.1222, 0.1845, 0.2462, 0.3076, 0.3694, 0.4309, 
-             0.4915, 0.5417, 0.6016, 0.673, 0.7085, 0.7949, 0.8558, 0.9171]
+# Data extracted from the table
 
-plt.figure(figsize=(8, 6))
-plt.plot(vbc_in, ib_vec_1, marker='o', label='VEC = 1 V')
-plt.plot(vbc_in, ib_vec_5, marker='s', label='VEC = 5 V')
-plt.plot(vbc_in, ib_vec_10, marker='^', label='VEC = 10 V')
-plt.title('Common Collector Input Characteristics')
-plt.xlabel('VBC (V)')
-plt.ylabel('IB (µA)')
-plt.grid(True)
-plt.legend()
+# Data extracted from the table
+# V_EC = 1V Data
+V_BC_1V = [0.593, 0.518, 0.418, 0.407, 0.39, 0.385, 0.382, 0.373, 0.374]
+I_B_1V = [0, 0.1, 0.7, 1, 1.9, 2.2, 2.6, 3.9, 6]
+
+# V_EC = 5V Data
+V_BC_5V = [4.47, 4.44, 4.42, 4.40, 4.38, 4.36, 4.34, 4.32, 4.30]
+I_B_5V = [0, 0.1, 0.5, 1, 2, 4.6, 9.7, 23, 61]
+
+# V_EC = 10V Data
+V_BC_10V = [9.42, 9.41, 9.40, 9.38, 9.36, 9.34]
+I_B_10V = [0.0000, 0.4, 1, 2.0, 5.0, 13.4]
+
+# Create the plot with a much wider figure size to stretch the curves out
+plt.figure(figsize=(16, 6))
+
+# Plot each series
+plt.plot(V_BC_1V, I_B_1V, marker='o', linestyle='-', label=r'$V_{EC} = 1V$')
+plt.plot(V_BC_5V, I_B_5V, marker='s', linestyle='-', label=r'$V_{EC} = 5V$')
+plt.plot(V_BC_10V, I_B_10V, marker='^', linestyle='-', label=r'$V_{EC} = 10V$')
+
+# Labeling and titles
+plt.title('CC Input Characteristics', fontsize=14, pad=15)
+plt.xlabel(r'$V_{BC}$ (V)', fontsize=12)
+plt.ylabel(r'$I_B$ ($\mu$A)', fontsize=12)
+
+# Create more divisions on the X-axis (ticks every 0.5V instead of auto-spacing)
+plt.xticks(np.arange(0, 10.5, 0.5))
+
+# Grid and Legend
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.legend(title='Emitter-Collector Voltage', fontsize=10, title_fontsize=11)
+
+# Display the plot
 plt.tight_layout()
 plt.savefig("collector_input_characteristics.png")
 

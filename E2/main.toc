@@ -7,18 +7,20 @@
 \contentsline {subsubsection}{\numberline {3.3.1}CE Input Simulations}{6}{subsubsection.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.2}CE Output Simulations}{9}{subsubsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.4}Observation Tables}{12}{subsection.3.4}%
-\contentsline {section}{\numberline {4}Common Base (CB) Configuration}{12}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Theory}{12}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Circuit Connections and Procedure}{13}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Circuit and Simulation}{13}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}CB Input Simulations}{15}{subsubsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.4}Observation Tables}{17}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Common Collector (CC) Configuration}{17}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Theory}{17}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Circuit Connections and Procedure}{18}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Circuit and Simulation}{18}{subsection.5.3}%
-\contentsline {subsubsection}{\numberline {5.3.1}CC Input Simulations}{20}{subsubsection.5.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.2}CC Output Simulations}{21}{subsubsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.4}Observation Tables}{24}{subsection.5.4}%
-\contentsline {section}{\numberline {6}Calculations / Analysis}{25}{section.6}%
-\contentsline {section}{\numberline {7}Results and Conclusion}{25}{section.7}%
+\contentsline {subsection}{\numberline {3.5}Calculations from Observation Data}{13}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Common Base (CB) Configuration}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Theory}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Circuit Connections and Procedure}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Circuit and Simulation}{15}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}CB Input Simulations}{16}{subsubsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.4}Observation Tables}{18}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Calculations from Observation Data}{19}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Common Collector (CC) Configuration}{20}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Theory}{20}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Circuit Connections and Procedure}{20}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Circuit and Simulation}{21}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}CC Input Simulations}{22}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}CC Output Simulations}{23}{subsubsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.4}Observation Tables}{26}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Calculations from Observation Data}{26}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Results and Conclusion}{27}{section.6}%
