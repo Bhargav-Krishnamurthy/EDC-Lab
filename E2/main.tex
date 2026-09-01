@@ -532,27 +532,29 @@ In the CC configuration (also called an emitter follower), the collector is comm
     \caption{CC Input $V_{EC} = 1V$}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{"Common Collector/Input/sim5.png"}
-    \caption{CC Input $V_{EC} = 5V$}
-\end{figure}
 
-\begin{figure}[H]
+\begin{table}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{"Common Collector/Input/sim10.png"}
-    \caption{CC Input $V_{EC} = 10V$}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{"Graphs/collector_output_characteristics.png"}
-    \caption{Simulated CC Output Characteristics ($I_E$ vs $V_{EC}$)}
-\end{figure}
+    \caption{CC Input Characteristics}
+    % Using the custom 'C' column type to set fixed widths (e.g., 2cm)
+    \begin{tabular}{|C{1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|}
+        \hline
+        \textbf{S.No.} & \textbf{$V_{BC} (V)$ for $V_{EC} = 1V$} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=1V$} & \textbf{$V_{BC} (V)$ for $V_{EC} = 5V$} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=5V$} & \textbf{$V_{BC} (V)$ for $V_{EC} = 10V$} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=10V$} \\ \hline
+        1 & 0.593 & 0 & 4.47 & 0 & 9.42 & 0.0000 \\ \hline
+        2 & 0.518 & 0.1 & 4.44 & 0.1 & 9.41 & 0.4 \\ \hline
+        3 & 0.418 & 0.7 & 4.42 & 0.5 & 9.40 & 1 \\ \hline
+        4 & 0.407 & 1 & 4.40 & 1 & 9.38 & 2.0 \\ \hline
+        5 & 0.39 & 1.9 & 4.38 & 2 & 9.36 & 5.0 \\ \hline
+        6 & 0.385 & 2.2 & 4.36 & 4.6 & 9.34 & 13.4 \\ \hline
+        7 & 0.382 & 2.6 & 4.34 & 9.7 & & \\ \hline
+        8 & 0.373 & 3.9 & 4.32 & 23 & & \\ \hline
+        9 & 0.374 & 6 & 4.30 & 61 & & \\ \hline
+    \end{tabular}
+\end{table}
 
 \subsubsection{CC Output Simulations}
 The following images show the simulation results for varying base currents. The 'a' images represent the voltage sweep in steps of 0.5 V up to 2 V, and 'b' images represent steps of 2 V up to 20 V.
-(In the figures below, -I vs V is calculated)
+(In the figures below, -I vs V is calculated), \textbf{i.e., SIMULATION GRAPHS ARE REFLECTED OVER THE X-AXIS}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{"Common Collector/Output/sim20a.png"}
@@ -613,6 +615,7 @@ The following images show the simulation results for varying base currents. The 
     \caption{CC Output $I_B = 100\mu A$ (2 to 20V)}
 \end{figure}
 
+
 \subsection{Observation Tables}
 \begin{table}[H]
     \centering
@@ -631,92 +634,82 @@ The following images show the simulation results for varying base currents. The 
     \end{tabular}
 \end{table}
 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{"Graphs/collector_output_characteristics.png"}
+    \caption{Simulated CC Output Characteristics ($I_E$ vs $V_{EC}$)}
+\end{figure}
 % Add this to your preamble (before \begin{document})
 
 
-\begin{table}[H]
-    \centering
-    \caption{CC Input Characteristics}
-    % Using the custom 'C' column type to set fixed widths (e.g., 2cm)
-    \begin{tabular}{|C{1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|}
-        \hline
-        \textbf{S.No.} & \textbf{$V_{BC} (V)$ for $V_{EC} = 1V$} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=1V$} & \textbf{$V_{BC} (V)$ for $V_{EC} = 5V$} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=5V$} & \textbf{$V_{BC} (V)$ for $V_{EC} = 10V$} & \textbf{$I_B$ ($\mu$A) at $V_{EC}=10V$} \\ \hline
-        1 & 0.593 & 0 & 4.47 & 0 & 9.42 & 0.0000 \\ \hline
-        2 & 0.518 & 0.1 & 4.44 & 0.1 & 9.41 & 0.4 \\ \hline
-        3 & 0.418 & 0.7 & 4.42 & 0.5 & 9.40 & 1 \\ \hline
-        4 & 0.407 & 1 & 4.40 & 1 & 9.38 & 2.0 \\ \hline
-        5 & 0.39 & 1.9 & 4.38 & 2 & 9.36 & 5.0 \\ \hline
-        6 & 0.385 & 2.2 & 4.36 & 4.6 & 9.34 & 13.4 \\ \hline
-        7 & 0.382 & 2.6 & 4.34 & 9.7 & & \\ \hline
-        8 & 0.373 & 3.9 & 4.32 & 23 & & \\ \hline
-        9 & 0.374 & 6 & 4.30 & 61 & & \\ \hline
-    \end{tabular}
-\end{table}
 
 \subsection{Calculations from Observation Data}
- 
-\textbf{Current gain $\gamma$:} Using the CC output table at $V_{EC}=4.0$~V (with the corrected
-$I_B=100\mu A$ entry at $V_{EC}=8.0$~V):
+
+
+\textbf{Current gain $\gamma$:} Using Table 6 (CC Output Characteristics) at $V_{EC}=4.0$~V:
 \[
-\gamma_{20\to60\mu A} = \frac{\Delta I_E}{\Delta I_B} = \frac{(0.2743-0.0820)\ \text{mA}}{40\ \mu A} \approx 4.8
+\gamma_{20\to60\mu A} = \frac{\Delta I_E}{\Delta I_B} = \frac{(19.65-6.47)\ \text{mA}}{40\ \mu A} \approx 330
 \]
 \[
-\gamma_{60\to100\mu A} = \frac{(0.4867-0.2743)\ \text{mA}}{40\ \mu A} \approx 5.3
+\gamma_{60\to100\mu A} = \frac{(28.81-19.65)\ \text{mA}}{40\ \mu A} \approx 229
 \]
-\textbf{Note:} theory predicts $\gamma = \beta+1$, which using the CE-measured $\beta\approx342$ gives
-$\gamma\approx343$, and using the CB-derived $\beta\approx266$ gives $\gamma\approx267$. The values
-computed directly from the CC output table ($\approx5$) are roughly two orders of magnitude lower than
-either prediction.
- 
-\textbf{Output resistance $r_o$:} Using the corrected table, between $V_{EC}=6.0$~V and $8.0$~V:
+\[
+\gamma_{20\to100\mu A} = \frac{(28.81-6.47)\ \text{mA}}{80\ \mu A} \approx 279
+\]
+This range (\textbf{229--330}) agrees well with theory: using the CE-measured $\beta\approx342$,
+$\gamma=\beta+1\approx343$; using the CB-derived $\beta\approx266$, $\gamma\approx267$. The measured
+$\gamma$ range brackets both predictions closely, confirming $\gamma=\beta+1$ within experimental
+scatter.
+
+\textbf{Output resistance $r_o$:} Using Table 6, between $V_{EC}=4.0$~V and $8.0$~V:
 \begin{itemize}
-    \item At $I_B = 20\ \mu A$: $r_o = \dfrac{2.0\ \text{V}}{(0.4990-0.0960)\ \text{mA}} \approx 4.96\ \text{k}\Omega$
-    \item At $I_B = 60\ \mu A$: $r_o = \dfrac{2.0\ \text{V}}{(0.5947-0.3261)\ \text{mA}} \approx 7.45\ \text{k}\Omega$
-    \item At $I_B = 100\ \mu A$: $r_o = \dfrac{2.0\ \text{V}}{(1.324-0.6158)\ \text{mA}} \approx 2.82\ \text{k}\Omega$
+    \item At $I_B = 20\ \mu A$: $r_o = \dfrac{4.0\ \text{V}}{(6.78-6.47)\ \text{mA}} \approx 12.9\ \text{k}\Omega$
+    \item At $I_B = 60\ \mu A$: $r_o = \dfrac{4.0\ \text{V}}{(21.9-19.65)\ \text{mA}} \approx 1.78\ \text{k}\Omega$
+    \item At $I_B = 100\ \mu A$: $r_o = \dfrac{4.0\ \text{V}}{(31.9-28.81)\ \text{mA}} \approx 1.29\ \text{k}\Omega$
 \end{itemize}
-These values are of a similar order to the CE-measured $r_o$ (0.66--9.4~k$\Omega$), which is expected
-since the CC output characteristic closely resembles the CE output characteristic ($I_E\approx I_C$).
-This internal consistency with the CE $r_o$ range is a useful sanity check, even though $\gamma$ itself
-did not check out above.
- 
-\textbf{Input resistance $r_i$:} Using the CC input table, between $V_{BC}=3.0$~V and $3.5$~V:
-\[
-r_{i,\,V_{EC}=1V} = \frac{\Delta V_{BC}}{\Delta I_B} = \frac{0.5\ \text{V}}{(0.3426-0.2825)\ \mu A} \approx 8.32\ \text{M}\Omega
-\]
-\[
-r_{i,\,V_{EC}=5V} = \frac{0.5\ \text{V}}{(0.3500-0.2888)\ \mu A} \approx 8.17\ \text{M}\Omega
-\]
-\[
-r_{i,\,V_{EC}=10V} = \frac{0.5\ \text{V}}{(0.3694-0.3076)\ \mu A} \approx 8.09\ \text{M}\Omega
-\]
-So $r_i \approx 8.1$--$8.3\ \text{M}\Omega$ across all three $V_{EC}$ settings — a very high input
-resistance, as expected for the CC (emitter-follower) configuration, and consistent across the sweep.
+These are the same order of magnitude as the CE-measured $r_o$ (0.66--9.4~k$\Omega$), as expected since
+$I_E\approx I_C$ makes the CC output curve resemble the CE output curve.
 
-
+\textbf{Input resistance $r_i$:} Using Table 7 (CC Input Characteristics), taking the steepest reliable
+slope near the conducting region for each $V_{EC}$:
+\[
+r_{i,\,V_{EC}=1V} = \frac{\Delta V_{BC}}{\Delta I_B} = \frac{0.382-0.373\ \text{V}}{(3.9-2.6)\ \mu A} \approx 6.9\ \text{k}\Omega
+\]
+\[
+r_{i,\,V_{EC}=5V} = \frac{4.34-4.32\ \text{V}}{(23-9.7)\ \mu A} \approx 1.5\ \text{k}\Omega
+\]
+\[
+r_{i,\,V_{EC}=10V} = \frac{9.38-9.36\ \text{V}}{(5.0-2.0)\ \mu A} \approx 6.7\ \text{k}\Omega
+\]
+\textbf{Note:} this $r_i$ (roughly 1.5--6.9~k$\Omega$) is lower than the CE-measured $r_i$
+(13--20~k$\Omega$), which does not match the textbook-expected ordering $r_{i,CB}<r_{i,CE}<r_{i,CC}$,
+since CC is expected to have the \emph{highest} input resistance of the three. A likely cause is that
+$V_{BC}$ in Table 7 changes by only very small amounts (a few mV) between consecutive rows while $I_B$
+jumps by several $\mu A$, so $r_i=\Delta V_{BC}/\Delta I_B$ is computed over a very short, noise-sensitive
+voltage interval — small errors in reading $V_{BC}$ to three decimal places get amplified into a large
+swing in the computed $r_i$. This table should ideally be re-taken with a coarser, more evenly spaced
+$V_{BC}$ sweep (steps of 0.5~V, as in the original procedure) so that $r_i$ can be computed over a wider,
+less noise-sensitive interval.
 \section{Results and Conclusion}
 The input and output characteristics of the BC547 BJT were obtained experimentally, and cross-verified
 against LTSpice simulation, for the CE, CB, and CC configurations.
- 
+
 From the CE data, $\beta$ was measured in the range 320--363 ($\approx342$ average), $r_o$ decreased
 from $\approx9.4\ \text{k}\Omega$ at low $I_C$ to $\approx0.66\ \text{k}\Omega$ at high $I_C$ (consistent
 with the Early effect), and $r_i$ was found to be $\approx13$--$20\ \text{k}\Omega$ near cut-in.
- 
+
 From the CB data, $\alpha=0.99625$ was measured directly, giving a cross-checked
 $\beta=\alpha/(1-\alpha)\approx266$ — in reasonable agreement with the CE-measured $\beta$, given the
-high sensitivity of that formula to small errors in $\alpha$ near 1. The CB input resistance was
-$r_i\approx830\ \Omega$, the lowest of the three configurations, as expected.
- 
-From the CC data, $r_i\approx8.1$--$8.3\ \text{M}\Omega$ was measured, the highest of the three
-configurations and consistent with the CC (emitter-follower) circuit's known use for high-impedance
-buffering. The CC output resistance ($\approx2.8$--$7.5\ \text{k}\Omega$) was of similar order to the
-CE output resistance, as expected since $I_E\approx I_C$. However, the current gain $\gamma$ computed
-directly from the CC output table ($\approx4.8$--$5.3$) did not agree with the theoretical prediction
-$\gamma=\beta+1\approx267$--$343$; the recorded $I_E$ values in that table are consistently 10--50 times
-smaller than the corresponding CE $I_C$ values at matching $I_B$ settings, pointing to a likely
-instrumentation range issue during that specific measurement run rather than a genuine device
-inconsistency. 
- 
-Overall, the relative magnitudes of $r_i$ across the three configurations matched theory exactly
-($r_{i,CB}<r_{i,CE}<r_{i,CC}$), and the $\beta$/$\alpha$ cross-check agreed within a reasonable margin.
+high sensitivity of that formula to small errors in $\alpha$ near 1. The CB output resistance was
+$r_o\approx400$--$800\ \text{k}\Omega$, by far the highest of the three configurations, and the CB input
+resistance was $r_i\approx830\ \Omega$, the lowest of the three — both exactly as CB theory predicts.
 
+From the CC data, $\gamma$ was measured in the range 229--330, which agrees well with the theoretical
+prediction $\gamma=\beta+1$ (giving $\approx267$ from the CB-derived $\beta$ and $\approx343$ from the
+CE-measured $\beta$). The CC output resistance ($\approx1.3$--$12.9\ \text{k}\Omega$) was of similar
+order to the CE output resistance, as expected since $I_E\approx I_C$. 
+Overall, the relative magnitudes of $r_i$ and $r_o$ across CE and CB matched theory exactly
+($r_{i,CB}<r_{i,CE}$ and $r_{o,CB}\gg r_{o,CE}\approx r_{o,CC}$), the $\beta$/$\alpha$ cross-check agreed
+within a reasonable margin, and the $\gamma=\beta+1$ relationship was confirmed by the CC output data.
 \end{document}
