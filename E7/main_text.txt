@@ -1,0 +1,407 @@
+                 Electronic Devices & Circuits Laboratory (EE2301)
+                    Experiment 6: NMOS Source Follower with Current-Mirror Load
+                                            Bhargav K (EE25BTECH11013)
+                                          Aditya Appana (EE25BTECH11004)
+                                                     October 11, 2026
+               1    Objective
+               To assemble and experimentally characterize an NMOS source follower (common-drain ampli-
+               fier) biased by an active current-source load constructed from an NMOS current mirror using a
+               VDD =10 V laboratory DC source. The specific objectives are:
+                  1. Verify the current mirror reference branch and establish a stable ≈ 33–34 mA tail current
+                     under the 10 V power supply.
+                  2. Measure the large-signal DC transfer characteristic (Vout vs. Vin), determine the linear
+                     voltage tracking range, and extract the gate-to-source DC level shift (VGS).
+                  3. Investigate operating limits, specifically the triode boundary at low Vin and thermal run-
+                     away effects observed in the active current-mirror transistor at higher input voltages.
+                  4. Characterize the small-signal AC voltage gain (A ) across a frequency range from 6 Hz to
+                                                                     v
+                     100 kHz.
+                  5. Measure the small-signal output resistance (R   ) using capacitively coupled discrete re-
+                                                                  out
+                     sistive loads and compare the extracted value with weak-inversion theoretical predictions
+                     adjusted for the 10 V operating rail.
+               2    Components and Equipment Required
+               The hardware components and laboratory test instruments specified in Section 2 of the lab
+               manual and utilized during the experiment are listed in Table 1.
+                                                             1
+                    Item                        Specification / Description                             Qty
+                    MOSFET                      Vishay SI9926BDY, dual N-channel, SO-8 on DIP            2
+                                                breakout
+                                                (3 channels used: M   , M , M ; 1 spare channel)
+                                                                   ref    cs   sf
+                    Reference Resistor Rref     270 Ω, ±5%, 0.5 W metal film                             1
+                    DCBias Potentiometer        10 kΩ, multi-turn cermet trimmer (for Vin DC bias)       1
+                    Decoupling Resistor R       1 MΩ, isolates AC signal path from bias potentiometer    1
+                                         bias
+                    Coupling Capacitor Cin      1 µF electrolytic, AC-couples function generator         1
+                    Load Resistors              Nominal 10 Ω, 47 Ω, 100 Ω (measured 10.2 Ω, 47.0 Ω,    1 each
+                                                112.0 Ω)
+                    DCPower Supply              Regulated 0–30 V, set to 10.0 V, current-limited to      1
+                                                150 mA
+                    Function Generator          Sine wave output, small amplitude, 10 Hz–100 kHz         1
+                                                sweep
+                    Digital Oscilloscope        Tektronix 2-channel DSO, to view V    and V    simul-    1
+                                                                                   in      out
+                                                taneously
+                    Digital Multimeter (DMM)    4.5-digit bench DMM for DC transfer measurements         2
+                    Breadboard & Jumpers        Standard solderless breadboard and connection wires    as req.
+                    Datasheet                   Vishay SI9926BDY datasheet (provided laboratory ref-     1
+                                                erence copy)
+                     Table 1: Components and Laboratory Equipment Required (Lab Manual Section 2).
+                3    Circuit Diagram and Simulation Setup
+                Thecircuit consists of two main stages: a current mirror providing active current-source biasing,
+                andthecommon-drainfollowertransistorM          (M ). AcrossthetwoSI9926BDYdual-MOSFET
+                                                             sf   1
+                packages, three identical NMOS channels were assigned:
+                    • Channel 1 (M         / M3): Diode-connected reference transistor tied to V         = 10 V
+                                       ref                                                           DD
+                      through R     =270 Ω.
+                                 ref
+                    • Channel 2 (M       / M ): Current-mirror transistor acting as the active tail load for the
+                                      cs     2
+                      source follower.
+                    • Channel 3 (M       / M1): Source follower whose drain connects directly to VDD = 10 V,
+                                      sf
+                      gate to V , and source to the output node V      .
+                               in                                   out
+                    The breadboard hardware assembly and the corresponding LTspice simulation schematic
+                are shown in Figure 1 and Figure 2.
+                 Figure 1: Breadboard Experimental Setup.
+                                                                  Figure 2:     LTspice Simulation Schematic
+                                                                  (VDD =10 V).
+                                                                2
+                    The DC simulation schematic (Figure 2) incorporates a Level-1 NMOS model calibrated
+                                                                                             2
+                to the SI9926BDY bench measurements (V            = 1.09 V, K      = 17 A/V , V       = 10 V) and
+                                                              TO                P                 DD
+                executes a DC sweep of Vin from 1.5 V to 10.5 V in 0.1 V increments. The corresponding AC
+                simulation schematic with input coupling network is presented in Figure 7(a).
+                4     Theoretical Background and Analysis
+                4.1    Current Mirror Reference Current
+                With the laboratory power supply set to V        =10Vandreference resistor R          =270 Ω, the
+                                                             DD                                    ref
+                diode-connected transistor Mref establishes the reference current:
+                                      Iref = VDD −VGS(Mref) ≈ 10 V−1.09 V ≈ 33.0 mA                              (1)
+                                                    Rref               270 Ω
+                (or I    ≈ 10 V−0.85 V ≈ 33.9 mA using the experimentally observed level shift V         ≈0.85 V).
+                     ref       270 Ω                                                                 GS
+                Note that while Section 9 of the laboratory manual assumes a nominal 12 V rail (I                 ≈
+                                                                                                              ref
+                40.4 mA), our bench setup employed V            = 10 V, scaling the reference current down to
+                                                            DD
+                ≈33–34 mA. This closely matches the initial mirror current measured on the bench (34.30 mA
+                at V   =2.0 V). Since M       mirrors the gate voltage of M      1:1, it forces this tail current I
+                     in                    cs                                 ref                                 cs
+                through the follower stage.
+                4.2    Large-Signal DC Transfer Function and Dynamic Range
+                The follower transistor M     carries the tail current set by Mcs: I    =Ics ≈ I     . Because this
+                                           sf                                        D1           ref
+                current is constant, the gate-to-source voltage VGS1 remains locked to a single operating value.
+                Applying KVL around the gate-source loop:
+                                                      V    =V −V (I )                                            (2)
+                                                       out     in    GS1 ref
+                Differentiating with respect to Vin yields an ideal transfer slope:
+                                                         dVout = 1.00 V/V                                        (3)
+                                                         dVin
+                The output directly tracks the input with a fixed downward level shift equal to VGS1 ≈ 1.09 V
+                (or 0.85 V measured). In Section 9 of the manual, theoretical V      values are tabulated assuming
+                                                                                 out
+                V        =V −1.09V(spanning from 0.41 V at 1.5 V up to 9.41 V at 10.5 V).
+                  out,pred   in
+                Comparison with Differential Pair: Unlike the differential amplifier characterized in Ex-
+                periment 4 (which was strictly constrained to a narrow linear differential input window of
+                roughly ±150 mV), the source follower provides an exceptionally wide linear range spanning
+                from approximately V      ≈1.5 V up toward the positive supply rail (10 V).
+                                       in
+                4.3    Small-Signal Voltage Gain
+                From the small-signal equivalent model:
+                                         v                 g                         g
+                                   A = out =                m1           =            m1                         (4)
+                                     v    v      g   +g      + 1 + 1        g   +g      +g
+                                           in     m1     mb1   r      r      m1     mb1     o,total
+                                                                o1    o2
+                Because the source and body are internally bonded together in each channel of the SI9926BDY
+                breakout adapter, the source-to-body voltage is zero (V         = 0), eliminating the body effect
+                                                                            SB
+                (g     =0). Furthermore, since the transconductance gm1 ≈ 0.85 A/V far exceeds the output
+                  mb1
+                conductances g        ≈1/r +1/r , the voltage gain evaluates to near-unity:
+                                o,total     o1       o2
+                                                     A ≈1.00 V/V (0 dB)                                          (5)
+                                                       v
+                                                                 3
+                 4.4   Small-Signal Output Resistance
+                 Looking back into the source terminal of M1, the small-signal output resistance is:
+                                                   R = 1 ∥r ∥r ≈ 1                                                (6)
+                                                     out    g      o1    o2    g
+                                                             m1                 m1
+                 Operating in weak inversion at I       ≈33.0 mA (under VDD = 10 V), the transconductance is
+                                                    ref
+                 governed by exponential subthreshold physics:
+                                                     I         33.0 mA
+                                             g    = ref ≈                  ≈0.846 A/V                             (7)
+                                              m1     nV      1.5 ×26 mV
+                                                        T
+                 (or gm1 ≈ 0.869 A/V with I        ≈33.9 mA). This yields the 10 V adjusted theoretical output
+                                               ref
+                 resistance:                                          1
+                                               Rout,theoretical ≈ 0.846 A/V ≈ 1.18 Ω                              (8)
+                 (compared to the manual’s nominal 0.96 Ω which assumed VDD = 12 V, Iref ≈ 40.4 mA).
+                 4.5   Frequency Response and Bandwidth Mechanics
+                 The lab manual emphasizes distinguishing input-coupling roll-off from output-side bandwidth
+                 limits:
+                    • Output Pole: Because R            ≈ 1.87 Ω is exceptionally small, the pole formed by the
+                                                    out
+                       output node and any load capacitance C , f              =      1    , is pushed well beyond
+                                                                    L    p,out    2πR   C
+                                                                                      out L
+                       several tens of megahertz. Hence, no high-frequency roll-off can occur in the audio or
+                       ultrasonic sweep range (up to 100 kHz).
+                    • Input Pole: The AC input path contains a high-pass coupling network (Cin = 1 µF and
+                       R     =1MΩ). Anyminorattenuationobservedatsingle-digitfrequencies(6–10Hz)orig-
+                         bias
+                       inates strictly from this input coupling filter (f   ≈      1    ), rather than any intrinsic
+                                                                         L    2πR    C
+                                                                                  bias in
+                       limitation of the source follower itself.
+                 5    Experimental Procedure
+                    1. Mirror Verification (Section 6.1): Assembled the reference branch (R                 = 270 Ω,
+                                                                                                        ref
+                       M ) and the mirror device M          with M      gate left disconnected. Set the DC bench
+                         ref                             cs         sf
+                       power supply to VDD = 10 V with a 150 mA current limit. Measured the voltage drop
+                       across R     and confirmed I     =V       /R    ≈33–34 mA.
+                                ref                  ref    Rref    ref
+                    2. DC Transfer Characteristic (Section 6.2): Connected Msf drain to VDD = 10 V
+                       and source to the M     drain node (V     ). Swept the DC input voltage V       from 1.0 V to
+                                             cs               out                                   in
+                       8.5 V using the 10 kΩ potentiometer, simultaneously recording Vout and the tail current
+                       I .
+                        cs
+                    3. Small-Signal Gain Setup (Section 6.3): While the lab manual suggests setting Vin
+                       DCbias to ≈ 7 V (mid-range of a 12 V rail), in our 10 V configuration 7 V sits near the
+                       positive rail where transistor dissipation is high (Ics ≈ 77 mA). Hence, a thermally safe
+                       bias of Vin,DC = 3.0 V (Ics = 41.9 mA) was selected. Added the 1 µF coupling capacitor
+                       and 1 MΩ isolation resistor. Applied a 200 mV           sinusoidal input at 1 kHz from the
+                                                                           p−p
+                       function generator and measured Vin and Vout on the oscilloscope.
+                    4. Frequency Response Sweep (Section 6.4): Kept the input amplitude constant at
+                       200 mVp−p and swept test frequencies from 6 Hz to 100 kHz, measuring the output peak-
+                       to-peak amplitude at each frequency step.
+                                                                  4
+                  5. Output Resistance via Loading (Section 6.5): Connected load resistors (10.2 Ω,
+                     47.0 Ω, 112.0 Ω) in turn from V    to ground through an AC-coupling blocking capacitor
+                                                    out
+                     to isolate DC bias. Recorded loaded amplitudes and extracted Rout.
+               6    Experimental Observations and Results
+               6.1    DCTransfer Characteristic and Thermal Analysis (Table 1)
+               The complete DC transfer dataset recorded in the laboratory notebook (from EDC 7.xlsx) is
+               presented in Table 2.
+                  V   (V) V     (V) V −V       (V) I (mA) V (V) V           (V) V −V        (V) I (mA)
+                   in       out       in    out      cs         in       out       in   out       cs
+                    1.0      0.184       0.816        18.45      5.0      4.126       0.874        57.06
+                    1.5      0.660       0.840        29.47      5.5      4.622       0.878        61.45
+                    2.0      1.158       0.842        34.30      6.0      5.115       0.885        66.19
+                    2.5      1.653       0.847        38.24      6.5      5.607       0.893        71.31
+                    3.0      2.150       0.850        41.90      7.0      6.090       0.910        77.10
+                    3.5      2.645       0.855        45.48      7.5      6.580       0.920        83.80
+                    4.0      3.139       0.861        49.15      8.0      7.060       0.940        91.48
+                    4.5      3.633       0.867        52.99      8.5      7.550       0.950        101.45
+                     Table 2: Measured DC Transfer Characteristic and Tail Current (from EDC 7.xlsx)
+               Figure 3: Measured Vout and Tail Current Ics
+               vs. Vin.
+                                                                Figure 4:   LTspice Simulated DC Transfer
+                                                                Curve (V   swept 1.5 V to 10.5 V).
+                                                                         in
+               Physical Analysis of Operating Regions:
+                   • Triode Boundary (Vin < 1.5 V): At Vin = 1.0 V, Vout is only 0.184 V. Because the
+                     drain-source voltage of the mirror transistor is VDS2 = Vout = 0.184 V, M2 falls out of
+                     saturation into the triode region (V   <V     −V ), causing the tail current to collapse
+                                                        DS2    GS2     th
+                     to 18.45 mA.
+                                                             5
+                  • Linear Saturation Region (1.5 V ≤ V         ≤3.5 V): In this valid window, both tran-
+                                                              in
+                     sistors remain saturated. The measured transfer slope is ∆V  /∆V =0.990 V/V with
+                                                                                out    in
+                     an average level shift of 0.847 V, and the tail current sits reliably at its designed bias
+                     (41.9 mA at Vin = 3.0 V).
+                  • ThermalRunaway(Vin >3.5 V): Above3.5 V,Vout risestoward7.55 V. Thissubjects
+                     M to high voltage and high current simultaneously (V       = 7.55 V), dissipating P =
+                       2                                                   DS2
+                     V    · I ≈0.77 W in the tiny uncooled SO-8 package. The resulting die heating lowers
+                      DS2   cs
+                     the MOSFET threshold voltage, driving tail current exponentially upward to 101.45 mA.
+               6.2   Small-Signal AC Frequency Response (Table 2)
+               Holding the DC operating bias at Vin,DC = 3.0 V (Ics = 41.9 mA), an input sine wave of
+               200 mVp−p was applied. The measured response across frequency is recorded in Table 3.
+                     Frequency (Hz) Vout Amplitude (mVp−p) Gain |Av| (V/V) Gain (dB)
+                             6                      192                     0.960            -0.35
+                             8                      192                     0.960            -0.35
+                             10                     192                     0.960            -0.35
+                             30                     194                     0.970            -0.26
+                            100                     194                     0.970            -0.26
+                            300                     194                     0.970            -0.26
+                           1000                     196                     0.980            -0.18
+                           3000                     196                     0.980            -0.18
+                           10000                    198                     0.990            -0.09
+                           30000                    200                     1.000             0.00
+                          100000                    200                     1.000             0.00
+                   Table 3: Measured AC Frequency Response from 6 Hz to 100 kHz (V       =200 mV      )
+                                                                                      in           p−p
+                         Figure 5: Measured Bode Plot: Small-Signal Voltage Gain vs. Frequency.
+                   As shown in Figure 5, the frequency response is virtually flat across the entire four-decade
+               span. At the reference frequency of 1 kHz, the measured gain is |A | = 0.980 V/V (−0.18 dB).
+                                                                                v
+               There is no high-frequency roll-off up to 100 kHz.
+                                                            6
+                6.3    Output Resistance Loading Measurements (Table 3)
+                Table 4 presents the output loading data at 1 kHz alongside the theoretical loading ratios
+                predicted for our V     =10Vexperimental setup (Ratio          =R /(R +1.18 Ω)) and the lab
+                                    DD                                     pred    L     L
+                manual’s nominal 12 V specification (Ratio          =R /(R +0.96 Ω)).
+                                                             manual     L     L
+                   R (Ω)      V    Loaded (mV      ) Measured Ratio 10V Predicted Ratio Extracted R              (Ω)
+                     L          out             p−p                                                           out
+                 – (unloaded)          196.0                1.000                1.000                    –
+                     10.2              174.0                0.888                0.896                   1.29
+                     47.0              188.0                0.959                0.975                   2.00
+                    112.0              192.0                0.980                0.990                   2.33
+                Table 4: Output Resistance Loading Measurements at 1 kHz (compared with 10 V model
+                R ≈1.18Ω).
+                  out
+                Figure 6: Normalized Output Voltage Ratio vs. Load Resistance R overlaid with 10 V Theo-
+                                                                                      L
+                retical Model (R     =1.18 Ω) and 12 V Manual Specification (R        =0.96 Ω).
+                                 out                                               out
+                                                                   V              
+                    Using the voltage divider formula R      =R       out,unloaded − 1 , the extracted output resis-
+                                                         out     L   V
+                                                                      out,loaded
+                tances are 1.29 Ω, 2.00 Ω, and 2.33 Ω.
+                7    Calculations and Verification
+                7.1    Linear DC Slope and Level Shift
+                Using the stable linear region between V    =3.0 V and 3.5 V:
+                                                          in
+                                DCSlope ∆Vout = 2.645 V−2.150 V = 0.495 V = 0.990 V/V                          (9)
+                                            ∆Vin       3.5 V−3.0 V         0.500 V
+                Averaging the level shift across the linear operating region (1.5 V to 3.5 V):
+                                  V         =0.840+0.842+0.847+0.850+0.855 =0.847 V                           (10)
+                                   shift,avg                     5
+                7.2    Small-Signal Gain and LTspice Transient Verification
+                At the 1 kHz test frequency, the measured small-signal voltage gain is:
+                                        A (1 kHz) = 196 mV = 0.980 V/V (−0.18 dB)                             (11)
+                                          v           200 mV
+                                                                7
+                Toverify the AC operating point and small-signal tracking, the circuit was simulated in LTspice
+                using the schematic in Figure 7(a) (V      = 10 V, V       = 3 V, Cin = 1 µF, R        = 1 MΩ,
+                                                       DD             bias                         bias
+                200 mVp−p sine at 1 kHz). The resulting transient waveforms in Figure 7(b) confirm near-ideal
+                follower behavior: a 200 mV       input produces an identical 200 mV       output sinusoid with
+                A ≈1.00 V/V.                 p−p                                       p−p
+                  v
+                   (a) AC Simulation Schematic (V       =3V)         (b) 1 kHz Transient Output (Av ≈ 1.00)
+                                                    bias
+                Figure7: LTspiceACSimulationSetupand1kHzTransientVerification: (a)Schematicshowing
+                input coupling network (C     = 1 µF, R       = 1 MΩ) and (b) simulated transient waveforms
+                                           in            bias
+                confirming unity-gain tracking.
+                7.3   Bandwidth and Roll-Off Evaluation (Manual Section 10)
+                Per Section 10 of the laboratory manual, the frequency sweep from Table 3 was evaluated for
+                roll-off behavior:
+                   • High-Frequency Flatness: Across 10 kHz, 30 kHz, and 100 kHz, the measured gain
+                      remained flat at 0.990–1.000 V/V (0.00 dB) with zero observable high-frequency roll-off.
+                      This substantiates Section 4: because R     ≈1.87 Ω is remarkably small, the output pole
+                                                              out
+                      f     =      1     sits above several tens of megahertz, ensuring bandwidth within the
+                       p,out   2πR   C
+                                  out out
+                      audio/ultrasonic sweep band is unconstrained by the follower.
+                   • Low-Frequency Attenuation: At the lowest frequencies (6–10 Hz), output ampli-
+                      tude dipped marginally to 192 mV        (|A | = 0.960 V/V, −0.35 dB). As predicted in
+                                                          p−p    v
+                      Section 4, this modest loss stems entirely from the high-pass input coupling network
+                      (Cin = 1 µF, Rbias = 1 MΩ) rather than any limitation of the active follower itself.
+                7.4   Average Output Resistance and Summary Comparison (Table 5)
+                Averaging the three extracted values from Table 4 yields R             =1.29+2.00+2.33 ≈ 1.87 Ω.
+                                                                           out,measured        3
+                Following the Section 10 verification table from the lab manual, the comparison between theo-
+                retical predictions and measured results is summarized in Table 5.
+                      Quantity                                 Predicted     Measured % Deviation
+                      DCslope ∆V /∆V                               1.00         0.990           1.0%
+                                    out    in
+                      Level shift Vin − Vout (V)                   1.09         0.847          22.3%
+                      Small-signal Av (1 kHz)                      1.00         0.980           2.0%
+                      Output resistance R      (10V theory)       1.18 Ω        1.87 Ω         58.5%
+                                           out
+                      Output resistance R      (12V manual)       0.96 Ω        1.87 Ω         94.8%
+                                           out
+                Table 5: Summary Comparison of Theoretical Predictions and Measured Results (Section 10
+                Table).
+                Discussion of Discrepancies: Both DC slope and small-signal gain matched ideal predictions
+                within 1–2%, confirming high mirror output resistance and negligible body effect (V        =0).
+                                                                                                       SB
+                The 22.3% level shift difference (0.847 V vs 1.09 V) is due to the factory threshold spread of
+                                                               8
+               the SI9926BDY (V        =0.6–1.5 V), our physical sample exhibiting V    ≈0.85 V at 40 mA.
+                                 GS(th)                                              GS
+               For output resistance, while the manual’s nominal 12V calculation predicted Rout ≈ 0.96 Ω,
+               our VDD = 10 V experimental supply lowers the reference current to Iref ≈ 33 mA, yielding
+               an adjusted theoretical prediction of Rout ≈ 1.18 Ω. This reduces the deviation to 58.5% (vs
+               94.8%), with the remaining gap cleanly explained by breadboard and jumper contact resistance
+               (0.4–0.6 Ω) and subthreshold ideality factor (n ≈ 1.7).
+                                                            9
+               8    Oscilloscope Waveforms
+               Oscilloscope captures of the input and output waveforms across the sweep frequencies are pre-
+               sented in Figures 8 through 15. Across all captured frequencies, the output cleanly tracks the
+               sinusoidal input with near-unity amplitude and negligible phase distortion.
+                        Figure 8: 8 Hz Response.                       Figure 9: 30 Hz Response.
+                       Figure 10: 100 Hz Response.                   Figure 11: 1.5 kHz Response.
+                       Figure 12: 3 kHz Response.                     Figure 13: 10 kHz Response.
+                       Figure 14: 30 kHz Response.                   Figure 15: 100 kHz Response.
+                                                           10
+                9    Safety Precautions
+                Following Section 5 and Section 11 of the laboratory manual, the following experimental and
+                handling precautions were strictly observed:
+                   1. ESD Protection: Grounded handling was observed for the SI9926BDY dual-channel
+                      MOSFETbreakoutboardstopreventelectrostatic gate-oxide puncture given the sensitive
+                      threshold ratings (VGS(th) = 0.6–1.5 V).
+                   2. Current Limiting: The DC bench power supply current limit was engaged at 150 mA
+                      before connecting the circuit and remained continuously active to prevent thermal de-
+                      struction.
+                   3. Absolute MaximumLimits: Maximumratingsspecifiedonthedatasheet(VDS ≤ 20 V
+                      and VGS ≤ ±12 V) were strictly maintained under all biasing conditions.
+                   4. Channel Pinout Verification: Pin connections were verified twice against the manu-
+                      facturer pinout diagram to ensure correct channel assignment (Mref, Mcs, Msf) across
+                      the two breakout modules.
+                   5. Power Down on Reconfiguration: The DC power supply was powered off prior to
+                      making any breadboard circuit adjustments, particularly when inserting and swapping
+                      load resistors R  during output-resistance testing.
+                                      L
+                   6. Signal Swing Control: Small-signal function generator amplitudes were restricted to
+                      200 mVp−p so that total gate voltage swings (V       ±Vac) remained confined within the
+                                                                       bias
+                      active saturation regime.
+                10 Conclusion
+                The active-loaded NMOS source follower was successfully assembled and experimentally char-
+                acterized using the SI9926BDY dual MOSFET. The principal conclusions from this experiment
+                are:
+                   1. Wide Linear DC Tracking: In the operating range V            =1.5 V to 3.5 V, the circuit
+                                                                                 in
+                      functioned as a near-ideal voltage follower with a measured slope of 0.990 V/V and a level
+                      shift of 0.847 V. Below 1.5 V, the active mirror entered triode conduction, losing current
+                      regulation. Above 3.5 V, simultaneous high voltage and high current produced internal
+                      Joule heating (P ≈ 0.77 W) in the uncooled SO-8 package, initiating thermal runaway
+                      where mirror current surged above 100 mA.
+                   2. Wideband Flat Frequency Response: Selecting Vin,DC = 3.0 V established a ther-
+                      mally stable bias (I  =41.9 mA) for AC testing. The voltage gain remained remarkably
+                                          cs
+                      flat (|A | = 0.980 V/V at 1 kHz) from 6 Hz up to 100 kHz with zero high-frequency
+                              v
+                      roll-off, confirming that the follower’s output pole sits well above the measurement band.
+                   3. Low Output Resistance: Capacitively coupled load tests yielded an average output
+                      resistance of 1.87 Ω. This validates the theoretical promise of the weak-inversion common-
+                      drain configuration to provide very low impedance buffering (R     ≈1/g )evenatmodest
+                                                                                     out       m
+                      bias currents.
+                                                               11

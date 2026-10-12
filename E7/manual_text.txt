@@ -1,0 +1,195 @@
+                                     Electronic Devices & Circuits Laboratory
+                Experiment 6: NMOS Source Follower with Current-Mirror 
+                                                          Load
+             1. Objective
+             To assemble a simple NMOS source follower (common-drain amplifier) biased by an 
+             active current-source load built from a current mirror, and to characterize its DC 
+             transfer function, small-signal voltage gain, and output resistance — and to verify that a 
+             current-source-loaded follower gives near-unity gain and very low output resistance 
+             even at low bias current.
+             2. Components and Equipment Required
+              Item                          Specification                                     Quantity
+                                            SI9926BDY, dual N-channel, SO-8, with SO-8-
+              MOSFET                        to-DIP breakout adapter (3 of the 4 available     2
+                                            channels used: M_ref, M_cs, M_sf)
+              Reference resistor Rref       270 Ω, ±5%                                        1
+              Potentiometer                 10 kΩ, multi-turn, for Vin DC bias                1
+              DC decoupling resistor        1 MΩ (isolates the AC signal path from the        1
+              R_bias                        bias pot, as in Experiment 5)
+              Coupling capacitor Cin        1 µF, AC-couples the function generator onto      1
+                                            the DC-biased gate
+              Load resistors (for Rout      10 Ω, 47 Ω, 100 Ω                                 1 each
+              measurement)
+              DC power supply               0–30 V regulated, current-limited                 1
+              Function generator            Sine output, small amplitude, low output          1
+                                            impedance, 10 Hz – 100 kHz sweep range
+              Oscilloscope                  2-channel, to view Vin and Vout                   1
+              Digital multimeter            For DC transfer measurements                      1–2
+              Breadboard and jumper         —                                                 as required
+              wires
+              Datasheet                     SI9926BDY, Vishay Siliconix (provided copy)       1
+             3. Circuit Diagram
+             M_ref (diode-connected) and Rref set a reference current Iref ≈ 40 mA. M_ref's gate 
+             drives M_cs, mirroring the same current 1:1 to form an active current-source load at the 
+             output node. M_sf, the source follower, has its drain tied to VDD and its source tied to 
+             this current-source load; the output is taken at the shared M_sf/M_cs node. For the AC 
+             measurements (Sections 6.3–6.5), the function generator is coupled onto Vin through a 
+             series 1 µF capacitor, with a 1 MΩ R_bias carrying the DC bias from the potentiometer 
+             to the gate — the same AC-coupling technique used in Experiment 5, so the DC 
+             operating point set in Section 6.2 is undisturbed by the AC source.
+             IIT H — EE2301                                                                   Page 1 of 6
+         4. Theory
+         Because M_cs's gate is fixed (tied to the mirror reference), the current it sinks is fixed at 
+         Iref regardless of Vin. Since M_sf and M_cs are the only two current paths into the 
+         output node, M_sf must also carry exactly this same fixed current at all times — which 
+         means M_sf's own VGS is forced to a single fixed value, independent of Vin. The DC 
+         transfer characteristic is therefore simply:
+         Vout = Vin − VGS(M_sf), with VGS(M_sf) fixed by Iref  —  an exact unity-slope, level-
+         shifted line
+         This holds across the whole range where M_sf and M_cs both stay in saturation — for 
+         this bias point, from about 1.1 V up to the supply rail, a far wider linear range than the 
+         differential amplifier's roughly ±150 mV (Experiment 4). The small-signal voltage gain 
+         follows the same reasoning: Av = dVout/dVin = gm/(gm + 1/ro,total) ≈ 1 for high gm and 
+         high output resistance of the current-source load; any measured gain below 1 comes 
+         from the current source's finite output resistance and body effect, neither of which is 
+         characterized on the SI9926BDY datasheet, so this gap is left as something to measure 
+         rather than predict precisely.
+         The output resistance looking back into Vout is approximately Rout ≈ 1/gm (ignoring 
+         body effect and the current source's own output resistance, both of which raise it 
+         slightly). Because this device sits in weak inversion at this bias current (as established in 
+         Experiment 4), gm = Iref/(nVT) is unusually large for the current level, so Rout comes 
+         out remarkably small — on the order of 1 Ω. This is the classic benefit of a source 
+         follower: it presents a low-impedance output regardless of how modest the bias current 
+         is.
+         Frequency response: an exact bandwidth prediction would need the gate and output 
+         capacitances under these specific bias and loading conditions, which the datasheet does 
+         not characterize (it only gives Ciss/Coss at large power-device currents, not at this 
+         weak-inversion bias). Qualitatively, though, two effects point the same way: the very low 
+         Rout means the output side is unlikely to show any roll-off within a normal bench sweep, 
+         IIT H — EE2301                                       Page 2 of 6
+         and the source follower's own gain mechanism does not rely on a high-impedance drain 
+         node the way the Experiment 4 amplifier's does. Any roll-off actually observed within the 
+         swept range is therefore more likely to come from the input side — the function 
+         generator's source resistance and the coupling network interacting with the gate 
+         capacitance — than from the follower itself, and is worth identifying rather than 
+         assuming away.
+         5. Safety Precautions
+            •  The SI9926BDY has a low gate threshold (VGS(th) = 0.6–1.5 V, min–max per 
+            datasheet) and is ESD-sensitive; ground yourself before handling the breakout 
+            boards.
+            •  Set the power supply current limit to about 150 mA before connecting the circuit 
+            for the first time.
+            •  Do not exceed VGS = ±12 V or VDS = 20 V under any circumstance.
+            •  Verify all pin connections twice against the datasheet before switching on the 
+            supply, and confirm which of the two SI9926BDY packages' channels is used for 
+            M_ref, M_cs, and M_sf before wiring.
+            •  Always power off before changing any wiring on the breadboard, including when 
+            swapping the load resistor for the output-resistance measurement.
+         6. Procedure
+         6.1 Mirror verification
+            •  Assemble the reference branch (Rref, M_ref) and the mirror device M_cs only, with 
+            M_sf's gate left open (M_sf not yet connected). Switch on VDD = 12 V with the 
+            current limit set to about 150 mA.
+            •  Measure the voltage across Rref and compute Iref = VRref/Rref; confirm Iref ≈ 40 
+            mA.
+         6.2 DC transfer characteristic
+            •  Connect M_sf (drain to VDD, source to the M_cs drain node = Vout). Using the 
+            potentiometer, sweep Vin from about 1.5 V to 10.5 V in 1 V steps, recording Vout at 
+            each step.
+            •  Verify the slope (ΔVout/ΔVin) is close to 1 and identify the lowest Vin at which the 
+            linear relationship breaks down (M_cs leaving saturation).
+         6.3 Small-signal gain
+            •  Set Vin's DC bias to about 7 V (mid-range). Add the Cin coupling capacitor and 
+            R_bias as shown in Section 3. Apply a small sine signal (start at ~100 mV amplitude, 
+            1 kHz) from the function generator and measure the amplitude of Vin and Vout on 
+            the oscilloscope. Compute Av = Vout(amplitude)/Vin(amplitude).
+         6.4 Frequency response
+            •  With the same setup, sweep the function generator frequency from about 10 Hz to 
+            100 kHz (e.g., 10, 30, 100, 300, 1 k, 3 k, 10 k, 30 k, 100 k Hz), recording the Vout 
+            amplitude at each frequency while keeping Vin's amplitude constant.
+         IIT H — EE2301                                          Page 3 of 6
+              •  Identify any frequency at which the gain drops noticeably from its mid-band value, 
+              and note whether it is closer to the low end or high end of the sweep — this helps 
+              distinguish an input-coupling effect from anything else.
+           6.5 Output resistance
+              •  At 1 kHz, connect each load resistor (10 Ω, 47 Ω, 100 Ω in turn) from Vout to 
+              ground, and record the resulting Vout amplitude for each. Power off between 
+              changes.
+              •  From the loaded-versus-unloaded amplitude ratio at each RL, extract Rout using 
+              RL/(RL+Rout) = Vout,loaded/Vout,unloaded, and average the three estimates.
+           7. Observation Tables
+           Table 1 — DC transfer characteristic
+            Vin (V)                  Vout (V)                  Vin − Vout (V)
+            1.5                      …                         …
+            2.5                      …                         …
+            3.5                      …                         …
+            4.5                      …                         …
+            5.5                      …                         …
+            6.5                      …                         …
+            7.5                      …                         …
+            8.5                      …                         …
+            9.5                      …                         …
+            10.5                     …                         …
+           Table 2 — Frequency response
+            Frequency (Hz)     Vout amplitude (mV)   Gain |Av|         Gain (dB)
+            …                  …                     …                 …
+           Table 3 — Output resistance measurement
+            RL (Ω)                   Vout amplitude (mV)       Vout,loaded / 
+                                                               Vout,unloaded
+            — (unloaded)             …                         1.000
+            10                       …                         …
+            47                       …                         …
+            100                      …                         …
+           8. Graphs to Be Plotted
+              •  Vout versus Vin (Table 1) — verify the slope is close to 1 across the linear region 
+              and mark where it breaks down.
+           IIT H — EE2301                                                   Page 4 of 6
+            •  Gain (dB) versus frequency (log X axis), from Table 2 — identify any roll-off and its 
+            approximate corner frequency.
+            •  Vout,loaded/Vout,unloaded versus RL (Table 3), overlaid with the predicted curve 
+            RL/(RL+Rout) using the theoretical Rout from Section 9.
+         9. Theoretical Predictions
+         Using Iref ≈ 40.4 mA (Rref = 270 Ω, Vth ≈ 1.05 V midpoint), VGS(M_sf) ≈ 1.09 V, gm ≈ 
+         1.04 A/V, Rout ≈ 1/gm ≈ 0.96 Ω:
+          Vin (V)                           Predicted Vout (V)
+          1.5                               0.41
+          2.5                               1.41
+          3.5                               2.41
+          4.5                               3.41
+          5.5                               4.41
+          6.5                               5.41
+          7.5                               6.41
+          8.5                               7.41
+          9.5                               8.41
+          10.5                              9.41
+         Predicted output-resistance loading effect:
+          RL (Ω)                            Predicted Vout,loaded/Vout,unloaded
+          10                                0.912
+          47                                0.980
+          100                               0.990
+         10. Calculations — Matching Measured Results with Theory
+            •  From Table 1, compute the measured slope ΔVout/ΔVin over the linear region and 
+            compare with the ideal value of 1.
+            •  Compute the measured DC level shift (average Vin − Vout over the linear region) 
+            and compare with the predicted VGS(M_sf) ≈ 1.09 V.
+            •  From Section 6.3, compute the measured small-signal Av and compare with the 
+            ideal value of 1.
+            •  From Table 2, note the measured mid-band gain and any roll-off frequency 
+            observed; state whether it is more consistent with an input-side effect (function 
+            generator source resistance and gate capacitance) or something else, per the 
+            reasoning in Section 4.
+            •  From Table 3, compute Rout using each RL and average; compare with the 
+            predicted ≈ 0.96 Ω.
+          Quantity              Predicted      Measured        % deviation
+         IIT H — EE2301                                          Page 5 of 6
+             DC slope ΔVout/ΔVin         1.00                …                  …
+             Level shift Vin−Vout (V)    1.09                …                  …
+             Small-signal Av             ≈ 1.00              …                  …
+             Rout (Ω)                    0.96                …                  …
+            11. Precautions
+               •  Do not exceed the SI9926BDY's VDS (20 V) or VGS (±12 V) ratings at any point.
+               •  Keep the current limit active at about 150 mA throughout.
+               •  Power off before adding or removing the load resistor in Section 6.5.
+               •  Keep the function generator amplitude small enough that Vin's total swing (DC 
+               bias ± AC amplitude) stays within the saturation range identified in Section 6.2.
+            IIT H — EE2301                                                         Page 6 of 6
