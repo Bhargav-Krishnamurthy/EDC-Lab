@@ -1,0 +1,6 @@
+LTspice 26.0.2 for Windows
+Circuit: C:\Users\bharg\Documents\Semester-3\EDC-Lab\Project\finalproj.net
+Start Time: Thu Oct 22 23:46:25 2026
+C:\Users\bharg\Documents\Semester-3\EDC-Lab\Project\finalproj.net(22): Number of nodes (5) does not match number of pins (6) of sub-circuit "lm311".
+X§U2 N008 N006 N001 N005 N007 LM311 ;§pnba In+)In-)V+)V-)OUT
+     ^^^^^^^^^^^^^^^^^^^^^^^^^

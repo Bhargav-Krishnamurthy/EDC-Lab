@@ -22,7 +22,7 @@
 }
 
 \title{\textbf{Electronic Devices \& Circuits Laboratory (EE2301)}\\[0.3em]
-\Large \textbf{Experiment 8: NMOS Linear Voltage Regulator using a 741 Op-Amp:}\\
+\Large \textbf{Experiment 8: NMOS Linear Voltage Regulator using a 741 Op-Amp}\\
 \large \textbf{1.2\,V Regulated Output from a 3 to 5\,V Supply}}
 
 \author{\textbf{Bhargav K} (EE25BTECH11013) \and \textbf{Aditya Appana} (EE25BTECH11004)}
@@ -35,143 +35,119 @@
 
 
 \section{Objective}
-The specific experimental objectives of this laboratory exercise are:
+The aim of this experiment is to:
 \begin{enumerate}[leftmargin=1.5em, itemsep=0.2em]
-    \item To build a linear voltage regulator using an LM741 op-amp driving the gate of an N-channel power MOSFET connected as a source follower.
-    \item To hold the output steady at $V_{OUT} = 1.200\,\text{V}$ while the input supply varies from $3.0\,\text{V}$ to $5.0\,\text{V}$.
-    \item To measure the \textbf{line regulation} in $\text{mV/V}$ and observe the feedback-driven gate bias tracking compensating for pass transistor channel-length modulation.
-    \item To characterize the \textbf{load regulation} across load currents up to $\approx 118\,\text{mA}$ and extract the closed-loop output resistance $R_{OUT}$ ($\text{mV/A}$ or $\text{m}\Omega$).
-    \item To measure the \textbf{dropout voltage} at full load ($R_L \approx 10.2\,\Omega$) and relate it directly to the MOSFET's linear triode on-resistance $R_{DS(\text{on})}$ and op-amp swing limits.
-    \item To measure the power dissipation $P_{diss}$ and efficiency ($\eta_{pass}$ and $\eta_{total}$), and understand why linear regulator efficiency is limited to $V_{OUT}/V_{IN}$.
-    \item To check the feedback stability on an oscilloscope with different output capacitors ($10\,\mu\text{F}, 47\,\mu\text{F}, 94\,\mu\text{F}$) and check for any oscillation.
-    \item To answer all eleven analytical discussion questions specified in Section~9 of the laboratory manual.
+    \item Build a linear voltage regulator using an LM741 op-amp driving the gate of an N-channel MOSFET connected as a source follower.
+    \item Keep the output voltage steady at $V_{OUT} = 1.200\,\text{V}$ while the input supply varies from $3.0\,\text{V}$ to $5.0\,\text{V}$.
+    \item Measure \textbf{line regulation} (mV/V) and see how the feedback adjusts the gate voltage to compensate for channel-length modulation in the MOSFET.
+    \item Measure \textbf{load regulation} across load currents up to about $118\,\text{mA}$ and extract the closed-loop output resistance $R_{OUT}$.
+    \item Find the \textbf{dropout voltage} at full load ($R_L \approx 10.2\,\Omega$) and relate it to the MOSFET's on-resistance $R_{DS(\text{on})}$.
+    \item Measure power dissipation and efficiency, and understand why a linear regulator's efficiency is limited to $V_{OUT}/V_{IN}$.
+    \item Check feedback stability on an oscilloscope with three different output capacitors ($10\,\mu\text{F}, 47\,\mu\text{F}, 94\,\mu\text{F}$) and check for oscillation.
+    \item Answer all eleven analysis questions from Section~9 of the lab manual.
 \end{enumerate}
 
-\section{Theoretical Background and Operating Principles}
+\section{Theory}
 
-\subsection{Closed-Loop Negative Feedback Action}
-The regulator uses negative feedback to keep the output voltage $V_{OUT}$ equal to a fixed reference voltage $V_{REF} = 1.200\,\text{V}$. The LM741 op-amp acts as the error amplifier:
+\subsection{How the Feedback Loop Works}
+The regulator uses negative feedback to keep $V_{OUT}$ equal to a fixed reference $V_{REF} = 1.200\,\text{V}$. The LM741 op-amp acts as the error amplifier:
 \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-    \item The non-inverting input (Pin~3) is connected to the reference voltage $V_{REF} = 1.200\,\text{V}$.
-    \item The inverting input (Pin~2) directly senses the regulated output voltage $V_{OUT}$ at the source of $M_1$.
-    \item The op-amp output (Pin~6) drives the gate of the N-channel power MOSFET.
+    \item Non-inverting input (Pin~3) is connected to $V_{REF} = 1.200\,\text{V}$.
+    \item Inverting input (Pin~2) is directly connected to $V_{OUT}$ (source of $M_1$).
+    \item Op-amp output (Pin~6) drives the gate of the N-channel MOSFET.
 \end{itemize}
-Because the MOSFET operates as a source follower (common drain), the output voltage follows the gate voltage shifted downward by the gate-to-source voltage:
+The MOSFET is in source-follower (common-drain) configuration, so:
 \begin{equation}
     V_{OUT} = V_G - V_{GS}
 \end{equation}
-If the output voltage $V_{OUT}$ drops slightly (for example when load current increases or $V_{IN}$ decreases), the differential input voltage $V_{id} = V_{REF} - V_{OUT}$ becomes positive. Because the 741 op-amp has a very high open-loop gain ($A \approx 2 \times 10^5$), its output quickly drives the gate voltage $V_G$ higher. This increases $V_{GS} = V_G - V_{OUT}$, so the MOSFET provides more drain current to the load, bringing $V_{OUT}$ back up to $V_{REF}$. On the other hand, if $V_{OUT}$ rises above $V_{REF}$, the op-amp lowers $V_G$, which reduces $V_{GS}$ and lowers the current.
+If $V_{OUT}$ drops (e.g.\ load increases or $V_{IN}$ decreases), the op-amp sees a positive error $(V_{REF} - V_{OUT})$ and drives the gate higher. This increases $V_{GS}$, so the MOSFET passes more current and $V_{OUT}$ rises back to $V_{REF}$. If $V_{OUT}$ rises, the op-amp lowers $V_G$ and reduces current.
 
-With unity feedback ($\beta = 1$), the closed-loop output voltage and error are given by:
+With unity feedback ($\beta = 1$) and open-loop gain $A \approx 2 \times 10^5$:
 \begin{equation}
-    V_{OUT} = V_{REF} \left( \frac{T}{1 + T} \right), \quad \text{Error} = \frac{V_{REF}}{1 + T} \approx \frac{V_{REF}}{A} \approx \frac{1.200\,\text{V}}{2 \times 10^5} \approx 6\,\mu\text{V}
+    V_{OUT} = V_{REF} \left( \frac{T}{1 + T} \right), \quad \text{Steady-state error} = \frac{V_{REF}}{1 + T} \approx \frac{1.200\,\text{V}}{2 \times 10^5} \approx 6\,\mu\text{V}
 \end{equation}
-Because the loop gain $T \approx A \approx 2 \times 10^5$ is very large, the theoretical steady-state error is only about $6\,\mu\text{V}$.
+So ideally, the output stays within $6\,\mu\text{V}$ of the reference.
 
-\subsection{Small-Signal Line Sensitivity and Closed-Loop Output Resistance}
-Applying small-signal analysis to the source follower within the negative feedback loop:
-\begin{itemize}[leftmargin=1.2em]
-    \item \textbf{Line Sensitivity ($dV_{OUT} / dV_{IN}$):} Writing KCL at the output node with small-signal gate voltage $v_g = -A v_{out}$:
-    \begin{equation}
-        i_d = g_m v_{gs} + \frac{v_{ds}}{r_o} = g_m (-A v_{out} - v_{out}) + \frac{v_{in} - v_{out}}{r_o} = \frac{v_{out}}{R_L}
-    \end{equation}
-    Solving for the line sensitivity yields:
-    \begin{equation}
-        \frac{dV_{OUT}}{dV_{IN}} = \frac{1}{r_o \left[ g_m (1 + A) + \frac{1}{r_o} + \frac{1}{R_L} \right]} \approx \frac{1}{r_o g_m (1 + A)}
-    \end{equation}
-    For our setup ($A \approx 2 \times 10^5$, $g_m \approx 0.85\,\text{A/V}$, $r_o \approx 50\,\Omega$):
-    \begin{equation}
-        \frac{dV_{OUT}}{dV_{IN}} \approx \frac{1}{50 \times 0.85 \times 2 \times 10^5} \approx 1.18 \times 10^{-7}\,\text{V/V} = 0.00012\,\text{mV/V}
-    \end{equation}
-    In the laboratory, this theoretical microvolt change cannot be observed directly because it is hidden by reference drift, op-amp offset drift, and the multimeter resolution limit ($0.1\,\text{mV}$).
+\subsection{Line Regulation and Output Resistance (Small-Signal)}
+Using small-signal analysis with the MOSFET in the feedback loop:
 
-    \item \textbf{Closed-Loop Output Resistance ($R_{OUT}$):} Applying an external test current source $i_{test}$ with $v_{in} = 0$ and $v_{ref} = 0$:
-    \begin{equation}
-        i_{test} = -g_m v_{gs} + \frac{v_{test}}{r_o} = g_m (1 + A) v_{test} + \frac{v_{test}}{r_o}
-    \end{equation}
-    yielding the closed-loop output resistance:
-    \begin{equation}
-        R_{OUT} = \frac{v_{test}}{i_{test}} = \frac{1}{g_m (1 + A) + \frac{1}{r_o}} \approx \frac{1}{g_m A}
-    \end{equation}
-    Evaluating numerically:
-    \begin{equation}
-        R_{OUT} \approx \frac{1}{0.85\,\text{A/V} \times 2 \times 10^5} \approx 5.88\,\mu\Omega = 0.00588\,\text{mV/A}
-    \end{equation}
-    On the breadboard, our measured output resistance is higher (around $9-10\,\text{m}\Omega$) because of contact and jumper wire resistances.
-\end{itemize}
+\textbf{Line Sensitivity ($dV_{OUT}/dV_{IN}$):} Writing KCL at the output node with $v_g = -A v_{out}$:
+\begin{equation}
+    \frac{dV_{OUT}}{dV_{IN}} = \frac{1}{r_o \left[ g_m (1 + A) + \frac{1}{r_o} + \frac{1}{R_L} \right]} \approx \frac{1}{r_o g_m (1 + A)}
+\end{equation}
+With $A \approx 2 \times 10^5$, $g_m \approx 0.85\,\text{A/V}$, $r_o \approx 50\,\Omega$:
+\begin{equation}
+    \frac{dV_{OUT}}{dV_{IN}} \approx \frac{1}{50 \times 0.85 \times 2 \times 10^5} \approx 1.18 \times 10^{-7}\,\text{V/V} = 0.00012\,\text{mV/V}
+\end{equation}
+This is too small to measure directly with a bench multimeter ($0.1\,\text{mV}$ resolution).
 
-\subsection{Why the LM741 Requires Dedicated Auxiliary Supplies}
-The 741 op-amp cannot be powered directly from the $3-5\,\text{V}$ input rail because of two practical limitations:
+\textbf{Closed-Loop Output Resistance ($R_{OUT}$):}
+\begin{equation}
+    R_{OUT} = \frac{1}{g_m (1 + A) + \frac{1}{r_o}} \approx \frac{1}{g_m A} \approx \frac{1}{0.85 \times 2 \times 10^5} \approx 5.88\,\mu\Omega
+\end{equation}
+In practice, breadboard contact and wire resistance (a few m$\Omega$) dominates, so measured $R_{OUT}$ will be much larger.
+
+\subsection{Why the LM741 Needs Separate $\pm 12\,\text{V}$ Supplies}
+The 741 cannot run from the same $3\text{--}5\,\text{V}$ input rail for two reasons:
 \begin{enumerate}[leftmargin=1.2em, itemsep=0.1em]
-    \item \textbf{Gate-Drive Voltage Headroom:} For an NMOS source follower delivering $V_{OUT} = 1.200\,\text{V}$, the gate must sit at:
-    \begin{equation}
-        V_G = V_{OUT} + V_{GS} \approx 1.2\,\text{V} + (0.9\,\text{V}\text{ to }1.0\,\text{V}) \approx 2.1\,\text{V to }2.2\,\text{V}
-    \end{equation}
-    The 741 output stage cannot swing closer than about $2\,\text{V}$ to its positive rail ($V_{OH} \le V^+ - 2\,\text{V}$). Powered from $V_{IN} = 3.0\,\text{V}$, the maximum gate voltage it could provide is only $1.0\,\text{V}$. But to keep $V_{OUT} = 1.2\,\text{V}$, the gate must sit at around $2.1-2.2\,\text{V}$. Therefore, powered from $3\,\text{V}$, it cannot turn the MOSFET on.
-    \item \textbf{Input Common-Mode Range (CMR):} The 741 input common-mode range also stops about $2\,\text{V}$ above its negative rail. If the negative rail is grounded ($0\,\text{V}$), the minimum input voltage it can sense is $2.0\,\text{V}$. It cannot sense a $1.200\,\text{V}$ reference or feedback voltage.
+    \item \textbf{Output swing:} The 741's output stays about $2\,\text{V}$ below its positive rail. At $V^+ = 3.0\,\text{V}$, the gate voltage would be limited to $\approx 1.0\,\text{V}$, but we need $V_G \approx 2.1\text{--}2.2\,\text{V}$ to keep $V_{OUT} = 1.2\,\text{V}$.
+    \item \textbf{Input common-mode range:} The 741 also cannot sense voltages within $2\,\text{V}$ of its negative rail (ground), so it cannot sense the $1.2\,\text{V}$ output.
 \end{enumerate}
-So we power the op-amp with separate $\pm 12\,\text{V}$ (or $\pm 10\,\text{V}$) supplies to give enough headroom for both inputs and output.
+So we power the op-amp from $\pm 12\,\text{V}$ (or $\pm 10\,\text{V}$) auxiliary supplies.
 
-\subsection{Role of the Minimum-Load Bleeder Resistor}
-An NMOS source follower can supply current to the load, but it \textbf{cannot sink current}. If the load resistor is disconnected and there is no bleeder resistor:
+\subsection{Why a Bleeder Resistor is Needed}
+An NMOS source follower can only \textit{source} current --- it cannot pull the output down. Without a bleeder resistor:
 \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-    \item The output node has no path to discharge to ground.
-    \item Small leakage currents or capacitive coupling from the gate can charge up $C_{OUT}$.
-    \item Even though the op-amp pulls $V_G$ low to turn the MOSFET off, it cannot pull charge out of the source terminal.
-    \item As a result, $V_{OUT}$ can sit higher than $V_{REF}$.
+    \item When the load is disconnected, there is no path for the output to discharge.
+    \item Leakage or gate capacitance can charge $C_{OUT}$ and pull $V_{OUT}$ above $V_{REF}$.
 \end{itemize}
-Connecting a permanent bleeder resistor ($1.0-1.2\,\text{k}\Omega$) draws a continuous baseline current:
+A $1.2\,\text{k}\Omega$ bleeder draws a steady $1\,\text{mA}$ and provides a discharge path:
 \begin{equation}
     I_{bleeder} = \frac{V_{OUT}}{R_{bleeder}} = \frac{1.200\,\text{V}}{1.2\,\text{k}\Omega} = 1.00\,\text{mA}
 \end{equation}
-which provides a discharge path and ensures $V_{OUT}$ stays regulated at $1.200\,\text{V}$ even when no external load is connected.
 
-\subsection{Dropout Voltage Physics}
-When $V_{IN}$ drops close to $1.2\,\text{V}$, the drain-to-source voltage $V_{DS} = V_{IN} - V_{OUT}$ becomes very small. To keep supplying the required load current, the op-amp output saturates near its positive rail ($V_G \approx 4.39\,\text{V}$). With the gate driven high, the MOSFET enters the ohmic (triode) region and acts like a small resistor $R_{DS(\text{on})}$. The output then follows $V_{IN}$ through a voltage divider:
+\subsection{Dropout Voltage}
+When $V_{IN}$ drops close to $V_{OUT}$, the drain-to-source voltage $V_{DS}$ becomes very small. The op-amp saturates high to drive the gate as high as possible, and the MOSFET enters the ohmic (triode) region, behaving like a small resistor $R_{DS(\text{on})}$. The output then follows:
 \begin{equation}
     V_{OUT} = V_{IN} \left( \frac{R_L}{R_L + R_{DS(\text{on})}} \right)
 \end{equation}
-The dropout voltage is defined per the manual as the $V_{IN}$ at which $V_{OUT}$ drops by $1\%$ ($12\,\text{mV}$) below its regulated value ($V_{OUT} \le 1.1882\,\text{V}$). The required headroom is:
-\begin{equation}
-    V_{dropout,\text{headroom}} = V_{IN,\text{dropout}} - V_{OUT} \approx I_{LOAD} \cdot R_{DS(\text{on})} + V_{DS,\text{sat}}
-\end{equation}
+Dropout is defined (per the manual) as the $V_{IN}$ at which $V_{OUT}$ falls by $1\%$ ($12\,\text{mV}$) below its regulated value.
 
-\subsection{Efficiency Limitations: Linear vs. Switching Regulators}
-Because the load current flows directly through the series pass transistor ($I_{IN} \approx I_{LOAD}$), the linear regulator efficiency is fundamentally bounded by:
+\subsection{Efficiency of a Linear Regulator}
+Since the full load current flows through the series MOSFET from the input supply:
 \begin{equation}
     \eta_{pass} = \frac{P_{OUT}}{P_{IN}} = \frac{V_{OUT} \cdot I_{LOAD}}{V_{IN} \cdot I_{IN}} \approx \frac{V_{OUT}}{V_{IN}}
 \end{equation}
-The difference voltage $(V_{IN} - V_{OUT})$ appears across the MOSFET channel, and the power is lost as heat:
+The voltage difference $(V_{IN} - V_{OUT})$ drops across the MOSFET and becomes heat:
 \begin{equation}
     P_{diss} = (V_{IN} - V_{OUT}) \cdot I_{LOAD}
 \end{equation}
-For $V_{OUT} = 1.2\,\text{V}$, the maximum theoretical efficiency is $40.0\%$ at $V_{IN} = 3.0\,\text{V}$ and drops to $24.0\%$ at $V_{IN} = 5.0\,\text{V}$. In comparison, a switching buck converter turns its transistor fully ON (where $V_{DS} \approx 0$) or fully OFF (where $I = 0$), and uses an inductor and capacitor filter to average the voltage ($V_{OUT} = D \cdot V_{IN}$), reaching typical efficiencies of $80-95\%$.
+A switching buck converter avoids this by toggling fully ON and OFF, using an LC filter to average the output. Typical efficiency is $80\text{--}95\%$, compared to at most $V_{OUT}/V_{IN} = 40\%$ for this regulator at $V_{IN} = 3\,\text{V}$.
 
-\section{Components and Laboratory Hardware Setup}
-The hardware components and test instruments specified in the manual and utilized during the experiment are listed in Table~\ref{tab:components}.
+\section{Components Used}
 
 \begin{table}[htbp]
 \centering
-\caption{Hardware Components and Test Instruments Utilized (Lab Manual Section 3).}
+\caption{Components and Equipment (Lab Manual Section~3).}
 \label{tab:components}
 \small
-\begin{tabularx}{\textwidth}{l p{5.5cm} c X}
+\begin{tabularx}{\textwidth}{l l c X}
 \toprule
-\textbf{Item} & \textbf{Specification / Part Number} & \textbf{Qty} & \textbf{Role / Function} \\
+\textbf{Component} & \textbf{Part / Value} & \textbf{Qty} & \textbf{Purpose} \\
 \midrule
-Error Amplifier & LM741CN DIP-8 Operational Amplifier & 1 & Powered from $\pm 12\,\text{V}$ (or $\pm 10\,\text{V}$) aux supplies \\
-Pass Transistor & Vishay Si9926BDY Dual N-MOSFET (SO-8 on DIP) & 1 & $V_{DS} \le 20\,\text{V}$, $V_{th} \approx 0.7-0.9\,\text{V}$, low $R_{DS(\text{on})}$ \\
-Shunt Reference & TL431 Precision Shunt Regulator (diode mode) & 1 & Stable $2.5\,\text{V}$ zener reference \\
-Potentiometer & $10\,\text{k}\Omega$ multi-turn cermet trimmer potentiometer & 1 & Calibrated to $V_{REF} = 1.2000\,\text{V}$ \\
-Bias Resistor & $4.7\,\text{k}\Omega$, $\pm 5\%$, $0.25\,\text{W}$ metal film resistor & 1 & Biases TL431 from $+12\,\text{V}$ auxiliary rail \\
-Gate-Source Resistor & $100\,\text{k}\Omega$, $\pm 5\%$, $0.25\,\text{W}$ carbon film resistor & 1 & Holds MOSFET off during unpowered state \\
-Bleeder Resistor & $1.2\,\text{k}\Omega$ / $1.0\,\text{k}\Omega$, $0.25\,\text{W}$ metal film resistor & 1 & Permanent bleeder setting $\approx 1\,\text{mA}$ base load \\
-Load Resistors ($R_L$) & Nominal $120\,\Omega, 47\,\Omega, 22\,\Omega, 12\,\Omega$ ($0.5\,\text{W}$ power resistors) & 1 ea & Measured: $112.2\,\Omega, 46.9\,\Omega, 22.0\,\Omega, 10.2\,\Omega$ \\
-Filter Capacitors & $10\,\mu\text{F}, 47\,\mu\text{F}$ electrolytic capacitors ($25\,\text{V}$) & 3 & Loop damping ($10\,\mu\text{F}, 47\,\mu\text{F}, 94\,\mu\text{F}$) \\
-DC Power Supply & Regulated Triple-Output Bench DC Power Supply & 1 & Ch~1: $V_{IN}$ ($3-5\,\text{V}$); Ch~2 \& 3: $\pm 12\,\text{V}$ aux \\
-Digital Multimeters & Keysight / Fluke 4.5-digit Bench DMMs & 2 & Precise $V_{IN}, V_{OUT}, V_G$ measurement \\
-Digital Oscilloscope & Tektronix TBS2000B Series 2-Channel DSO & 1 & AC-coupled stability \& noise inspection \\
-Breadboard & Solderless breadboard and jumper wires & 1 & Hardware circuit assembly \\
+Op-amp & LM741CN (DIP-8) & 1 & Error amplifier, powered from $\pm 12\,\text{V}$ \\
+Pass transistor & Vishay Si9926BDY dual N-MOSFET (SO-8 on DIP adapter) & 1 & Series pass element; $V_{th} \approx 0.7\text{--}0.9\,\text{V}$, low $R_{DS(\text{on})}$ \\
+Voltage reference & TL431 precision shunt regulator & 1 & Provides stable $2.5\,\text{V}$; tapped by pot to give $1.2\,\text{V}$ \\
+Potentiometer & $10\,\text{k}\Omega$ multi-turn cermet trimmer & 1 & Adjusted to set $V_{REF} = 1.2000\,\text{V}$ \\
+Bias resistor & $4.7\,\text{k}\Omega$, $0.25\,\text{W}$ & 1 & Biases TL431 from the $+12\,\text{V}$ rail \\
+Gate-source resistor & $100\,\text{k}\Omega$, $0.25\,\text{W}$ & 1 & Keeps MOSFET off when power is removed \\
+Bleeder resistor & $1.2\,\text{k}\Omega$ (or $1.0\,\text{k}\Omega$), $0.25\,\text{W}$ & 1 & Provides $\approx 1\,\text{mA}$ minimum load \\
+Load resistors & $120\,\Omega$, $47\,\Omega$, $22\,\Omega$, $12\,\Omega$ (0.5\,W) & 1 each & Measured: $112.2\,\Omega$, $46.9\,\Omega$, $22.0\,\Omega$, $10.2\,\Omega$ \\
+Output capacitors & $10\,\mu\text{F}$ and $47\,\mu\text{F}$ electrolytic, 25\,V & 3 & Stability test ($10\,\mu\text{F}$, $47\,\mu\text{F}$, $94\,\mu\text{F}$ in parallel) \\
+DC power supply & Triple-output bench supply & 1 & Ch~1: $V_{IN}$ ($3\text{--}5\,\text{V}$); Ch~2 \& 3: $\pm 12\,\text{V}$ \\
+Digital multimeters & 4.5-digit bench DMMs & 2 & Measuring $V_{IN}$, $V_{OUT}$, $V_G$ \\
+Oscilloscope & Tektronix TBS2000B (2-channel DSO) & 1 & AC-coupled stability check \\
+Breadboard & Solderless breadboard with jumper wires & 1 & Circuit assembly \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -179,36 +155,42 @@ Breadboard & Solderless breadboard and jumper wires & 1 & Hardware circuit assem
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.92\textwidth]{circuit.png}
-    \caption{LTspice Simulation Schematic of the Closed-Loop NMOS Linear Voltage Regulator ($V_{OUT} = 1.2\,\text{V}$).}
+    \caption{LTspice simulation schematic of the closed-loop NMOS linear voltage regulator ($V_{OUT} = 1.2\,\text{V}$).}
     \label{fig:circuit_schematic}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
+    \includegraphics[width=0.92\textwidth]{image.png}
+    \caption{LTspice simulation output}
+    \label{fig:circuit_output}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
     \includegraphics[width=0.48\textwidth]{realcircuit.jpeg}
-    \caption{Breadboard Experimental Setup.}
+    \caption{Breadboard setup.}
     \label{fig:realcircuit}
 \end{figure}
 
-\section{Experimental Procedure}
-The experiment was conducted in six systematic phases per Section~5 of the lab manual:
+\section{Procedure}
+The experiment was done in six parts following Section~5 of the lab manual:
 \begin{enumerate}[leftmargin=1.5em, itemsep=0.2em]
-    \item \textbf{Part A -- Initial Setup and Verification:} We built the circuit on the breadboard with only the $1.2\,\text{k}\Omega$ bleeder connected. We set the auxiliary supply to $\pm 12\,\text{V}$ and adjusted the $10\,\text{k}\Omega$ pot across the TL431 reference to get exactly $V_{REF} = 1.2000\,\text{V}$ on the DMM before connecting it to Pin~3. We turned on the $\pm 12\,\text{V}$ supplies first, then turned on $V_{IN} = 3.0\,\text{V}$ with the current limit set to $200\,\text{mA}$. We checked that $V_{OUT} \approx 1.200\,\text{V}$ and verified that $V_G \approx 2.05\,\text{V}$.
-    \item \textbf{Part B -- Line Regulation:} We connected a $22.0\,\Omega$ resistor in parallel with the bleeder. We varied $V_{IN}$ from $3.00\,\text{V}$ to $5.00\,\text{V}$ in steps of $0.25\,\text{V}$, recording $V_{OUT}$ and $V_G$ in Table~1.
-    \item \textbf{Part C -- Load Regulation:} At $V_{IN} = 3.0\,\text{V}$ and then at $5.0\,\text{V}$, we tested five load conditions: bleeder only, $112.2\,\Omega, 46.9\,\Omega, 22.0\,\Omega$, and $10.2\,\Omega$. We recorded $V_{OUT}$ and $V_G$ in Table~2 and calculated the closed-loop output resistance $R_{OUT}$.
-    \item \textbf{Part D -- Dropout Voltage:} With $R_L = 10.2\,\Omega$ connected, we reduced $V_{IN}$ from $3.0\,\text{V}$ down to $0.0\,\text{V}$ in steps of $0.2\,\text{V}$ and $0.1\,\text{V}$. We recorded $V_{OUT}$ and $V_G$ in Table~3 to find the dropout voltage (where $V_{OUT}$ drops by $1\%$) and extracted the on-resistance $R_{DS(\text{on})}$.
-    \item \textbf{Part E -- Efficiency and Power Dissipation:} With $R_L = 10.2\,\Omega$, we measured the input current $I_{IN}$ and load current $I_{LOAD}$ at $V_{IN} = 3.0, 3.5, 4.0, 4.5$, and $5.0\,\text{V}$. We calculated $P_{IN}, P_{OUT}, \eta_{pass}$, and $P_{diss}$ in Table~4. We also measured the currents drawn from the $\pm 12\,\text{V}$ supplies to find the total efficiency.
-    \item \textbf{Part F -- Feedback Stability Check:} Under full load ($10.2\,\Omega$), we connected the oscilloscope to $V_{OUT}$ with AC coupling. We tested with $C_{OUT} = 10\,\mu\text{F}, 47\,\mu\text{F}$, and $94\,\mu\text{F}$ to check if the circuit oscillates and to observe the noise.
+    \item \textbf{Part A -- Setup:} We built the circuit on the breadboard with only the $1.2\,\text{k}\Omega$ bleeder connected. We set the $\pm 12\,\text{V}$ auxiliary supplies, then adjusted the $10\,\text{k}\Omega$ pot across the TL431 to read exactly $V_{REF} = 1.2000\,\text{V}$ on the DMM before connecting it to Pin~3. We turned on the $\pm 12\,\text{V}$ supplies first, then turned on $V_{IN} = 3.0\,\text{V}$ (current limit set to $200\,\text{mA}$). We checked $V_{OUT} \approx 1.200\,\text{V}$ and $V_G \approx 2.05\,\text{V}$.
+    \item \textbf{Part B -- Line Regulation:} We connected a $22.0\,\Omega$ resistor in parallel with the bleeder. We varied $V_{IN}$ from $3.00\,\text{V}$ to $5.00\,\text{V}$ in steps of $0.25\,\text{V}$ and recorded $V_{OUT}$ and $V_G$ in Table~1.
+    \item \textbf{Part C -- Load Regulation:} At $V_{IN} = 3.0\,\text{V}$ and $5.0\,\text{V}$, we tested five load conditions: bleeder only, $112.2\,\Omega$, $46.9\,\Omega$, $22.0\,\Omega$, and $10.2\,\Omega$. We recorded $V_{OUT}$ and $V_G$ in Table~2 and calculated $R_{OUT}$.
+    \item \textbf{Part D -- Dropout Voltage:} With $R_L = 10.2\,\Omega$, we reduced $V_{IN}$ from $3.0\,\text{V}$ down to $0.0\,\text{V}$ in steps of $0.2\,\text{V}$ (and $0.1\,\text{V}$ near the dropout region). We recorded $V_{OUT}$ and $V_G$ in Table~3 to find the dropout point.
+    \item \textbf{Part E -- Efficiency:} With $R_L = 10.2\,\Omega$, we measured $I_{IN}$ and $I_{LOAD}$ at $V_{IN} = 3.0, 3.5, 4.0, 4.5$, and $5.0\,\text{V}$. We calculated $P_{IN}$, $P_{OUT}$, $\eta_{pass}$, and $P_{diss}$ in Table~4. We also measured auxiliary supply currents to find total efficiency.
+    \item \textbf{Part F -- Stability:} Under full load ($10.2\,\Omega$), we connected the oscilloscope to $V_{OUT}$ (AC-coupled) and tested $C_{OUT} = 10\,\mu\text{F}$, $47\,\mu\text{F}$, and $94\,\mu\text{F}$ to check for oscillation.
 \end{enumerate}
 
-\section{Experimental Observations and Results}
+\section{Observations and Results}
 
-\subsection{Table 1: Line Regulation \texorpdfstring{($R_L = 22.0\,\Omega$ with Bleeder)}{(RL = 22 Ohm with Bleeder)}}
-Table~\ref{tab:line_reg} presents the measured line regulation data across the $3.00\,\text{V}$ to $5.00\,\text{V}$ input sweep.
+\subsection{Table 1: Line Regulation ($R_L = 22.0\,\Omega$ with Bleeder)}
 
 \begin{table}[htbp]
 \centering
-\caption{Measured Line Regulation Data at $R_L = 22.0\,\Omega$ (with Bleeder Resistor).}
+\caption{Line regulation data at $R_L = 22.0\,\Omega$ (with bleeder resistor).}
 \label{tab:line_reg}
 \small
 \begin{tabular}{ccccc}
@@ -228,25 +210,25 @@ Table~\ref{tab:line_reg} presents the measured line regulation data across the $
 \end{tabular}
 \end{table}
 
-Across the full $2.0\,\text{V}$ sweep of $V_{IN}$, $V_{OUT}$ varied by only $\Delta V_{OUT} = 1.2008\,\text{V} - 1.2006\,\text{V} = 0.20\,\text{mV}$, yielding:
+Over the full $2.0\,\text{V}$ sweep, $V_{OUT}$ changed by only $\Delta V_{OUT} = 1.2008\,\text{V} - 1.2006\,\text{V} = 0.20\,\text{mV}$:
 \begin{equation}
     \text{Line Regulation} = \frac{\Delta V_{OUT}}{\Delta V_{IN}} = \frac{0.20\,\text{mV}}{2.00\,\text{V}} = \mathbf{0.10\,\text{mV/V}} \quad (0.0083\%\text{/V})
 \end{equation}
-As plotted in Figure~\ref{fig:plot_line}, $V_G$ decreases monotonically from $2.138\,\text{V}$ to $2.118\,\text{V}$ ($\Delta V_G = -20\,\text{mV}$). As $V_{IN}$ increases, the drain-to-source voltage $V_{DS}$ increases. Due to channel-length modulation, the MOSFET would naturally pass slightly more current for the same $V_{GS}$. To keep $V_{OUT}$ held tightly at $1.200\,\text{V}$, the op-amp feedback automatically reduces the gate voltage $V_G$ by about $20\,\text{mV}$.
+
+As shown in Figure~\ref{fig:plot_line}, $V_G$ drops from $2.138\,\text{V}$ to $2.118\,\text{V}$ ($\Delta V_G = -20\,\text{mV}$) as $V_{IN}$ increases. This is the feedback actively reducing gate drive to compensate for channel-length modulation: at higher $V_{DS}$, the MOSFET naturally passes more current, so the op-amp reduces $V_G$ slightly to keep $V_{OUT}$ constant.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.68\textwidth]{plot_line_reg.png}
-    \caption{Measured Line Regulation: Output voltage $V_{OUT}$ (left) and gate voltage $V_G$ (right) vs. $V_{IN}$ at $R_L = 22.0\,\Omega$.}
+    \caption{Line regulation: $V_{OUT}$ (left) and $V_G$ (right) vs.\ $V_{IN}$ at $R_L = 22.0\,\Omega$.}
     \label{fig:plot_line}
 \end{figure}
 
-\subsection{Table 2: Load Regulation \texorpdfstring{($V_{IN} = 3.0\,\text{V}$ and $V_{IN} = 5.0\,\text{V}$)}{(VIN = 3.0V and VIN = 5.0V)}}
-Table~\ref{tab:load_reg} presents the load regulation data recorded across five load settings at both $V_{IN} = 3.0\,\text{V}$ and $5.0\,\text{V}$.
+\subsection{Table 2: Load Regulation ($V_{IN} = 3.0\,\text{V}$ and $5.0\,\text{V}$)}
 
 \begin{table}[htbp]
 \centering
-\caption{Measured Load Regulation Data and Extracted Closed-Loop Output Resistance.}
+\caption{Load regulation data and extracted closed-loop output resistance.}
 \label{tab:load_reg}
 \small
 \setlength{\tabcolsep}{4.5pt}
@@ -263,26 +245,28 @@ $12\,\Omega$ & $10.2$ & $118.67$ & $1.2002$ & $2.196$ & $1.2001$ & $2.145$ \\
 \end{tabular}
 \end{table}
 
-Between minimum load ($11.71\,\text{mA}$) and maximum load ($118.67\,\text{mA}$, $\Delta I_{LOAD} = 106.96\,\text{mA}$):
+Note: $I_{LOAD}$ is the total current sourced by the MOSFET, including the $1\,\text{mA}$ bleeder current.
+
+Between minimum load ($11.71\,\text{mA}$ at $112.2\,\Omega$) and maximum load ($118.67\,\text{mA}$ at $10.2\,\Omega$), $\Delta I_{LOAD} = 106.96\,\text{mA}$:
 \begin{align}
-    R_{OUT,(3\text{V})} &= \frac{1.2012\,\text{V} - 1.2002\,\text{V}}{0.10696\,\text{A}} = \frac{1.00\,\text{mV}}{0.10696\,\text{A}} = \mathbf{9.35\,\text{mV/A}} = \mathbf{9.35\,\text{m}\Omega} \\
-    R_{OUT,(5\text{V})} &= \frac{1.2012\,\text{V} - 1.2001\,\text{V}}{0.10696\,\text{A}} = \frac{1.10\,\text{mV}}{0.10696\,\text{A}} = \mathbf{10.28\,\text{mV/A}} = \mathbf{10.28\,\text{m}\Omega}
+    R_{OUT,(3\text{V})} &= \frac{1.2012\,\text{V} - 1.2002\,\text{V}}{0.10696\,\text{A}} = \frac{1.00\,\text{mV}}{0.10696\,\text{A}} = \mathbf{9.35\,\text{m}\Omega} \\
+    R_{OUT,(5\text{V})} &= \frac{1.2012\,\text{V} - 1.2001\,\text{V}}{0.10696\,\text{A}} = \frac{1.10\,\text{mV}}{0.10696\,\text{A}} = \mathbf{10.28\,\text{m}\Omega}
 \end{align}
-As shown in Figure~\ref{fig:plot_load}, $V_G$ increases by $+138\,\text{mV}$ across the load range to provide the necessary gate overdrive $V_{OV} = V_{GS} - V_{th}$ for the ten-fold surge in load current.
+
+$V_G$ increases by about $+138\,\text{mV}$ across the full load range so the op-amp can provide enough gate overdrive for the larger current.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.92\textwidth]{plot_load_reg.png}
-    \caption{Load Regulation Characteristics: (a) Output voltage $V_{OUT}$ vs. $I_{LOAD}$; (b) Gate drive voltage $V_G$ vs. $I_{LOAD}$.}
+    \caption{Load regulation: (a) $V_{OUT}$ vs.\ $I_{LOAD}$; (b) $V_G$ vs.\ $I_{LOAD}$.}
     \label{fig:plot_load}
 \end{figure}
 
-\subsection{Table 3: Dropout Voltage \texorpdfstring{($R_L = 10.2\,\Omega$, Full Load $\approx 118\,\text{mA}$)}{(RL = 10.2 Ohm, Full Load ~ 118 mA)}}
-Table~\ref{tab:dropout} presents the complete downward sweep from $V_{IN} = 3.0\,\text{V}$ to $0.0\,\text{V}$ under full load ($R_L = 10.2\,\Omega$, $I_{LOAD} \approx 118\,\text{mA}$).
+\subsection{Table 3: Dropout Voltage ($R_L = 10.2\,\Omega$, Full Load $\approx 118\,\text{mA}$)}
 
 \begin{table}[htbp]
 \centering
-\caption{Measured Dropout Voltage Data at Full Load ($R_L = 10.2\,\Omega$, $I_{LOAD} \approx 118\,\text{mA}$).}
+\caption{Dropout voltage data at full load ($R_L = 10.2\,\Omega$, $I_{LOAD} \approx 118\,\text{mA}$).}
 \label{tab:dropout}
 \small
 \setlength{\tabcolsep}{3.2pt}
@@ -291,52 +275,51 @@ Table~\ref{tab:dropout} presents the complete downward sweep from $V_{IN} = 3.0\
 \toprule
 \textbf{$V_{IN}$ (V)} & \textbf{$V_{OUT}$ (V)} & \textbf{$V_G$ (V)} & \textbf{State} & \textbf{$V_{IN}$ (V)} & \textbf{$V_{OUT}$ (V)} & \textbf{$V_G$ (V)} & \textbf{State} \\
 \midrule
-3.0 & 1.2002 & 2.183 & Regulated Saturation & 1.3 & 1.2002 & 2.291 & Regulated Knee \\
-2.8 & 1.2002 & 2.187 & Regulated Saturation & \textbf{1.2} & \textbf{1.1684} & \textbf{4.391} & \textbf{Dropout! Op-amp Sat} \\
-2.6 & 1.2002 & 2.192 & Regulated Saturation & 1.1 & 1.0711 & 4.332 & Ohmic Triode \\
-2.4 & 1.2001 & 2.199 & Regulated Saturation & 1.0 & 0.9739 & 4.274 & Ohmic Triode \\
-2.2 & 1.2001 & 2.206 & Regulated Saturation & 0.9 & 0.8766 & 4.216 & Ohmic Triode \\
-2.0 & 1.2002 & 2.212 & Regulated Saturation & 0.8 & 0.7792 & 4.157 & Ohmic Triode \\
-1.9 & 1.2003 & 2.218 & Regulated Saturation & 0.7 & 0.6818 & 4.099 & Ohmic Triode \\
-1.8 & 1.2002 & 2.221 & Regulated Saturation & 0.6 & 0.5845 & 4.041 & Ohmic Triode \\
-1.7 & 1.2002 & 2.226 & Regulated Saturation & 0.5 & 0.4872 & 3.982 & Ohmic Triode \\
-1.6 & 1.2001 & 2.232 & Regulated Saturation & 0.4 & 0.3897 & 3.924 & Ohmic Triode \\
-1.5 & 1.2001 & 2.239 & Regulated Saturation & 0.3 & 0.2923 & 3.866 & Ohmic Triode \\
-1.4 & 1.2001 & 2.251 & Regulated Saturation & 0.2 & 0.1949 & 3.807 & Ohmic Triode \\
--- & -- & -- & -- & 0.1 & 0.0974 & 3.750 & Ohmic Triode \\
--- & -- & -- & -- & 0.0 & 0.0000 & 3.691 & Unpowered \\
+3.0 & 1.2002 & 2.183 & Regulated & 1.3 & 1.2002 & 2.291 & Regulated (near knee) \\
+2.8 & 1.2002 & 2.187 & Regulated & \textbf{1.2} & \textbf{1.1684} & \textbf{4.391} & \textbf{Dropout! (op-amp sat.)} \\
+2.6 & 1.2002 & 2.192 & Regulated & 1.1 & 1.0711 & 4.332 & Ohmic (triode) \\
+2.4 & 1.2001 & 2.199 & Regulated & 1.0 & 0.9739 & 4.274 & Ohmic (triode) \\
+2.2 & 1.2001 & 2.206 & Regulated & 0.9 & 0.8766 & 4.216 & Ohmic (triode) \\
+2.0 & 1.2002 & 2.212 & Regulated & 0.8 & 0.7792 & 4.157 & Ohmic (triode) \\
+1.9 & 1.2003 & 2.218 & Regulated & 0.7 & 0.6818 & 4.099 & Ohmic (triode) \\
+1.8 & 1.2002 & 2.221 & Regulated & 0.6 & 0.5845 & 4.041 & Ohmic (triode) \\
+1.7 & 1.2002 & 2.226 & Regulated & 0.5 & 0.4872 & 3.982 & Ohmic (triode) \\
+1.6 & 1.2001 & 2.232 & Regulated & 0.4 & 0.3897 & 3.924 & Ohmic (triode) \\
+1.5 & 1.2001 & 2.239 & Regulated & 0.3 & 0.2923 & 3.866 & Ohmic (triode) \\
+1.4 & 1.2001 & 2.251 & Regulated & 0.2 & 0.1949 & 3.807 & Ohmic (triode) \\
+-- & -- & -- & -- & 0.1 & 0.0974 & 3.750 & Ohmic (triode) \\
+-- & -- & -- & -- & 0.0 & 0.0000 & 3.691 & Off \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\noindent \textbf{Dropout Threshold and Parameter Extraction:}
+\noindent \textbf{Dropout calculations:}
 \begin{enumerate}[leftmargin=1.2em, itemsep=0.1em]
-    \item \textbf{1\% Dropout Point:} Nominal output is $V_{reg} = 1.2002\,\text{V}$, giving a $1\%$ ($12\,\text{mV}$) dropout threshold of $V_{target} = 1.1882\,\text{V}$. Linear interpolation between $1.3\,\text{V}$ and $1.2\,\text{V}$ yields:
+    \item \textbf{1\% dropout point:} Nominal output is $V_{reg} = 1.2002\,\text{V}$, so the $1\%$ ($12\,\text{mV}$) drop threshold is $V_{target} = 1.1882\,\text{V}$. Interpolating between $V_{IN} = 1.3\,\text{V}$ ($V_{OUT} = 1.2002\,\text{V}$) and $V_{IN} = 1.2\,\text{V}$ ($V_{OUT} = 1.1684\,\text{V}$):
     \begin{equation}
-        V_{IN,\text{dropout}} = 1.2\,\text{V} + \frac{1.1882 - 1.1684}{1.2002 - 1.1684} \times 0.1\,\text{V} = \mathbf{1.2623\,\text{V}}
+        V_{IN,\text{dropout}} = 1.2\,\text{V} + \frac{1.1882 - 1.1684}{1.2002 - 1.1684} \times 0.1\,\text{V} = \mathbf{1.262\,\text{V}}
     \end{equation}
-    The minimum dropout headroom is $V_{\text{headroom}} = 1.2623\,\text{V} - 1.2002\,\text{V} = \mathbf{62.1\,\text{mV}}$.
-    \item \textbf{Op-Amp Saturation:} At $V_{IN} = 1.2\,\text{V}$, $V_G$ suddenly spikes to $\mathbf{4.391\,\text{V}}$ as the op-amp saturates high to force the MOSFET fully ON.
-    \item \textbf{Extraction of $R_{DS(\text{on})}$:} For $V_{IN} \le 1.2\,\text{V}$, the triode ohmic transfer characteristic has slope $\frac{V_{OUT}}{V_{IN}} = 0.9737$. Equating to $\frac{R_L}{R_L + R_{DS(\text{on})}}$ with $R_L = 10.2\,\Omega$:
+    Dropout headroom: $1.262\,\text{V} - 1.200\,\text{V} = \mathbf{62.1\,\text{mV}}$.
+    \item \textbf{Op-amp saturation:} At $V_{IN} = 1.2\,\text{V}$, $V_G$ jumps to $\mathbf{4.391\,\text{V}}$ as the op-amp hits its positive output limit.
+    \item \textbf{$R_{DS(\text{on})}$ extraction:} In the ohmic region ($V_{IN} \le 1.1\,\text{V}$), $V_{OUT}/V_{IN} \approx 0.9737$ (read from data at $V_{IN}=1.1\,\text{V}$). Using the triode voltage divider with $R_L = 10.2\,\Omega$:
     \begin{equation}
-        R_{DS(\text{on})} = 10.2\,\Omega \times \left(\frac{1}{0.9737} - 1\right) = \mathbf{0.2754\,\Omega} \quad (275.4\,\text{m}\Omega)
+        R_{DS(\text{on})} = 10.2\,\Omega \times \left(\frac{1}{0.9737} - 1\right) = \mathbf{0.275\,\Omega} \quad (275\,\text{m}\Omega)
     \end{equation}
-    The full-load ohmic channel drop is $I_{LOAD} \cdot R_{DS(\text{on})} = 0.1177\,\text{A} \times 0.2754\,\Omega = 32.4\,\text{mV}$, leaving $\approx 30\,\text{mV}$ as saturation boundary headroom.
+    The ohmic drop at full load: $0.1177\,\text{A} \times 0.275\,\Omega = 32.4\,\text{mV}$. The remaining $\approx 30\,\text{mV}$ of headroom is the saturation boundary.
 \end{enumerate}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.70\textwidth]{plot_dropout.png}
-    \caption{Dropout Characteristics at Full Load ($R_L = 10.2\,\Omega$): Output voltage $V_{OUT}$ and gate voltage $V_G$ vs. $V_{IN}$, showing the $1.262\,\text{V}$ dropout point, op-amp saturation, and ohmic triode line.}
+    \caption{Dropout characteristics at full load ($R_L = 10.2\,\Omega$): $V_{OUT}$ and $V_G$ vs.\ $V_{IN}$, showing the $1.262\,\text{V}$ dropout point and ohmic triode region.}
     \label{fig:plot_dropout}
 \end{figure}
 
-\subsection{Table 4: Power Dissipation and Conversion Efficiency \texorpdfstring{($R_L = 10.2\,\Omega$)}{(RL = 10.2 Ohm)}}
-Table~\ref{tab:efficiency} summarizes the power metrics and conversion efficiency evaluated across the $3.0\,\text{V}$ to $5.0\,\text{V}$ operating range under full load ($R_L = 10.2\,\Omega$, $I_{LOAD} \approx 117.7\,\text{mA}$).
+\subsection{Table 4: Power Dissipation and Efficiency ($R_L = 10.2\,\Omega$)}
 
 \begin{table}[htbp]
 \centering
-\caption{Measured Power and Efficiency Data at Full Load ($R_L = 10.2\,\Omega$).}
+\caption{Power and efficiency data at full load ($R_L = 10.2\,\Omega$).}
 \label{tab:efficiency}
 \small
 \begin{tabular}{ccccccc}
@@ -352,280 +335,277 @@ Table~\ref{tab:efficiency} summarizes the power metrics and conversion efficienc
 \end{tabular}
 \end{table}
 
-\noindent \textbf{Auxiliary Power and Total Efficiency:} Auxiliary supply current was measured as $I_{AUX+} + |I_{AUX-}| = 2.54\,\text{mA}$ at $3.0\,\text{V}$ and $2.66\,\text{mA}$ at $5.0\,\text{V}$. Using the nominal $\pm 12\,\text{V}$ specification ($P_{AUX} = 12\,\text{V} \cdot I_{AUX}$):
+\noindent Note: $P_{IN} = V_{IN} \times I_{IN}$ (measured total supply current), $P_{OUT} = V_{OUT} \times I_{LOAD}$, $\eta_{pass} = P_{OUT}/P_{IN}$, $P_{diss} = P_{IN} - P_{OUT}$.
+
+\noindent \textbf{Auxiliary supply power and total efficiency:}
+We measured the auxiliary supply currents as $I_{AUX+} + |I_{AUX-}| = 2.54\,\text{mA}$ at $V_{IN} = 3.0\,\text{V}$ and $2.66\,\text{mA}$ at $5.0\,\text{V}$. With $\pm 12\,\text{V}$ rails, $P_{AUX} = 12\,\text{V} \times I_{AUX}$:
 \begin{align}
     \text{At } V_{IN} = 3.0\,\text{V}: \quad P_{AUX} &= 30.48\,\text{mW} \implies \eta_{total} = \frac{141.20\,\text{mW}}{366.00\,\text{mW} + 30.48\,\text{mW}} = \mathbf{35.61\%} \\
     \text{At } V_{IN} = 5.0\,\text{V}: \quad P_{AUX} &= 31.92\,\text{mW} \implies \eta_{total} = \frac{141.20\,\text{mW}}{610.00\,\text{mW} + 31.92\,\text{mW}} = \mathbf{22.00\%}
 \end{align}
-(Under $\pm 10\,\text{V}$ supplies: $P_{AUX} = 25.4\,\text{mW} \implies \eta_{total} = 36.08\%$ at $3\,\text{V}$, and $P_{AUX} = 26.6\,\text{mW} \implies \eta_{total} = 22.18\%$ at $5\,\text{V}$). As shown in Figure~\ref{fig:plot_efficiency}, MOSFET heat dissipation climbs from $224.8\,\text{mW}$ to $468.8\,\text{mW}$ at $5.0\,\text{V}$.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.92\textwidth]{plot_efficiency.png}
-    \caption{Power and Efficiency Evaluation: (a) Measured pass efficiency $\eta_{pass}$, total efficiency $\eta_{total}$, and theoretical limit $V_{OUT}/V_{IN}$ vs. an $88\%$ buck converter; (b) Power dissipated as heat in the pass transistor scaling to nearly $0.47\,\text{W}$.}
+    \caption{Efficiency and power dissipation: (a) Measured $\eta_{pass}$, $\eta_{total}$, and theoretical $V_{OUT}/V_{IN}$ limit, compared to an $88\%$ buck converter; (b) MOSFET heat dissipation rising to $\approx 469\,\text{mW}$ at $5\,\text{V}$.}
     \label{fig:plot_efficiency}
 \end{figure}
 
-\section{Feedback Loop Stability and Oscilloscope Analysis}
-Oscilloscope captures of the AC-coupled output under full load ($118\,\text{mA}$) for $C_{OUT} = 10\,\mu\text{F}, 47\,\mu\text{F}$, and $94\,\mu\text{F}$ are presented in Figure~\ref{fig:stability_dso}.
+\section{Stability Check (Oscilloscope)}
+Oscilloscope captures of $V_{OUT}$ (AC-coupled, full load $118\,\text{mA}$) for three capacitor values are shown in Figure~\ref{fig:stability_dso}.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{stability10uF.jpeg}
-        \caption{$C_{OUT} = 10\,\mu\text{F}$: Pk-to-Pk = $33.60\,\text{mV}$.}
+        \caption{$C_{OUT} = 10\,\mu\text{F}$: Pk-Pk = $33.60\,\text{mV}$.}
         \label{fig:stab10}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{stability47uF.jpeg}
-        \caption{$C_{OUT} = 47\,\mu\text{F}$: Pk-to-Pk = $60.00\,\text{mV}$ ($4\,\text{ns}$).}
+        \caption{$C_{OUT} = 47\,\mu\text{F}$: Pk-Pk = $60.00\,\text{mV}$.}
         \label{fig:stab47}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{stability94uF.jpeg}
-        \caption{$C_{OUT} = 94\,\mu\text{F}$: Pk-to-Pk = $62.40\,\text{mV}$.}
+        \caption{$C_{OUT} = 94\,\mu\text{F}$: Pk-Pk = $62.40\,\text{mV}$.}
         \label{fig:stab94}
     \end{subfigure}
-    \caption{Tektronix TBS2000B Digital Oscilloscope AC-Coupled Captures of Regulator Output across Decoupling Capacitances.}
+    \caption{AC-coupled output voltage under full load for three output capacitor values.}
     \label{fig:stability_dso}
 \end{figure}
 
-\noindent \textbf{Stability and Noise Analysis:}
+\noindent \textbf{Observations:}
 \begin{enumerate}[leftmargin=1.2em, itemsep=0.1em]
-    \item \textbf{Verification of Stability:} The oscilloscope traces show a flat DC level without any sinusoidal oscillation or ringing, confirming that the feedback loop is stable.
-    \item \textbf{Residual Noise Identification:} The small spikes of about $33-62\,\text{mV}$ peak-to-peak are not feedback oscillations, but high-frequency electrical noise picked up by the unshielded jumper wires and oscilloscope probe ground lead. Increasing $C_{OUT}$ from $10\,\mu\text{F}$ to $47\,\mu\text{F}$ and $94\,\mu\text{F}$ helped with loop stability, but could not eliminate these very fast spikes because electrolytic capacitors have parasitic resistance (ESR) and inductance (ESL). Adding a small $0.1\,\mu\text{F}$ ceramic capacitor directly across the pins and using a short probe ground reduced this noise.
+    \item The oscilloscope traces are flat (no sinusoidal oscillation or ringing), confirming the feedback loop is stable for all three capacitor values.
+    \item The small spikes ($33\text{--}62\,\text{mV}$ peak-to-peak) are high-frequency noise picked up by the unshielded jumper wires and probe ground lead --- not loop oscillations. Electrolytic capacitors cannot filter these fast spikes because of their parasitic ESR and ESL. A $0.1\,\mu\text{F}$ ceramic capacitor in parallel with $C_{OUT}$ and a shorter probe ground lead would reduce this noise.
 \end{enumerate}
 
-\section{Detailed Calculations and Summary Comparison}
+\section{Calculations Summary}
 
-\subsection{Mathematical Calculation Summary}
+\subsection{Key Results}
 \begin{itemize}[leftmargin=1.2em, itemsep=0.2em]
     \item \textbf{Line Regulation:}
     \begin{equation}
-        \text{Line Reg} = \frac{V_{OUT,\max} - V_{OUT,\min}}{5.0\,\text{V} - 3.0\,\text{V}} = \frac{1.2008\,\text{V} - 1.2006\,\text{V}}{2.00\,\text{V}} = \mathbf{0.10\,\text{mV/V}} \quad (0.0083\%\text{/V})
+        \text{Line Reg} = \frac{1.2008\,\text{V} - 1.2006\,\text{V}}{5.0\,\text{V} - 3.0\,\text{V}} = \mathbf{0.10\,\text{mV/V}} \quad (0.0083\%\text{/V})
     \end{equation}
     \item \textbf{Load Regulation ($R_{OUT}$):}
     \begin{align}
         R_{OUT,(3\text{V})} &= \frac{1.2012\,\text{V} - 1.2002\,\text{V}}{0.11867\,\text{A} - 0.01171\,\text{A}} = \frac{1.00\,\text{mV}}{0.10696\,\text{A}} = \mathbf{9.35\,\text{m}\Omega} \\
         R_{OUT,(5\text{V})} &= \frac{1.2012\,\text{V} - 1.2001\,\text{V}}{0.10696\,\text{A}} = \frac{1.10\,\text{mV}}{0.10696\,\text{A}} = \mathbf{10.28\,\text{m}\Omega}
     \end{align}
-    \item \textbf{Dropout Headroom and $R_{DS(\text{on})}$:}
+    \item \textbf{Dropout and $R_{DS(\text{on})}$:}
     \begin{equation}
-        V_{IN,\text{dropout}} = \mathbf{1.262\,\text{V}} \implies V_{\text{headroom}} = 1.262\,\text{V} - 1.200\,\text{V} = \mathbf{62.1\,\text{mV}}
+        V_{IN,\text{dropout}} = \mathbf{1.262\,\text{V}} \implies V_{\text{headroom}} = 62.1\,\text{mV}
     \end{equation}
     \begin{equation}
-        R_{DS(\text{on})} = 10.2\,\Omega \times \left(\frac{1}{0.9737} - 1\right) = \mathbf{0.2754\,\Omega} \implies V_{\text{ohmic}} = 0.1177\,\text{A} \times 0.2754\,\Omega = \mathbf{32.4\,\text{mV}}
+        R_{DS(\text{on})} = 10.2\,\Omega \times \left(\frac{1}{0.9737} - 1\right) = \mathbf{0.275\,\Omega} \implies V_{\text{ohmic}} = 0.1177\,\text{A} \times 0.275\,\Omega = 32.4\,\text{mV}
     \end{equation}
-    \item \textbf{Power and Efficiency at $5.0\,\text{V}$ ($I_{LOAD} \approx 117.7\,\text{mA}$, $I_{IN} = 122.0\,\text{mA}$):}
+    \item \textbf{Power and efficiency at $5.0\,\text{V}$:}
     \begin{align}
         P_{IN} &= 5.0\,\text{V} \times 0.1220\,\text{A} = 610.0\,\text{mW}, \quad P_{OUT} = 1.2001\,\text{V} \times 0.11766\,\text{A} = 141.20\,\text{mW} \\
-        \eta_{pass} &= \frac{141.20\,\text{mW}}{610.0\,\text{mW}} \times 100\% = \mathbf{23.15\%}, \quad P_{diss} = 610.0\,\text{mW} - 141.20\,\text{mW} = \mathbf{468.80\,\text{mW}} \\
-        \eta_{total} &= \frac{141.20\,\text{mW}}{610.0\,\text{mW} + 31.92\,\text{mW}} \times 100\% = \mathbf{22.00\%}
+        \eta_{pass} &= \frac{141.20}{610.0} \times 100\% = \mathbf{23.15\%}, \quad P_{diss} = 610.0 - 141.20 = \mathbf{468.80\,\text{mW}}
     \end{align}
 \end{itemize}
 
-\subsection{Summary Comparison: Theoretical vs. Experimental Results}
-Table~\ref{tab:comparison} presents a comprehensive comparison of theoretical predictions and measured bench results.
-
+\subsection{Theory vs.\ Experiment}
 \begin{table}[htbp]
 \centering
-\caption{Comprehensive Comparison of Theoretical Predictions and Experimental Results.}
+\caption{Comparison of theoretical and measured results.}
 \label{tab:comparison}
 \small
 \begin{tabularx}{\textwidth}{l c c c X}
 \toprule
-\textbf{Parameter / Metric} & \textbf{Theoretical} & \textbf{Measured} & \textbf{Deviation} & \textbf{Physical Cause of Discrepancy} \\
+\textbf{Parameter} & \textbf{Theoretical} & \textbf{Measured} & \textbf{Error} & \textbf{Reason for difference} \\
 \midrule
-Regulated Voltage $V_{OUT}$ & $1.2000\,\text{V}$ & $1.2001-1.2013\,\text{V}$ & $<0.11\%$ & Precision wiper tuning on TL431 reference \\
-Line Regulation & $\approx 0.0001\,\text{mV/V}$ & $0.10\,\text{mV/V}$ & Dominated & Limited by DMM resolution ($0.1\,\text{mV}$) \& ref drift \\
-Load Regulation ($R_{OUT}$) & $\approx 0.006\,\text{m}\Omega$ & $9.35-10.28\,\text{m}\Omega$ & Dominated & Breadboard jumper \& contact resistance ($5-10\,\text{m}\Omega$) \\
-Gate Voltage $V_G$ (@ $118\,\text{mA}$) & $2.15\,\text{V}$ & $2.187\,\text{V}$ & $1.7\%$ & Overdrive $V_{OV} \approx 0.28\,\text{V}$ above $V_{th} \approx 0.70-0.85\,\text{V}$ \\
-Dropout Voltage $V_{IN,\text{dropout}}$ & $\approx 1.23\,\text{V}$ & $1.262\,\text{V}$ & $2.6\%$ & Ohmic drop ($32\,\text{mV}$) plus $V_{DS,\text{sat}}$ headroom \\
-MOSFET $R_{DS(\text{on})}$ & $\approx 0.25\,\Omega$ & $0.275\,\Omega$ & $10.0\%$ & Excellent agreement with Si9926BDY datasheet \\
-Pass Efficiency (@ $3\,\text{V}$) & $40.00\%$ & $38.58\%$ & $-1.42\%$ & Small bleeder current ($1\,\text{mA}$) \& bias overhead \\
-Pass Efficiency (@ $5\,\text{V}$) & $24.00\%$ & $23.15\%$ & $-0.85\%$ & Follows fundamental $V_{OUT}/V_{IN}$ upper bound \\
-MOSFET Heat $P_{diss}$ (@ $5\,\text{V}$) & $447.1\,\text{mW}$ & $468.8\,\text{mW}$ & $+4.8\%$ & Channel drop $(V_{IN}-V_{OUT})I$ plus bleeder current \\
+Regulated voltage $V_{OUT}$ & $1.2000\,\text{V}$ & $1.2001\text{--}1.2013\,\text{V}$ & $<0.11\%$ & Pot calibration limit \\
+Line regulation & $\approx 0.0001\,\text{mV/V}$ & $0.10\,\text{mV/V}$ & --- & DMM resolution ($0.1\,\text{mV}$) and reference drift \\
+Load regulation $R_{OUT}$ & $\approx 0.006\,\text{m}\Omega$ & $9.35\text{--}10.28\,\text{m}\Omega$ & --- & Breadboard contact and wire resistance \\
+Gate voltage $V_G$ (@ $118\,\text{mA}$) & $\approx 2.15\,\text{V}$ & $2.19\,\text{V}$ & $1.7\%$ & $V_{OV} \approx 0.28\,\text{V}$ above $V_{th} \approx 0.70\text{--}0.85\,\text{V}$ \\
+Dropout voltage & $\approx 1.23\,\text{V}$ & $1.262\,\text{V}$ & $2.6\%$ & Ohmic drop ($32\,\text{mV}$) plus saturation margin \\
+$R_{DS(\text{on})}$ & $\approx 0.25\,\Omega$ & $0.275\,\Omega$ & $10\%$ & Good match to Si9926BDY datasheet \\
+Pass efficiency (@ $3\,\text{V}$) & $40.00\%$ & $38.58\%$ & $-1.42\%$ & Bleeder and bias overhead \\
+Pass efficiency (@ $5\,\text{V}$) & $24.00\%$ & $23.15\%$ & $-0.85\%$ & Follows $V_{OUT}/V_{IN}$ limit \\
+MOSFET heat (@ $5\,\text{V}$) & $447.1\,\text{mW}$ & $468.8\,\text{mW}$ & $+4.8\%$ & Bleeder and bias currents add extra loss \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\section{Answers to Analysis and Discussion Questions (Section 9)}
+\section{Analysis Questions (Section~9)}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=2.0em, itemsep=0.8em]
-    \item \textbf{What line regulation (mV/V) and load regulation (mV/A) did you measure? Compare them with the ideal result of Section 2 and identify what limits your measurement.}
-    
-    \textbf{Answer:} 
+    \item \textbf{What line regulation (mV/V) and load regulation (mV/A) did you measure? Compare with theory and state what limits the measurement.}
+
+    \textbf{Answer:}
     \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-        \item \textit{Measured Values:} Line regulation was measured as $\mathbf{0.10\,\text{mV/V}}$ ($0.2\,\text{mV}$ shift across a $2.0\,\text{V}$ input swing). Load regulation (closed-loop output resistance) was measured as $\mathbf{9.35\,\text{mV/A}}$ ($9.35\,\text{m}\Omega$) at $V_{IN} = 3.0\,\text{V}$ and $\mathbf{10.28\,\text{mV/A}}$ ($10.28\,\text{m}\Omega$) at $V_{IN} = 5.0\,\text{V}$.
-        \item \textit{Theoretical Ideal Values:} Small-signal feedback formulas predict:
+        \item Line regulation = $\mathbf{0.10\,\text{mV/V}}$ ($0.2\,\text{mV}$ shift over a $2.0\,\text{V}$ sweep).
+        \item Load regulation = $\mathbf{9.35\,\text{mV/A}}$ at $3\,\text{V}$ and $\mathbf{10.28\,\text{mV/A}}$ at $5\,\text{V}$.
+        \item Theoretical predictions from small-signal analysis:
         \begin{align}
-            \frac{dV_{OUT}}{dV_{IN}} &= \frac{1}{r_o g_m (1 + A)} \approx \frac{1}{50 \times 0.85 \times 2 \times 10^5} \approx 0.00012\,\text{mV/V} \\
-            R_{OUT} &= \frac{1}{g_m (1 + A) + 1/r_o} \approx \frac{1}{0.85 \times 2 \times 10^5} \approx 0.00588\,\text{mV/A} \quad (5.88\,\mu\Omega)
+            \frac{dV_{OUT}}{dV_{IN}} &\approx \frac{1}{r_o g_m (1 + A)} \approx 0.00012\,\text{mV/V} \\
+            R_{OUT} &\approx \frac{1}{g_m (1 + A)} \approx 5.88\,\mu\Omega
         \end{align}
-        \item \textit{Measurement Limitations:} Our measured variations are larger than the ideal values because physical measurements in the lab are limited by practical factors: (1) the bench multimeter resolution ($0.1\,\text{mV}$); (2) slight drift in the TL431 reference voltage; (3) op-amp offset voltage drift; and (4) contact and jumper wire resistance on the breadboard (about $5-20\,\text{m}\Omega$).
+        \item The measured values are much larger than theoretical because: (1) multimeter resolution is $0.1\,\text{mV}$; (2) TL431 reference drifts slightly; (3) breadboard contact resistance ($5\text{--}20\,\text{m}\Omega$) sets the floor on $R_{OUT}$.
     \end{itemize}
 
-    \item \textbf{What was the $V_G$ you measured at 100 mA? Compare $V_G - V_{OUT}$ with the threshold voltage on your MOSFET datasheet.}
-    
+    \item \textbf{What was $V_G$ at 100 mA? Compare $V_G - V_{OUT}$ with $V_{th}$ from the datasheet.}
+
     \textbf{Answer:}
     \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-        \item \textit{Measured Gate Voltage:} At $I_{LOAD} \approx 118\,\text{mA}$, $V_G = 2.187\,\text{V}$ at $3.0\,\text{V}$ ($V_{GS} = 2.187 - 1.2001 = \mathbf{0.9869\,\text{V}}$) and $V_G = 2.135\,\text{V}$ at $5.0\,\text{V}$ ($V_{GS} = 2.135 - 1.2001 = \mathbf{0.9349\,\text{V}}$).
-        \item \textit{Datasheet Comparison:} The Vishay Si9926BDY specifies a gate threshold of $V_{GS(th)} = 0.6\,\text{V}$ to $1.5\,\text{V}$ (typical $0.70-0.85\,\text{V}$). The measured $V_{GS} \approx 0.94-0.99\,\text{V}$ exceeds threshold by an overdrive voltage $V_{OV} = V_{GS} - V_{th} \approx 0.24\,\text{V}$, providing the required transconductance drive to conduct $118\,\text{mA}$ in saturation.
+        \item At $I_{LOAD} \approx 118\,\text{mA}$: $V_G = 2.187\,\text{V}$ at $3\,\text{V}$, giving $V_{GS} = 2.187 - 1.2001 = \mathbf{0.987\,\text{V}}$; $V_G = 2.135\,\text{V}$ at $5\,\text{V}$, giving $V_{GS} = \mathbf{0.935\,\text{V}}$.
+        \item The Si9926BDY datasheet gives $V_{GS(th)} = 0.6\text{--}1.5\,\text{V}$ (typical $0.70\text{--}0.85\,\text{V}$). Our measured $V_{GS} \approx 0.94\text{--}0.99\,\text{V}$ is above threshold by about $V_{OV} \approx 0.24\,\text{V}$, which is the overdrive needed to conduct $118\,\text{mA}$.
     \end{itemize}
 
-    \item \textbf{What dropout voltage did you measure at 100 mA? Relate it to $R_{DS(\text{on})}$ of your MOSFET and the 741 output swing.}
-    
+    \item \textbf{What dropout voltage did you measure at 100 mA? Relate it to $R_{DS(\text{on})}$ and the 741 output swing.}
+
     \textbf{Answer:}
     \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-        \item \textit{Measured Dropout Voltage:} At full load ($117.7\,\text{mA}$), the $1\%$ drop threshold is reached at $V_{IN,\text{dropout}} = \mathbf{1.262\,\text{V}}$, giving an ultra-low dropout headroom of $\mathbf{62.1\,\text{mV}}$.
-        \item \textit{Relation to $R_{DS(\text{on})}$:} Below dropout, the MOSFET enters deep triode, where $R_{DS(\text{on})} = 0.2754\,\Omega$ accounts for an ohmic drop of $I_{LOAD} \cdot R_{DS(\text{on})} = 0.1177\,\text{A} \times 0.2754\,\Omega = 32.4\,\text{mV}$. The remaining $\approx 30\,\text{mV}$ of headroom represents the transition margin $V_{DS,\text{sat}}$ required before transconductance falls off.
-        \item \textit{Relation to 741 Swing:} Powered from $\pm 12\,\text{V}$ supplies, the 741 swings up to $+10.5\,\text{V}$. At dropout, $V_G$ rose to $4.391\,\text{V}$, well within the op-amp's swing. Hence, op-amp swing did not constrain dropout; dropout was limited solely by MOSFET channel resistance.
+        \item At full load ($117.7\,\text{mA}$), the $1\%$ drop point is $V_{IN,\text{dropout}} = \mathbf{1.262\,\text{V}}$, giving a headroom of $\mathbf{62.1\,\text{mV}}$.
+        \item The ohmic drop across $R_{DS(\text{on})} = 0.275\,\Omega$ is $0.1177\,\text{A} \times 0.275\,\Omega = 32.4\,\text{mV}$. The remaining $\approx 30\,\text{mV}$ is the saturation transition margin.
+        \item Powered from $\pm 12\,\text{V}$, the 741 can swing up to about $+10.5\,\text{V}$. At dropout, $V_G = 4.391\,\text{V}$, well within this swing. So op-amp swing is not the limiting factor here --- dropout is set by the MOSFET's on-resistance.
     \end{itemize}
 
-    \item \textbf{Why can the regulator not be powered with the op-amp on the same 3 to 5 V supply as the drain? What alternative op-amp type would allow it?}
-    
+    \item \textbf{Why can the op-amp not be powered from the same $3\text{--}5\,\text{V}$ supply? What alternative would allow it?}
+
     \textbf{Answer:}
     \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-        \item \textit{Why LM741 Fails:} (1) Output swing: The 741's bipolar output stage cannot swing closer than $2.0\,\text{V}$ to its positive rail ($V_{OH} \le V^+ - 2.0\,\text{V}$). At $V_{IN} = 3.0\,\text{V}$, maximum gate drive would be only $1.0\,\text{V}$, failing to reach the required $V_G \approx 2.15\,\text{V}$. (2) Input common-mode range: The 741 requires inputs at least $2.0\,\text{V}$ above its negative rail, making sensing of $1.200\,\text{V}$ impossible on a grounded-negative supply.
-        \item \textit{Alternative Op-Amp Type:} A single-supply \textbf{Rail-to-Rail Input and Output (RRIO) CMOS operational amplifier} (e.g., MCP6001, OPA340, LMV321). However, to operate an NMOS follower down to $V_{IN} = 1.3\,\text{V}$ dropout, an internal charge pump is required to boost gate voltage above $V_{IN}$, or a \textbf{PMOS pass transistor} must be used.
+        \item \textit{Problem 1 -- Output swing:} The 741 output stays $2\,\text{V}$ below $V^+$. At $V^+ = 3\,\text{V}$, max gate drive is $\approx 1\,\text{V}$, but we need $V_G \approx 2.15\,\text{V}$.
+        \item \textit{Problem 2 -- Input common-mode range:} The 741 inputs must be at least $2\,\text{V}$ above the negative rail (ground). It cannot sense the $1.2\,\text{V}$ output.
+        \item \textit{Alternative:} A single-supply \textbf{rail-to-rail input/output (RRIO) CMOS op-amp} (e.g., MCP6001, LMV321) can sense down to $0\,\text{V}$ and swing to the rail. However, an NMOS follower still needs $V_G > V_{IN}$ to minimise dropout, so a PMOS pass transistor (or an internal charge pump) would be needed for a clean single-supply design.
     \end{itemize}
 
-    \item \textbf{What happens to $V_{OUT}$ if the bleeder is removed and the load is disconnected? Explain.}
-    
-    \textbf{Answer:} An NMOS source follower can source current into the load but \textbf{cannot sink current}. With no external load and no bleeder resistor, the output source node has zero DC discharge path. Stray charge injected by subthreshold leakage or gate capacitive feedthrough ($C_{gs}$) charges $C_{OUT}$. Although the op-amp pulls $V_G$ to its negative rail to turn the channel completely OFF ($I_D \to 0$), it cannot extract trapped charge from the output. Consequently, $V_{OUT}$ floats uncontrollably above $V_{REF}$, creeping toward $V_{IN}$. The bleeder guarantees a continuous discharge path ($1.0-1.2\,\text{mA}$).
+    \item \textbf{What happens to $V_{OUT}$ if the bleeder is removed and the load is disconnected?}
 
-    \item \textbf{How would you change the circuit to obtain a regulated output of 2.4 V with the same $V_{REF}$? Give the resistor ratio and note what happens to the dropout.}
-    
+    \textbf{Answer:} An NMOS source follower can only source current, not sink it. With no load and no bleeder, the output node has no discharge path. Leakage or gate-capacitor feedthrough slowly charges $C_{OUT}$, and even though the op-amp pulls $V_G$ to its negative rail to try to turn the MOSFET off, it cannot pull trapped charge out of the source node. So $V_{OUT}$ floats upward above $V_{REF}$, possibly drifting toward $V_{IN}$. The bleeder provides a continuous $\approx 1\,\text{mA}$ discharge path to prevent this.
+
+    \item \textbf{How would you change the circuit to get $V_{OUT} = 2.4\,\text{V}$ with the same $V_{REF} = 1.2\,\text{V}$? What happens to the dropout voltage?}
+
     \textbf{Answer:}
     \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-        \item \textit{Circuit Modification:} Place a resistive voltage divider ($R_1$ and $R_2$) from $V_{OUT}$ to ground, and connect the divider node to Pin~2 (inverting input). Then $V_- = V_{OUT} \frac{R_2}{R_1 + R_2} = V_{REF} = 1.200\,\text{V}$. For $V_{OUT} = 2.400\,\text{V}$, the required ratio is:
+        \item \textit{Circuit change:} Add a resistor divider $R_1$--$R_2$ from $V_{OUT}$ to ground, with the midpoint fed to Pin~2. The feedback becomes $V_- = V_{OUT} \frac{R_2}{R_1+R_2} = V_{REF}$. For $V_{OUT} = 2.4\,\text{V}$:
         \begin{equation}
-            \frac{R_1 + R_2}{R_2} = \frac{2.400\,\text{V}}{1.200\,\text{V}} = 2 \implies R_1 = R_2 \quad (\text{a } 1:1 \text{ ratio, e.g., } R_1 = R_2 = 10.0\,\text{k}\Omega)
+            \frac{R_2}{R_1 + R_2} = \frac{1.2}{2.4} = 0.5 \implies R_1 = R_2 \quad (\text{e.g., both } 10\,\text{k}\Omega)
         \end{equation}
-        \item \textit{Effect on Dropout:} Because the output is now $2.400\,\text{V}$, the minimum input supply must increase by $1.2\,\text{V}$:
+        \item \textit{Effect on dropout:} The minimum $V_{IN}$ for regulation increases by $1.2\,\text{V}$:
         \begin{equation}
-            V_{IN,\text{dropout}} \approx 2.400\,\text{V} + 0.062\,\text{V} = \mathbf{2.462\,\text{V}}
+            V_{IN,\text{dropout}} \approx 2.4\,\text{V} + 0.062\,\text{V} = \mathbf{2.462\,\text{V}}
         \end{equation}
-        The regulator can no longer regulate below $2.462\,\text{V}$, and operating headroom at $V_{IN} = 3.0\,\text{V}$ is reduced to $0.6\,\text{V}$.
+        So at $V_{IN} = 3\,\text{V}$, there is only $\approx 0.54\,\text{V}$ of headroom.
     \end{itemize}
 
-    \item \textbf{What is the power dissipated in the MOSFET at $V_{IN} = 5$ V and 100 mA, and how does the efficiency compare with $V_{IN} = 3$ V?}
-    
-    \textbf{Answer:} At $V_{IN} = 5.0\,\text{V}$ and $I_{LOAD} \approx 117.7\,\text{mA}$ ($I_{IN} = 122.0\,\text{mA}$):
+    \item \textbf{What is the MOSFET power dissipation at $V_{IN} = 5\,\text{V}$ and $100\,\text{mA}$? How does efficiency compare with $V_{IN} = 3\,\text{V}$?}
+
+    \textbf{Answer:} At $V_{IN} = 5.0\,\text{V}$, $I_{LOAD} = 117.7\,\text{mA}$, $I_{IN} = 122.0\,\text{mA}$:
     \begin{align}
-        P_{diss} &= P_{IN} - P_{OUT} = (5.0\,\text{V} \times 0.1220\,\text{A}) - (1.2001\,\text{V} \times 0.11766\,\text{A}) \nonumber \\
-        &= 610.0\,\text{mW} - 141.2\,\text{mW} = \mathbf{468.80\,\text{mW}}
+        P_{diss} &= (5.0\,\text{V} \times 0.1220\,\text{A}) - (1.2001\,\text{V} \times 0.11766\,\text{A}) = 610.0 - 141.2 = \mathbf{468.8\,\text{mW}}
     \end{align}
-    At $V_{IN} = 3.0\,\text{V}$, $P_{diss} = 366.0\,\text{mW} - 141.2\,\text{mW} = \mathbf{224.80\,\text{mW}}$ with pass efficiency $\eta_{pass} = \mathbf{38.58\%}$. At $5.0\,\text{V}$, efficiency plummets to $\mathbf{23.15\%}$ and heat dissipation more than doubles ($+108.5\%$) because the series voltage drop across the MOSFET increases from $1.8\,\text{V}$ to $3.8\,\text{V}$ while carrying the same load current.
+    At $3\,\text{V}$, $P_{diss} = \mathbf{224.8\,\text{mW}}$ with $\eta_{pass} = \mathbf{38.58\%}$. At $5\,\text{V}$, efficiency drops to $\mathbf{23.15\%}$ and dissipation more than doubles, because the voltage drop across the MOSFET goes from $1.8\,\text{V}$ to $3.8\,\text{V}$ while carrying the same current.
 
-    \item \textbf{Why is the efficiency of this regulator limited to $V_{OUT} / V_{IN}$, however well the op-amp is designed? What would the efficiency be if $V_{IN}$ were 12 V?}
-    
-    \textbf{Answer:} By Kirchhoff's Current Law, all load current must flow directly through the series pass transistor from the input supply ($I_{IN} = I_{LOAD} + I_Q \approx I_{LOAD}$). Therefore:
-    \begin{equation}
-        \eta = \frac{P_{OUT}}{P_{IN}} = \frac{V_{OUT} \cdot I_{LOAD}}{V_{IN} \cdot I_{IN}} \approx \frac{V_{OUT}}{V_{IN}}
-    \end{equation}
-    The voltage difference $(V_{IN} - V_{OUT})$ drops across the series MOSFET, and the power $(V_{IN} - V_{OUT}) I_{LOAD}$ is converted directly into heat. Even with a perfect op-amp that draws zero power and has infinite gain, this series power loss cannot be avoided. If $V_{IN} = 12.0\,\text{V}$, maximum efficiency would be only:
-    \begin{equation}
-        \eta_{\max} = \frac{1.2\,\text{V}}{12.0\,\text{V}} \times 100\% = \mathbf{10.0\%}
-    \end{equation}
-    where $90\%$ of input power ($1.08\,\text{W}$ at $100\,\text{mA}$) is converted directly into waste heat.
+    \item \textbf{Why is efficiency limited to $V_{OUT}/V_{IN}$ no matter how good the op-amp is? What would efficiency be at $V_{IN} = 12\,\text{V}$?}
 
-    \item \textbf{By how much does the control supply (741 and reference) lower the total efficiency? Which part of it would remain in a switching regulator?}
-    
+    \textbf{Answer:} All load current must flow through the series pass transistor from the supply, so $I_{IN} \approx I_{LOAD}$. This gives:
+    \begin{equation}
+        \eta \approx \frac{V_{OUT} \cdot I_{LOAD}}{V_{IN} \cdot I_{IN}} \approx \frac{V_{OUT}}{V_{IN}}
+    \end{equation}
+    The voltage $(V_{IN} - V_{OUT})$ drops across the MOSFET and is lost as heat. There is no way around this in a linear regulator, regardless of op-amp quality. At $V_{IN} = 12\,\text{V}$:
+    \begin{equation}
+        \eta_{\max} = \frac{1.2}{12.0} \times 100\% = \mathbf{10.0\%}
+    \end{equation}
+    So $90\%$ of input power ($1.08\,\text{W}$ at $100\,\text{mA}$) becomes waste heat.
+
+    \item \textbf{By how much does the auxiliary 741 and reference supply reduce total efficiency? What part of it would still exist in a switching regulator?}
+
     \textbf{Answer:}
     \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-        \item \textit{Impact of Control Supply:} Auxiliary power ($P_{AUX} = 12\,\text{V} \cdot I_{AUX} \approx 30.5-31.9\,\text{mW}$) lowers total efficiency by:
+        \item The auxiliary supply ($P_{AUX} \approx 30\text{--}32\,\text{mW}$) reduces efficiency by:
         \begin{equation}
-            \Delta \eta = 38.58\% - 35.61\% = \mathbf{2.97\%} \text{ at } 3.0\,\text{V}, \quad 23.15\% - 22.00\% = \mathbf{1.15\%} \text{ at } 5.0\,\text{V}
+            \Delta\eta = 38.58\% - 35.61\% = \mathbf{2.97\%} \text{ at } 3\,\text{V}; \quad 23.15\% - 22.00\% = \mathbf{1.15\%} \text{ at } 5\,\text{V}
         \end{equation}
-        \item \textit{What Remains in a Switching Regulator:} The quiescent power consumed by control circuitry (PWM oscillator, error amplifier, bandgap reference, comparator) remains in a switching regulator ($P_Q = V_{cc} \cdot I_Q$). In addition, dynamic gate-drive switching power ($P_{gate} = Q_g V_{gate} f_{sw}$) is consumed to switch the MOSFET gate capacitance. However, the massive linear conduction drop $(V_{IN} - V_{OUT}) I_{LOAD}$ is eliminated.
+        \item In a switching regulator, the series conduction loss $(V_{IN}-V_{OUT})I_{LOAD}$ is eliminated, but quiescent control power ($V_{cc} \cdot I_Q$ for the PWM controller, error amp, and reference) remains. Gate drive switching power ($Q_g V_{gate} f_{sw}$) is also added due to toggling the MOSFET at high frequency.
     \end{itemize}
 
-    \item \textbf{In a switching regulator the series transistor is either fully on or fully off. Explain why this makes the loss small, and name two loss mechanisms that remain.}
-    
+    \item \textbf{In a switching regulator the transistor is either fully on or fully off. Why does this keep losses small? Name two losses that still remain.}
+
     \textbf{Answer:}
     \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-        \item \textit{Why Loss is Small:} Instantaneous power dissipation is $p(t) = v_{DS}(t) \cdot i_D(t)$. When the switch is fully ON, it operates in deep triode with $v_{DS} = i_D \cdot R_{DS(\text{on})} \approx 0\,\text{V}$, so conduction loss is minimal. When fully OFF, $i_D = 0\,\text{A}$, so power dissipation is zero despite the full input voltage across it ($p_{off} = V_{IN} \cdot 0 = 0$). Because either the voltage is near zero or the current is zero, the power loss during the steady ON and OFF states is very small.
-        \item \textit{Two Remaining Loss Mechanisms:}
-        \begin{enumerate}[label=(\alph*),leftmargin=1.2em, itemsep=0.1em]
-            \item \textbf{Switching Transition Loss ($P_{sw}$):} During the finite rise and fall transition times ($t_r$ and $t_f$), $v_{DS}$ and $i_D$ are simultaneously non-zero, dissipating $P_{sw} \approx \frac{1}{2} V_{IN} I_{LOAD} (t_r + t_f) f_{sw}$.
-            \item \textbf{Conduction Losses ($P_{cond}$):} Ohmic dissipation across on-resistance ($I_{RMS}^2 R_{DS(\text{on})}$) and the inductor winding DC resistance ($I_{LOAD}^2 R_{DCR}$).
+        \item When fully ON: $v_{DS} \approx I_D \cdot R_{DS(\text{on})} \approx 0$, so $p = v_{DS} \cdot i_D \approx 0$. When fully OFF: $i_D = 0$, so $p = 0$ even though $v_{DS} = V_{IN}$. In both steady states, one of the two terms in $p = v \cdot i$ is (nearly) zero.
+        \item Two remaining losses:
+        \begin{enumerate}[label=(\alph*),leftmargin=1.2em]
+            \item \textbf{Switching transition loss:} During the finite rise/fall time, both $v_{DS}$ and $i_D$ are non-zero simultaneously. $P_{sw} \approx \frac{1}{2} V_{IN} I_{LOAD} (t_r + t_f) f_{sw}$.
+            \item \textbf{Conduction loss:} Ohmic drop in the MOSFET ($I_{RMS}^2 R_{DS(\text{on})}$) and inductor winding resistance ($I_{LOAD}^2 R_{DCR}$).
         \end{enumerate}
     \end{itemize}
 
-    \item \textbf{A buck converter delivers 120 mW at 88\% efficiency. How much heat does it dissipate, and how does this compare with your measured $P_{diss}$ at $V_{IN} = 5$ V?}
-    
+    \item \textbf{A buck converter delivers 120 mW at 88\% efficiency. How much heat does it dissipate? Compare with your linear regulator at $V_{IN} = 5\,\text{V}$.}
+
     \textbf{Answer:}
     \begin{itemize}[leftmargin=1.2em, itemsep=0.1em]
-        \item \textit{Buck Converter Dissipation:}
+        \item Buck converter loss:
         \begin{equation}
-            P_{loss,\text{buck}} = \frac{P_{OUT}}{\eta} - P_{OUT} = \frac{120.0\,\text{mW}}{0.88} - 120.0\,\text{mW} = 136.36\,\text{mW} - 120.0\,\text{mW} = \mathbf{16.36\,\text{mW}}
+            P_{loss,\text{buck}} = \frac{120.0\,\text{mW}}{0.88} - 120.0\,\text{mW} = 136.36 - 120.0 = \mathbf{16.36\,\text{mW}}
         \end{equation}
-        \item \textit{Comparison with Linear Regulator:} Our measured linear regulator dissipated $P_{diss} = \mathbf{468.80\,\text{mW}}$ at $V_{IN} = 5.0\,\text{V}$. Comparing directly:
+        \item Our linear regulator dissipated $\mathbf{468.8\,\text{mW}}$ at $5\,\text{V}$, which is:
         \begin{equation}
-            \text{Ratio} = \frac{P_{diss,\text{measured}}}{P_{loss,\text{buck}}} = \frac{468.80\,\text{mW}}{16.36\,\text{mW}} = \mathbf{28.66\times}
+            \frac{468.8}{16.36} \approx \mathbf{28.7\times}
         \end{equation}
-        (Even if the linear regulator is scaled to the same $120.0\,\text{mW}$ output, it dissipates $398.36\,\text{mW}$, which is $\mathbf{24.35\times}$ higher). The linear regulator dissipates nearly \textbf{29 times more heat} than the switching buck converter, clearly explaining why switching regulators are mandatory in high-power and battery-operated electronics.
+        more heat than the buck converter (at the same load). Even scaled to $120\,\text{mW}$ output, our linear regulator would dissipate $398\,\text{mW}$ --- about $\mathbf{24\times}$ more. This clearly shows why switching converters are preferred in power-sensitive applications.
     \end{itemize}
 \end{enumerate}
 
-\section{Comparison: Linear Regulator vs. Switching Buck Regulator}
-Table~\ref{tab:lin_vs_buck} summarizes the architectural and performance trade-offs between the linear regulator characterized in this experiment and the switching buck converter.
-
+\section{Linear Regulator vs.\ Switching Buck Converter}
 \begin{table}[htbp]
 \centering
-\caption{Comprehensive Architectural Trade-offs: Linear vs. Switching Buck Regulators.}
+\caption{Comparison of linear and switching buck regulators.}
 \label{tab:lin_vs_buck}
 \small
 \begin{tabularx}{\textwidth}{l X X}
 \toprule
-\textbf{Property} & \textbf{Linear Regulator (This Experiment)} & \textbf{Switching Regulator (Buck Converter)} \\
+\textbf{Property} & \textbf{Linear Regulator (this experiment)} & \textbf{Switching Buck Converter} \\
 \midrule
-Conversion Efficiency ($\eta$) & Low ($\approx V_{OUT}/V_{IN} = 23-38\%$), degrades rapidly as $V_{IN}$ increases & High ($80-95\%$), nearly independent of $V_{IN}$ \\
 \addlinespace
-Heat Dissipation & Severe: $(V_{IN} - V_{OUT}) I_{LOAD}$; requires bulky heatsinks at high currents & Very small: only switching transitions and conduction $I^2 R_{DS(\text{on})}$ losses \\
+Efficiency & Limited to $V_{OUT}/V_{IN}$; drops as $V_{IN}$ rises (max $40\%$ here) & High ($80\text{--}95\%$), nearly independent of $V_{IN}$ \\
 \addlinespace
-Output Voltage Capabilities & Step-down only ($V_{OUT} < V_{IN}$); requires positive dropout headroom & Step-down (buck), step-up (boost), or inverting from same core topologies \\
+Heat dissipation & Severe: $(V_{IN}-V_{OUT})I_{LOAD}$; needs heatsink at high currents & Very small: only switching and $I^2 R_{DS(\text{on})}$ conduction losses \\
 \addlinespace
-Output Ripple \& Noise & Exceptionally low (microvolts); zero switching EMI; ideal for sensitive RF/analog & High-frequency switching ripple ($10-50\,\text{mV}$); requires EMI filtering \& shielding \\
+Output capability & Step-down only; needs positive dropout headroom & Buck (step-down), boost (step-up), or inverting \\
 \addlinespace
-Transient Response & Extremely fast; wide loop bandwidth limited only by op-amp GBW & Slower; bounded by $L-C$ filter resonance and PWM loop compensation \\
+Output noise & Very low (microvolts); no switching EMI; ideal for RF and analog & High-frequency ripple ($10\text{--}50\,\text{mV}$); needs EMI filtering \\
 \addlinespace
-Component Count \& Complexity & Very low; few passive components; no magnetic inductors required & Higher; requires inductor, diode/synchronous FET, PWM controller, capacitors \\
+Transient response & Very fast; loop bandwidth limited only by op-amp GBW & Slower; limited by LC filter resonance and compensation \\
 \addlinespace
-PCB Footprint \& Weight & Small silicon die, but heavy heatsink needed at high power & Inductor requires magnetic volume, but eliminates large thermal heatsinks \\
+Component count & Very few: no inductors & More: requires inductor, diode (or sync FET), PWM controller \\
 \addlinespace
-Battery Runtime & Poor when $V_{IN} \gg V_{OUT}$; energy drained as wasted thermal heat & Substantially longer; maximizes energy extraction from battery cell chemistry \\
+Battery life & Poor when $V_{IN} \gg V_{OUT}$ & Much better; energy not wasted as heat \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \clearpage
-\section{Safety Limits and Laboratory Precautions Observed}
-Per Section~4 of the lab manual, the following safety procedures were strictly observed:
+\section{Safety Precautions}
+Per Section~4 of the lab manual, we followed these safety steps throughout:
 \begin{enumerate}[leftmargin=1.5em, itemsep=0.2em]
-    \item \textbf{MOSFET Gate-Source Voltage Rating ($V_{GS(\max)}$):} The Si9926BDY datasheet limits $V_{GS} \le \pm 12\,\text{V}$. Because the 741 was powered from $\pm 12\,\text{V}$ supplies, $V_{GS}$ was continuously verified during operation to ensure it remained safely within limits ($V_{GS} \le 1.05\,\text{V}$ in normal regulation).
-    \item \textbf{Input Supply Current Limiting:} The bench power supply current limit for $V_{IN}$ was preset to $200\,\text{mA}$, preventing catastrophic overcurrent in case of breadboard wiring faults.
-    \item \textbf{Thermal Dissipation Management:} Peak power dissipation reached $468.8\,\text{mW}$ at $5.0\,\text{V}$ under full load ($118\,\text{mA}$). While the SO-8 package handles modest dissipation, the package warmed up noticeably. To avoid threshold drift, sweeps were taken expeditiously and the device was allowed to cool between tests.
-    \item \textbf{Mandatory Power-Up and Power-Down Sequence:} To prevent unpredictable latch-up or gate-oxide stress, the auxiliary supplies ($\pm 12\,\text{V}$) were always switched ON first, 741 pin connections were verified, and only then was $V_{IN}$ applied. The reverse sequence was executed during power-down.
-    \item \textbf{Reference Calibration Before Connection:} The $10\,\text{k}\Omega$ potentiometer was tuned with the 4.5-digit DMM to exactly $V_{REF} = 1.2000\,\text{V}$ \textit{before} being tied to Pin~3 of the op-amp.
-    \item \textbf{Multimeter Safety during Current Measurements:} When measuring $I_{IN}$ and auxiliary currents, the DMM was inserted in series on its mA range only, and returned to voltage mode before changing supplies or swapping resistors.
-    \item \textbf{Oscilloscope Ground Isolation:} The oscilloscope probe ground clip was connected strictly to circuit common ground to avoid accidental shorts across $V_{OUT}$.
+    \item \textbf{MOSFET $V_{GS}$ limit:} Si9926BDY is rated $V_{GS} \le \pm 12\,\text{V}$. Since the 741 was powered from $\pm 12\,\text{V}$, we verified $V_{GS}$ stayed within limits during all tests (normally $V_{GS} \le 1.05\,\text{V}$).
+    \item \textbf{Input supply current limit:} The $V_{IN}$ supply was current-limited to $200\,\text{mA}$ to prevent damage from wiring faults.
+    \item \textbf{Thermal management:} Peak dissipation reached $468.8\,\text{mW}$ at $5\,\text{V}$ full load. The device warmed up noticeably; we took readings quickly and allowed cooling between sweeps.
+    \item \textbf{Power-up/down sequence:} Auxiliary $\pm 12\,\text{V}$ supplies were always turned ON first and turned OFF last, to avoid transient gate stress or latch-up.
+    \item \textbf{Reference calibration:} The $10\,\text{k}\Omega$ pot was trimmed to exactly $V_{REF} = 1.2000\,\text{V}$ (measured on the DMM) \textit{before} connecting it to Pin~3.
+    \item \textbf{Current measurement:} The DMM was switched to its mA range only when measuring series current, and returned to voltage mode before changing supplies or swapping resistors.
+    \item \textbf{Oscilloscope ground:} The probe ground clip was connected to circuit ground only, to avoid accidental shorts.
 \end{enumerate}
 
 \section{Conclusion}
-In this laboratory experiment, a closed-loop linear series voltage regulator was successfully built and experimentally evaluated using an LM741 operational amplifier and an Si9926BDY N-channel power MOSFET. The major findings are:
+We built and tested a closed-loop linear voltage regulator using an LM741 op-amp and an Si9926BDY N-channel MOSFET. The main results are:
 \begin{enumerate}[leftmargin=1.5em, itemsep=0.2em]
-    \item \textbf{Excellent Line and Load Regulation:} Negative feedback held $V_{OUT}$ within $1.200\,\text{V} \pm 1.3\,\text{mV}$ across all test conditions. Measured line regulation was $\mathbf{0.10\,\text{mV/V}}$ ($0.0083\%\text{/V}$), with gate voltage actively adjusting ($\Delta V_G = -20\,\text{mV}$) to neutralize channel-length modulation. Load regulation demonstrated ultra-low closed-loop output resistances of $R_{OUT} = \mathbf{9.35\,\text{m}\Omega}$ at $3.0\,\text{V}$ and $\mathbf{10.28\,\text{m}\Omega}$ at $5.0\,\text{V}$, validating theoretical loop-gain suppression.
-    \item \textbf{Low Dropout Voltage and $R_{DS(\text{on})}$ Extraction:} At full load ($118.7\,\text{mA}$), regulation was maintained down to $V_{IN} = 1.3\,\text{V}$, with a $1\%$ dropout threshold of $V_{IN,\text{dropout}} = \mathbf{1.262\,\text{V}}$ (a dropout headroom of only $\mathbf{62.1\,\text{mV}}$). The linear triode slope yielded an extracted on-resistance of $R_{DS(\text{on})} = \mathbf{0.2754\,\Omega}$, in complete agreement with manufacturer datasheet specifications.
-    \item \textbf{Linear Efficiency Limitations:} Pass conversion efficiency decreased from $38.58\%$ at $3.0\,\text{V}$ to $23.15\%$ at $5.0\,\text{V}$, strictly obeying the theoretical limit $V_{OUT}/V_{IN} = 24\%$, with heat dissipation rising to $468.8\,\text{mW}$. Auxiliary control power lowered total efficiency further to $35.61\%$ at $3.0\,\text{V}$ and $22.00\%$ at $5.0\,\text{V}$.
-    \item \textbf{Feedback Stability Verified:} Oscilloscope AC analysis confirmed that the closed-loop system is inherently stable across $C_{OUT} = 10\,\mu\text{F}, 47\,\mu\text{F}$, and $94\,\mu\text{F}$. High-frequency residual noise was attributed to breadboard inductive pickup rather than loop instability.
-    \item \textbf{Motivation for Switching Converters:} A switching buck converter delivering the same output power dissipates nearly \textbf{29 times less heat} ($16.4\,\text{mW}$ vs. $468.8\,\text{mW}$) and achieves $88\%$ efficiency, highlighting the indispensable role of switching topologies in modern energy-efficient electronics.
+    \item \textbf{Good line and load regulation:} Feedback kept $V_{OUT}$ within $\pm 1.3\,\text{mV}$ of $1.200\,\text{V}$ across all tests. Line regulation was $0.10\,\text{mV/V}$ (gate voltage adjusted by $-20\,\text{mV}$ to compensate channel-length modulation). Closed-loop output resistance was $9.35\,\text{m}\Omega$ at $3\,\text{V}$ and $10.28\,\text{m}\Omega$ at $5\,\text{V}$ --- much higher than the theoretical $5.88\,\mu\Omega$ due to breadboard resistance.
+    \item \textbf{Low dropout:} Regulation was maintained down to $V_{IN} = 1.3\,\text{V}$, with the $1\%$ dropout threshold at $1.262\,\text{V}$ (headroom of $62.1\,\text{mV}$). The extracted $R_{DS(\text{on})} = 0.275\,\Omega$ matches the Si9926BDY datasheet.
+    \item \textbf{Efficiency limits:} Pass efficiency dropped from $38.58\%$ at $3\,\text{V}$ to $23.15\%$ at $5\,\text{V}$, following the $V_{OUT}/V_{IN}$ limit. MOSFET heat dissipation rose to $468.8\,\text{mW}$ at $5\,\text{V}$. Including auxiliary supply losses, total efficiency was $35.61\%$ at $3\,\text{V}$ and $22.00\%$ at $5\,\text{V}$.
+    \item \textbf{Stable feedback:} The circuit was stable for all three capacitor values ($10\,\mu\text{F}$, $47\,\mu\text{F}$, $94\,\mu\text{F}$). The residual oscilloscope noise was breadboard pickup, not loop instability.
+    \item \textbf{Linear vs.\ switching:} A switching buck converter delivering the same output dissipates only $16.4\,\text{mW}$ at $88\%$ efficiency --- about $\mathbf{29\times}$ less heat than our linear regulator at $5\,\text{V}$.
 \end{enumerate}
 
 \end{document}

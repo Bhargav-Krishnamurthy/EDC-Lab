@@ -1,0 +1,37 @@
+Version 4
+SymbolType CELL
+LINE Normal -64 -64 32 -64
+LINE Normal 32 -64 32 64
+LINE Normal 32 64 -64 64
+LINE Normal -64 64 -64 -64
+LINE Normal -64 -32 -16 -32
+LINE Normal -64 32 -16 32
+LINE Normal -16 -32 -16 32
+LINE Normal -16 -32 32 0
+LINE Normal 32 0 -16 32
+LINE Normal 32 0 96 0
+LINE Normal 0 -64 0 -112
+LINE Normal 0 64 0 112
+LINE Normal -16 -32 -24 -32
+LINE Normal -16 32 -24 32
+TEXT 0 140 Left 2 !
+SYMATTR Prefix X
+SYMATTR Value LM311
+PIN -128 32 NONE 0
+PINATTR PinName IN+
+PINATTR SpiceOrder 1
+PIN -128 -32 NONE 0
+PINATTR PinName IN-
+PINATTR SpiceOrder 2
+PIN 0 -144 NONE 0
+PINATTR PinName V+
+PINATTR SpiceOrder 3
+PIN 0 144 NONE 0
+PINATTR PinName V-
+PINATTR SpiceOrder 4
+PIN 128 0 NONE 0
+PINATTR PinName OUTC
+PINATTR SpiceOrder 5
+PIN 128 64 NONE 0
+PINATTR PinName OUTE
+PINATTR SpiceOrder 6
