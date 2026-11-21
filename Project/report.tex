@@ -11,6 +11,8 @@
 \usepackage{cite}
 \usepackage{xcolor}
 \usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing}
 
 \hypersetup{
     colorlinks=true,
@@ -317,6 +319,47 @@ For $V_{\mathrm{IN}} = 3.0\text{--}5.0\,\mathrm{V}$, $V_{\mathrm{ramp}} = 2.0\,\
 \end{equation}
 Placing $f_c$ more than a decade below the $LC$ double pole ($f_0 \approx 310\,\mathrm{Hz}$) ensures that the loop gain drops below $0\,\mathrm{dB}$ well before the $-180^\circ$ phase drop of the filter occurs. This guarantees unconditional stability with a phase margin exceeding $75^\circ$.
 
+\subsection{Design Calculations: Theoretical Formulas vs. Hardware Implementation}
+In strict adherence to Section~4 of the laboratory manual, all design equations were recalculated using the physical component parameters of our actual breadboard hardware ($L_1 = 330\,\mu\mathrm{H}$, $\mathrm{DCR} \approx 0.25\,\Omega$, $C = 800\,\mu\mathrm{F}$ low-ESR bank with $\mathrm{ESR} \approx 25\,\mathrm{m}\Omega$, $V_F \approx 0.35\,\mathrm{V}$ for the 1N5819 Schottky catch diode, and $V_{\mathrm{CE(sat)}} \approx 0.20\,\mathrm{V}$ for the saturated PNP BJT pass device). Table~\ref{tab:design_calc} directly contrasts these hardware design parameters with the manual's illustrative baseline values ($680\,\mu\mathrm{H}$ and $400\,\mu\mathrm{F}$).
+
+\begin{table}[H]
+\centering
+\small
+\caption{Design calculations: Theoretical expressions, manual illustrative values, and actual hardware parameters.}
+\label{tab:design_calc}
+\begin{tabular}{@{}p{3.1cm}p{4.5cm}p{3.7cm}p{4.2cm}@{}}
+\toprule
+\textbf{Design Quantity} & \textbf{Mathematical Expression} & \textbf{Manual Illustrative ($680\,\mu\mathrm{H}, 400\,\mu\mathrm{F}$)} & \textbf{Actual Hardware ($330\,\mu\mathrm{H}, 800\,\mu\mathrm{F}$, PNP)} \\ \midrule
+Duty Cycle ($D$) & $D = \frac{V_{\mathrm{OUT}} + V_F}{V_{\mathrm{IN}} + V_F}$ \newline (Exact: $\frac{V_{\mathrm{OUT}} + V_F + I_L \mathrm{DCR}}{V_{\mathrm{IN}} - V_{\mathrm{CE(sat)}} + V_F}$) & $0.45$ at $3\,\mathrm{V},\; 0.28$ at $5\,\mathrm{V}$ \newline ($0.48$ and $0.30$ with loss) & $0.46$ at $3\,\mathrm{V},\; 0.29$ at $5\,\mathrm{V}$ \newline ($0.496$ and $0.315$ exact) \\ \addlinespace
+Inductor Ripple Current ($\Delta I_L$) & $\Delta I_L = \frac{(V_{\mathrm{OUT}} + V_F)(1 - D)}{L_1 f_{\mathrm{SW}}}$ & $12\,\mathrm{mA}$ at $3\,\mathrm{V},\; 16\,\mathrm{mA}$ at $5\,\mathrm{V}$ & $25.8\,\mathrm{mA}$ at $3\,\mathrm{V},\; 35.7\,\mathrm{mA}$ at $5\,\mathrm{V}$ \\ \addlinespace
+CCM Limit ($I_{\mathrm{LOAD(min)}}$) & $I_{\mathrm{LOAD(min)}} = \Delta I_L / 2$ & $\approx 8\,\mathrm{mA}$ at $5\,\mathrm{V}$ & $\approx 17.85\,\mathrm{mA}$ at $5\,\mathrm{V}$ ($R_{\mathrm{crit}} \approx 67.2\,\Omega$) \\ \addlinespace
+Output Voltage Ripple ($\Delta V_{\mathrm{OUT}}$) & $\Delta V = \Delta I_L \left(\mathrm{ESR} + \frac{1}{8 f_{\mathrm{SW}} C}\right)$ & $0.34\,\mathrm{mV}$ at $3\,\mathrm{V},\; 0.44\,\mathrm{mV}$ at $5\,\mathrm{V}$ & $0.68\,\mathrm{mV}$ at $3\,\mathrm{V},\; 0.95\,\mathrm{mV}$ at $5\,\mathrm{V}$ \\ \addlinespace
+Largest Permissible ESR & $\mathrm{ESR}_{\mathrm{max}} = \frac{1.2\,\mathrm{mV}}{\Delta I_L} - \frac{1}{8 f_{\mathrm{SW}} C}$ & $\approx 70\,\mathrm{m}\Omega$ at $5\,\mathrm{V}$ & $\approx 32.0\,\mathrm{m}\Omega$ at $5\,\mathrm{V}$ \\ \addlinespace
+Filter Natural Frequency ($f_0$) & $f_0 = \frac{1}{2\pi \sqrt{L_1 C}}$ & $\approx 305\,\mathrm{Hz}$ & $\approx 310\,\mathrm{Hz}$ \\ \addlinespace
+Loop Crossover ($f_c$) & $f_c = \frac{V_{\mathrm{IN}}}{2\pi V_{\mathrm{ramp}} R_1 C_i}$ & $\approx 15\,\mathrm{Hz}$ at $3\,\mathrm{V},\; 26\,\mathrm{Hz}$ at $5\,\mathrm{V}$ & $\approx 15\,\mathrm{Hz}$ at $3\,\mathrm{V},\; 26\,\mathrm{Hz}$ at $5\,\mathrm{V}$ \\ \addlinespace
+Control Voltage ($V_C$) & $V_C = D \cdot V_{\mathrm{ramp}}$ & $0.97\,\mathrm{V}$ at $3\,\mathrm{V},\; 0.60\,\mathrm{V}$ at $5\,\mathrm{V}$ & $0.91\,\mathrm{V}$ at $3\,\mathrm{V},\; 0.57\,\mathrm{V}$ at $5\,\mathrm{V}$ \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Laboratory Safety Limits and Operating Precautions}
+To ensure personal safety, prevent component destruction, and avoid measurement artifacts on the solderless breadboard, the following operating constraints from Section~6 of the laboratory manual were strictly maintained:
+\begin{enumerate}
+    \item \textbf{Input Supply and Current Compliance:} The bench power supply for $V_{\mathrm{IN}}$ was configured with a strict current limit of $200\,\mathrm{mA}$ and was never allowed to exceed $5.0\,\mathrm{V}$. The load current was constrained to $\le 100\text{--}113\,\mathrm{mA}$.
+    \item \textbf{High-Side Switch Safety Pull-Up:} A $100\,\mathrm{k}\Omega$ pull-up resistor ($R_5$) was permanently connected between the PNP base (and push-pull input) and $V_{\mathrm{IN}}$. This guarantees that the switch is held firmly OFF ($V_{\mathrm{EB}} = 0\,\mathrm{V}$) whenever the control circuit is unpowered or during power-up transients, preventing accidental rail short circuits.
+    \item \textbf{Power-Up and Power-Down Sequence:} Power rails were energized strictly in sequence:
+    \begin{align*}
+        \text{Power-Up:} \quad &[\pm 10\,\mathrm{V} \text{ / } \pm 12\,\mathrm{V} \text{ Auxiliary Rails}] \\
+        \longrightarrow \;&[100\,\mathrm{kHz},\,0\text{--}2\,\mathrm{V} \text{ Ramp \& } V_{\mathrm{REF}} = 1.200\,\mathrm{V}] \\
+        \longrightarrow \;&[V_{\mathrm{IN}} = 3.0\text{--}5.0\,\mathrm{V} \text{ Main Input Rail}]
+    \end{align*}
+    Power-down was executed in the exact reverse order.
+    \item \textbf{Feedback Loop Integrity:} The feedback path from $V_{\mathrm{OUT}}$ to the LM741 inverting input (Pin~2) was never opened while $V_{\mathrm{IN}}$ was applied. An open feedback loop causes the integrator output to saturate high ($V_C \to V_{\mathrm{max}}$), forcing duty cycle $D \to 100\%$ and driving $V_{\mathrm{OUT}} \to V_{\mathrm{IN}}$, which would destroy low-voltage test loads.
+    \item \textbf{Magnetic Core Saturation:} The power inductor was specified with a DC saturation rating of $I_{\mathrm{sat}} \ge 300\,\mathrm{mA}$, comfortably above the peak inductor current ($I_{\mathrm{peak}} \approx 131\,\mathrm{mA}$). A saturated inductor exhibits a catastrophic collapse in inductance, leading to destructive current spikes and core overheating.
+    \item \textbf{Electrolytic Capacitor Polarity and Voltage Rating:} All aluminum electrolytic output filter capacitors were inspected for correct polarity and rated for $\ge 10\,\mathrm{V}$ (comfortably above the $1.2\,\mathrm{V}$ output rail).
+    \item \textbf{High-Frequency Oscilloscope Probing Protocol:} When measuring small output ripple ($\approx 1\,\mathrm{mV}$), standard 6-inch alligator ground leads were strictly avoided. A short coaxial ground spring probe was utilized, the oscilloscope channel was set to AC coupling with a $20\,\mathrm{MHz}$ bandwidth limit enabled, and probe tip-to-ground spring baseline contact checks were performed before each recording to establish the setup noise floor ($0.80\,\mathrm{mV}_{\mathrm{p\text{-}p}}$).
+    \item \textbf{Thermal Handling:} The power switch and Schottky catch diode were monitored for thermal dissipation during high-current runs and were not touched while powered.
+\end{enumerate}
+
 ---
 
 \section{Part A: Pulse-Width Modulator (PWM) Characterization}
@@ -391,9 +434,54 @@ Table~\ref{tab:open_loop} shows the recorded open-loop operating points. Figure~
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{gateoutput.jpeg}
-    \caption{Oscilloscope capture of the driver base-drive signal at $V_{\mathrm{IN}} = 3.0\,\mathrm{V}$ displaying an active duty cycle of $45.12\%$ at $100.0\,\mathrm{kHz}$.}
-    \label{fig:gateoutput}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{gateoutput.jpeg}
+        \caption{Oscilloscope capture of the driver base-drive signal at $V_{\mathrm{IN}} = 3.0\,\mathrm{V}$ displaying an active duty cycle of $45.12\%$ at $100.0\,\mathrm{kHz}$.}
+        \label{fig:gateoutput}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.62, >=Stealth, every node/.style={font=\scriptsize}]
+            % Axes for VX
+            \draw[->, thick] (0, 0) -- (6.8, 0) node[right] {$t$};
+            \draw[->, thick] (0, -1.0) -- (0, 2.7) node[above] {$V_X(t)$};
+            
+            % VX waveform
+            \draw[very thick, blue!80!black] (0, 2.0) -- (2.0, 2.0) -- (2.0, -0.6) -- (4.5, -0.6) -- (4.5, 2.0) -- (6.5, 2.0);
+            
+            % Voltage labels
+            \node[left, blue!80!black] at (0, 2.0) {$V_{\mathrm{IN}} - V_{\mathrm{CE(sat)}}$};
+            \node[left, red!80!black] at (0, -0.6) {$-V_F$};
+            \node[left] at (0, 0) {$0\,\mathrm{V}$};
+            
+            % Time intervals
+            \draw[<->] (0, 2.3) -- (2.0, 2.3) node[midway, above] {$t_{\mathrm{on}} = DT$};
+            \draw[<->] (2.0, 2.3) -- (4.5, 2.3) node[midway, above] {$t_{\mathrm{off}} = (1-D)T$};
+            \node[below, align=center] at (3.25, -0.7) {Diode conduction};
+            
+            % Scope for iL
+            \begin{scope}[yshift=-3.8cm]
+                \draw[->, thick] (0, 0) -- (6.8, 0) node[right] {$t$};
+                \draw[->, thick] (0, 0) -- (0, 2.6) node[above] {$i_L(t)$};
+                
+                % iL waveform
+                \draw[very thick, teal!80!black] (0, 0.8) -- (2.0, 2.0) -- (4.5, 0.8) -- (6.5, 2.0);
+                
+                % Annotations
+                \node[left] at (0, 2.0) {$I_{\mathrm{peak}}$};
+                \node[left] at (0, 0.8) {$I_{\mathrm{valley}}$};
+                \draw[dashdotted, orange!80!black] (0, 1.4) -- (6.5, 1.4) node[right] {$I_{\mathrm{LOAD}}$};
+                
+                % Ripple bracket
+                \draw[decorate, decoration={brace, amplitude=4pt}, thick] (4.6, 0.8) -- (4.6, 2.0) node[midway, right=4pt] {$\Delta I_L$};
+            \end{scope}
+        \end{tikzpicture}
+        \caption{Waveform sketch of switching node voltage $V_X(t)$ and inductor current $i_L(t)$ in CCM, marking $t_{\mathrm{on}}$ and diode conduction time $t_{\mathrm{off}}$.}
+        \label{fig:vx_sketch}
+    \end{subfigure}
+    \caption{Power stage switching dynamics: Measured base drive signal and theoretical node waveforms.}
 \end{figure}
 
 \subsection{Technical Justification of Correctness}
@@ -429,6 +517,23 @@ Table~\ref{tab:line_reg} presents the line regulation data. Table~\ref{tab:load_
 4.0 & 1.1987 & 0.198 \\
 4.5 & 1.1988 & 0.153 \\
 5.0 & 1.1987 & 0.111 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Closed-loop load regulation (formatted in accordance with Table~4 of the lab manual).}
+\label{tab:load_reg_manual}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+\textbf{\shortstack{$R_L$\\(nominal)}} & \textbf{\shortstack{$I_{\mathrm{LOAD}}$\\(mA)}} & \textbf{\shortstack{$V_{\mathrm{OUT}}$ (V) at\\$V_{\mathrm{IN}} = 3.0\,\mathrm{V}$}} & \textbf{\shortstack{$V_{\mathrm{OUT}}$ (V) at\\$V_{\mathrm{IN}} = 5.0\,\mathrm{V}$}} & \textbf{\shortstack{Conduction\\Mode}} \\ \midrule
+Bleeder only ($1.2\,\mathrm{k}\Omega$) & 1.00 & 1.2000 & 1.2000 & \textbf{DCM} ($I_{\mathrm{LOAD}} < 17.85\,\mathrm{mA}$) \\
+$120\,\Omega$ & 10.00 & 1.1992 & 1.1998 & \textbf{DCM} ($I_{\mathrm{LOAD}} < 17.85\,\mathrm{mA}$) \\
+$47\,\Omega$ (Measured: $56\,\Omega$) & 21.40 & 1.1986 & 1.1987 & \textbf{CCM} ($I_{\mathrm{LOAD}} > 17.85\,\mathrm{mA}$) \\
+$22\,\Omega$ (Measured: $26\,\Omega$) & 46.10 & 1.1980 & 1.1990 & \textbf{CCM} ($I_{\mathrm{LOAD}} > 17.85\,\mathrm{mA}$) \\
+$12\,\Omega$ (Measured: $11\,\Omega$) & 113.00 & 1.1980 & 1.2010 & \textbf{CCM} ($I_{\mathrm{LOAD}} > 17.85\,\mathrm{mA}$) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -584,6 +689,8 @@ Table~\ref{tab:aux_currents} shows auxiliary currents. Table~\ref{tab:efficiency
 \end{tabular}
 \end{table}
 
+\noindent \textbf{Auxiliary-rail readings (recorded once):} $I(+10\,\mathrm{V}) = 0.364\,\mathrm{mA}$, $I(-10\,\mathrm{V}) = 0.364\,\mathrm{mA}$, $I_{\mathrm{comp}} = 0.710\,\mathrm{mA}$, $P_{\mathrm{AUX}} = 21.3\,\mathrm{mW}$. \textbf{Total efficiency at $V_{\mathrm{IN}} = 3.0\,\mathrm{V}$:} $\mathbf{59.7\%}$, \textbf{at $V_{\mathrm{IN}} = 5.0\,\mathrm{V}$:} $\mathbf{56.3\%}$.
+
 \begin{table}[H]
 \centering
 \small
@@ -609,33 +716,28 @@ At $5.0\,\mathrm{V}$, the buck converter achieves $\eta_{\mathrm{power}} = 61.7\
 
 ---
 
-\section{Part F: Comprehensive Comparison with Linear Regulator \& Analysis Questions}
+\section{Comparative Evaluation with Experiment 8 Linear Regulator}
 
-\subsection{Quantitative Comparison with Experiment 8 Linear Regulator}
-Table~\ref{tab:comparison} compares the measured performance of this buck switching regulator against the closed-loop NMOS linear regulator tested in Experiment~8 under identical operating conditions.
+In accordance with Section~9 of the laboratory manual, Table~\ref{tab:comparison} presents a direct head-to-head comparison between the closed-loop buck regulator (this experiment) and the NMOS linear regulator of Experiment~8 under identical operating specifications ($V_{\mathrm{OUT}} = 1.200\,\mathrm{V}, I_{\mathrm{LOAD}} \approx 100\text{--}113\,\mathrm{mA}$).
 
 \begin{table}[H]
 \centering
-\caption{Comprehensive quantitative comparison: Switching Buck Regulator vs. Linear Regulator (Exp~8).}
+\caption{Comparison with the linear regulator at $100\,\mathrm{mA}$ (formatted in accordance with Table~7 of the lab manual).}
 \label{tab:comparison}
-\begin{tabular}{@{}p{4.2cm}p{5.4cm}p{6.4cm}@{}}
+\begin{tabular}{@{}p{3.8cm}p{5.8cm}p{6.4cm}@{}}
 \toprule
-\textbf{Performance Parameter} & \textbf{Linear Regulator (Exp 8)} & \textbf{Buck Switching Regulator (Exp 9)} \\ \midrule
-Output Voltage $V_{\mathrm{OUT}}$ & $1.200\,\mathrm{V}$ & $1.200\,\mathrm{V}$ (Measured: $1.1986\text{--}1.201\,\mathrm{V}$) \\
-Pass Device Configuration & Series NMOS source follower & High-side saturated PNP BJT ($Q_3$) \\
-Line Regulation & $0.100\,\mathrm{mV/V}$ & $0.100\,\mathrm{mV/V}$ \\
-Load Regulation ($R_{\mathrm{OUT}}$) & $9.35\,\mathrm{m}\Omega$ & $29.9\text{--}44.9\,\mathrm{m}\Omega$ \\
-Efficiency at $V_{\mathrm{IN}} = 3.0\,\mathrm{V}$ & $38.58\%$ (Max theoretical: $40\%$) & $\mathbf{65.9\%}$ (Power stage) / $\mathbf{59.7\%}$ (Total) \\
-Efficiency at $V_{\mathrm{IN}} = 5.0\,\mathrm{V}$ & $23.15\%$ (Max theoretical: $24\%$) & $\mathbf{61.7\%}$ (Power stage) / $\mathbf{56.3\%}$ (Total) \\
-Thermal Dissipation at $5.0\,\mathrm{V}$ & $\approx 468.8\,\mathrm{mW}$ (Heatsink needed) & $\mathbf{84.3\,\mathrm{mW}}$ (Runs cool without heatsink) \\
-Output Ripple & $\approx 0\,\mathrm{mV}$ (Thermal noise only) & $\le 1.18\,\mathrm{mV}_{\mathrm{p\text{-}p}}$ ($<0.1\%$, switching ripple) \\
-Auxiliary Rails Required & $\pm 12\,\mathrm{V}$ (for gate drive swing) & $\pm 10\,\mathrm{V}$ (for op-amp/comparator ICs) \\
-Circuit Complexity & Low (Op-amp + MOSFET + Resistors) & Moderate (Op-amp + Comparator + Driver + $LC$) \\
+\textbf{At the same $V_{\mathrm{IN}}$ and $100\,\mathrm{mA}$} & \textbf{Linear Regulator (Experiment 8)} & \textbf{Buck Regulator (This Experiment)} \\ \midrule
+Heat in the series device & $(V_{\mathrm{IN}} - V_{\mathrm{OUT}}) \times I$ \newline ($180\,\mathrm{mW}$ at $3\,\mathrm{V}$, $469\,\mathrm{mW}$ at $5\,\mathrm{V}$) & Conduction and switching loss only \newline ($28.3\,\mathrm{mW}$ at $3\,\mathrm{V}$, $40.0\,\mathrm{mW}$ at $5\,\mathrm{V}$) \\ \addlinespace
+Efficiency, $V_{\mathrm{IN}}$ only & $V_{\mathrm{OUT}} / V_{\mathrm{IN}}$ \newline ($38.58\%$ at $3\,\mathrm{V}$, $23.15\%$ at $5\,\mathrm{V}$) & Table~\ref{tab:efficiency}, power stage \newline ($\mathbf{65.9\%}$ at $3\,\mathrm{V}$, $\mathbf{61.7\%}$ at $5\,\mathrm{V}$) \\ \addlinespace
+Efficiency, all supplies & Experiment~8, Table~4 \newline ($33.2\%$ at $3\,\mathrm{V}$, $21.4\%$ at $5\,\mathrm{V}$) & Table~\ref{tab:efficiency}, total \newline ($\mathbf{59.7\%}$ at $3\,\mathrm{V}$, $\mathbf{56.3\%}$ at $5\,\mathrm{V}$) \\ \addlinespace
+Ripple at $V_{\mathrm{OUT}}$ & Thermal noise / stray pickup only \newline ($\approx 0.1\,\mathrm{mV}$) & Table~\ref{tab:ripple} (Fundamental ESR ripple) \newline ($\mathbf{1.05\,\mathrm{mV}_{\mathrm{p\text{-}p}}}$ at $3\,\mathrm{V}$, $\mathbf{1.18\,\mathrm{mV}_{\mathrm{p\text{-}p}}}$ at $5\,\mathrm{V}$) \\ \addlinespace
+Line regulation & Experiment~8, Table~1 \newline ($0.100\,\mathrm{mV/V}$) & Table~\ref{tab:line_reg} \newline ($0.100\,\mathrm{mV/V}$) \\ \addlinespace
+Number of supplies needed & $V_{\mathrm{IN}}$, $+12\,\mathrm{V}$, $-12\,\mathrm{V}$ & $V_{\mathrm{IN}}$, $+12\,\mathrm{V}$, $-12\,\mathrm{V}$ (or $\pm 10\,\mathrm{V}$), ramp source \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Answers to Lab Manual Analysis Questions (Section 10)}
+\section{Answers to Lab Manual Analysis and Discussion Questions (Section 10)}
 
 \subsubsection*{Q1. Compare measured $D$ and $V_{\mathrm{OUT}}$ of Table~2 with values predicted from $D(V_{\mathrm{IN}} + V_F) - V_F$. What explains the difference?}
 \textbf{Answer:} From the simplified formula $V_{\mathrm{OUT,pred}} = D(V_{\mathrm{IN}} + V_F) - V_F$ ($V_F = 0.35\,\mathrm{V}$):
